@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:06:25 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/03/31 10:57:06 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/03/31 18:26:13 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <errno.h> 
 
 typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
@@ -29,18 +30,15 @@ typedef struct s_commands
 	char	**args_vec;
 	char	**envp;
 	char	*cmd_path;
-	char	*cmd;
-	/* file and heredoc */
-	char	*here_doc;
-	char	**infile;
-	char	**outfile;
 	/* fd file */
-	int		fd_infile;
-	int		fd_outfile;
-	int		infile_type;
+	int		infile;
+	int		outfile;
+	char	*here_doc;
 	/* pipe */
-	int		last_pipe[2];
-	int		next_pipe[2];
+	int		next_pfd1;
+	int		next_pfd0;
+	int		last_pfd1;
+	int		last_pfd0;
 	/* pid */
 	int		pid;
 	/* stop */
@@ -65,6 +63,7 @@ typedef struct s_data_p
 	char		**args;
 	char		**env_vars;
 	int			pipes_nb;
+	int			**pip;
 	int			args_create;
 	t_commands	*commands;
 	t_hd_data	hd_data;
