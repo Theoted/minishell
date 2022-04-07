@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/17 14:18:12 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/04/06 15:19:13 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,18 @@ void	free_all(char **arg)
 	free(arg);
 }
 
+void	sig_handler(int signo)
+{
+	printf("coucou\n");
+	(void)signo;
+}
+
 int main(int ac, char **av, char **envp)
 {
 	t_data_p		data_p;
 	
+	signal(SIGINT, sig_handler);
+	sleep(10);
 	(void)ac;
 	(void)av;
 	data_p.track = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:06:25 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/03/31 18:26:13 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/04/07 14:09:43 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 # include <readline/history.h>
 # include <errno.h> 
 
-typedef struct s_commands t_commands;
-typedef struct s_data_p t_data_p;
-typedef struct s_hd_data t_hd_data;
+# define HEREDOC 1
+# define INFILE 2
 
 typedef struct s_commands
 {
@@ -34,13 +33,17 @@ typedef struct s_commands
 	int		infile;
 	int		outfile;
 	char	*here_doc;
+	int		infile_type;
 	/* pipe */
+	int		pipe_heredoc1;
+	int		pipe_heredoc0;
 	int		next_pfd1;
 	int		next_pfd0;
-	int		last_pfd1;
-	int		last_pfd0;
+	int		prev_pfd1;
+	int		prev_pfd0;
 	/* pid */
 	int		pid;
+	int		pid_heredoc;
 	/* stop */
 	int		stop;
 }			t_commands;
@@ -74,16 +77,15 @@ typedef struct s_data_p
 
 
 void	e_exec(t_data_p *data, t_commands *cmd);
-
-
-
-
-
-
-
-
-
-
+void	close_all_pipe(t_commands *c);
+void	open_all_pipe(t_data_p *data, t_commands *c);
+void	e_infile_heredoc_cmd_outfile(t_data_p *data, t_commands c);
+void	e_infile_heredoc_cmd(t_data_p *data, t_commands c);
+void	e_cmd_outfile(t_data_p *data, t_commands c);
+void	e_cmd_cmd(t_data_p *data, t_commands c);
+void	e_heredoc_pipe(t_data_p *data, t_commands *c, int i);
+void	e_heredoc(t_data_p *data, t_commands c);
+void	close_all_file(t_commands *c);
 
 
 /* ------------------- PARSING ------------------- */
@@ -125,6 +127,5 @@ int 	state_checker(char *str, int start, int len);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
-char	**get_exp_vars_arg(char *arg, t_da
 
 #endif
