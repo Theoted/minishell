@@ -1,0 +1,12 @@
+fd == 7
+next_pfd1 = 6
+next_pfd0 = 5
+prev_pfd1 = 0
+prev_pfd0 = 0
+data argv0 = cat
+data argv1 = /dev/random
+data cmd_path = /bin/cat
+fd_infile = 3
+fd_outfile = 0
+fd heredoc1 = 0
+fd heredoc0 = 0
