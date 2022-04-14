@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/31 19:08:44 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/04/07 17:06:28 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/04/14 12:13:18 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	close_all_file(t_commands *c)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	while (c[++i].stop)
 	{
 		if (c[i].infile)
@@ -30,7 +30,6 @@ void	close_all_file(t_commands *c)
 
 void	e_heredoc_pipe(t_data_p *data, t_commands *c, int i)
 {
-	printf("herdfoc\n");
 	int	pfd_heredoc[2];
 	pipe (pfd_heredoc);
 	c[i].pipe_heredoc0 = pfd_heredoc[0];
@@ -46,7 +45,6 @@ void	open_all_pipe(t_data_p *data, t_commands *c)
 	int	pfd[2];
 	while (++i < data->pipes_nb)
 	{
-		printf("sdfsdfsdf\n");
 		pipe(pfd);
 		c[i].next_pfd1 = pfd[1];
 		c[i].next_pfd0 = pfd[0];
