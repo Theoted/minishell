@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:25:22 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 17:25:43 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	synthax_checker(char *arg)
 	return (0);
 }
 
+// Fonction qui split l'argument principale via les |
 int	split_args(char *arg, t_data_p *data)
 {
 	int		i;
@@ -112,7 +113,8 @@ int	lexer(char *arg, t_data_p *data)
 	data->args_create = 0;
 	data->args = gc_calloc(sizeof(char *), (data->pipes_nb + 2), &data->track);
 	data->commands = gc_calloc(sizeof(t_commands), (data->pipes_nb + 2), &data->track);
-	data->commands[data->pipes_nb + 2].stop = 1;
+	data->commands[data->pipes_nb + 1].stop = 1;
+	fill_envp_cmd(data);
 	if (synthax_checker(arg)) // Have to add pipe synthax checker
 	{
 		printf("Synthax error\n");
@@ -125,6 +127,7 @@ int	lexer(char *arg, t_data_p *data)
 		data->commands[i].last_in_type = last_in_redir(data->args[i]);
 		get_in_out_files(data->args[i], data, i);
 		check_heredoc(data->args[i], data, i);
+		get_cmd_in_arg(data->args[i], data, i);
 		// check_arg_vars(data->args[i], data);
 		i++;
 	}

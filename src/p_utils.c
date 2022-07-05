@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:24:26 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 16:38:34 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,9 @@ int last_in_redir(char *arg)
     return (check);
 }
 
-/*
-Cette fonction est celle qui va remplire le tabl de structure t_files
-qui se trouve dans chaque t_commands
-*/
+
+// Cette fonction est celle qui va remplire le tabl de structure t_files
+// qui se trouve dans chaque t_commands
 int get_in_out_files(char *arg, t_data_p *data, int idx)
 {
     int i;
@@ -74,11 +73,6 @@ int get_in_out_files(char *arg, t_data_p *data, int idx)
     data->commands[idx].files = gc_calloc(count_in_out_files(arg) + 1,
                                           sizeof(t_files), &data->track);
     data->commands[idx].files[count_in_out_files(arg) + 1].stop = 1;
-    while (data->commands[idx].files[i].stop == 0)
-    {
-        printf("ok\n");
-        i++;
-    }
     while (arg[++i])
     {
         if (arg[i] == '<' || arg[i] == '>')
@@ -94,12 +88,11 @@ int get_in_out_files(char *arg, t_data_p *data, int idx)
     return (0);
 }
 
-/*
-Cette fonction permet de recuperer le type de file (type),
-de mettre l'index dans l'argument au debut du nom du file
-et de recuperer l'index de la fin du mot pour pouvoir le
-substr
-*/
+
+// Cette fonction permet de recuperer le type de file (type),
+// de mettre l'index dans l'argument au debut du nom du file
+// et de recuperer l'index de la fin du mot pour pouvoir le
+// substr
 int get_file(char *arg, int *start, int *type)
 {
     int i;
@@ -169,4 +162,19 @@ int count_in_out_files(char *arg)
         }
     }
     return (count);
+}
+
+
+// Cette fonction met les env var dans
+// chaque case du tabl de struct command
+void fill_envp_cmd(t_data_p *data)
+{
+    int i;
+
+    i = 0;
+    while (data->commands[i].stop == 0)
+    {
+        data->commands->envp = data->env_vars;
+        i++;
+    }
 }

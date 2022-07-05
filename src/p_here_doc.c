@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:31:46 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 17:36:36 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	get_heredoc_del(char *arg, int i, t_data_p *data)
 	return (0);
 }
 
+// Cette fonction permet de mettre le delimiteur au bon format
+// par rapport aux guillemets 
 int	format_del(char *del, t_data_p *data)
 {
 	int		i;
@@ -130,6 +132,11 @@ int	here_doc_write(t_data_p *data, char *buffer, int idx)
 	return (0);
 }
 
+// Cette fonction recupere les variable d'env
+// dans le buffer du here_doc et les met dans un tabl vars
+// a laide de la fonction fill_vars_tab
+// Ensuite on boucle sur le tableau et on expend les variables
+// existantes grave a la fonction expend_env_var
 char	*get_expend_var(t_data_p *data, char *buffer)
 {
 	int		i;
@@ -159,6 +166,9 @@ char	*get_expend_var(t_data_p *data, char *buffer)
 	return (expend_var_in_buffer(buffer, vars, data));
 }
 
+// Cette fonction permet de remplire les cases du tableau vars crée
+// dans la fonction get_expended_var avec toutes les variables d'environnement
+// Exemple: [0] = "$USER", [1] = "$PATH", [2] = "$non"
 void	fill_vars_tab(t_data_p *data, char **var, char *buffer, int *idx, int *k)
 {
 	int	j;
@@ -183,6 +193,8 @@ void	fill_vars_tab(t_data_p *data, char **var, char *buffer, int *idx, int *k)
 		(*idx)--;
 }
 
+// Cette fonction est la fonction qui expend toutes les variables
+// d'environnement dans le buffer
 char	*expend_var_in_buffer(char *buffer, char **expended_vars, t_data_p *data)
 {
 	int		i;
