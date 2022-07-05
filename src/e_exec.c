@@ -6,11 +6,11 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/05 14:32:14 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 15:23:22 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/exec.h"
+#include "../includes/minishell.h"
 
 /* Ouverture de l'infile */
 int	open_infile(t_commands *c, char *infile)
@@ -124,8 +124,10 @@ void	e_exec(t_commands *c)
 
 	c->fd_in = 0;
 	i = -1;
+		dprintf(2, "2222222\n");
 	while (c[++i].stop == 0)
 	{
+		dprintf(2, "33333333\n");
 		pipe(c->pfd);
 		c[i].pid = fork();
 		if (!c[i].pid)

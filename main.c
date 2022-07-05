@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:20:20 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:28:06 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int main(int ac, char **av, char **envp)
 			lexer(data_p.stdin_arg, &data_p);
 		break ;
 	}
+		dprintf(2, "1111111111\n");
+	e_exec(data_p.commands);
 	gc_free_all(&data_p.track);
 	free(data_p.stdin_arg);
 	return (0);

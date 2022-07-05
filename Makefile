@@ -6,7 +6,7 @@
 #    By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/07/05 14:49:06 by theodeville      ###   ########.fr        #
+#    Updated: 2022/07/05 15:27:59 by theodeville      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ EXECINCLUDES =	-lreadline
 
 # -I./readline/include -L./readline/lib -lncurses
 
-SRCS	+=	main.c	\
+SRCS	+=	main.c			\
 			src/e_exec.c	\
 			src/e_execve.c
 

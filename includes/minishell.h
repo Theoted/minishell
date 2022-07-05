@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:13:49 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:27:49 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+
+# define INFILE 1
+# define OUTFILE 2
+# define OUTFILE_HB 3
+
+# define HEREDOC_TYPE 1
+# define INFILE_TYPE 2
 
 typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
@@ -42,14 +49,38 @@ de redirection sur l'entrée si il y en a une.
 */
 struct s_commands
 {
+	/* cmd pour l'execve */
 	char	**args_vec;
+	char	**envp;
 	char	*cmd_path;
+	/* fd file && pipe*/
+	int		fd_in;
+	int		fd_out;
+	int		pfd[2];
 	char	*here_doc;
 	int		infile;
 	int		outfile;
 	int		last_in_type;
 	t_files	*files;
+	int		last_in_type;
+	/* pid */
+	int		pid;
+	int		pid_heredoc;
+	/* stop */
+	int		stop;
 };
+
+// struct s_commands
+// {
+// 	char	**args_vec;
+// 	char	*cmd_path;
+// 	char	*here_doc;
+// 	int		infile;
+// 	int		outfile;
+// 	int		infile_type;
+// 	int		last_in_type;
+// 	t_files	*files;
+// };
 
 struct s_hd_data
 {
@@ -74,6 +105,18 @@ struct s_data_p
 	t_hd_data	hd_data;
 	t_track		*track;
 };
+
+/* ------------------- EXECUTION ------------------- */
+
+void	e_execve(t_commands *c);
+int		open_infile(t_commands *c, char *infile);
+int		open_outfile(t_commands *c, char *outfile);
+int		open_outfile_hb(t_commands *c, char *outfile_hb);
+void	e_heredoc(t_commands *c);
+int		open_files(t_commands *c);
+int		e_child(t_commands *c);
+void	e_exec(t_commands *c);
+int		main (int argc, char **argv, char **envp);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path
