@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+         #
+#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/07/05 14:36:15 by theodeville      ###   ########.fr        #
+#    Updated: 2022/07/05 14:38:59 by pat              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ EXECINCLUDES =	-lreadline
 
 # -I./readline/include -L./readline/lib -lncurses
 
-SRCS	+=	src/e_main.c	\
+SRCS	+=	main.c			\
 			src/e_exec.c	\
 			src/e_execve.c
 

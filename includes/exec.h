@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:06:25 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/07/05 14:12:29 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 14:41:54 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_commands
 	int		fd_out;
 	int		pfd[2];
 	char	*here_doc;
-	 struct s_files	*files;
+	struct s_files	*files;
 	int		last_in_type;
 	/* pid */
 	int		pid;
