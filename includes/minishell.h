@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:27:49 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:29:02 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ struct s_commands
 	int		outfile;
 	int		last_in_type;
 	t_files	*files;
-	int		last_in_type;
 	/* pid */
 	int		pid;
 	int		pid_heredoc;

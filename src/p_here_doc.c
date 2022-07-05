@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 14:34:09 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:29:43 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	check_heredoc(char *arg, t_data_p *data, int idx)
 	{
 		if (arg[i] == '<' && arg[i + 1] == '<')
 		{
-			data->commands[idx].infile_type = 1;
 			get_heredoc_del(arg, i + 2, data);
 			ft_here_doc(data, idx);
 			// clear_here_doc(data, arg);
