@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:31:47 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 17:42:16 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ struct s_commands
 	int		pid_heredoc;
 	/* stop */
 	int		stop;
+	
 };
 
 // struct s_commands
@@ -132,6 +133,15 @@ int		split_args(char *arg, t_data_p *data);
 int		create_arg(char *str, int i, t_data_p *data, int bad_pipe);
 int		count_pipes(char *str);
 int		pipe_synthax(char *str, t_data_p data);
+
+	// Get cmd
+char 	*get_cmd_in_arg(char *arg, t_data_p *data, int idx);
+char 	*skip_in_out_hd(char *arg, t_data_p *data);
+void	skip_in_hd(char *arg, int *i);
+void	skip_out(char *arg, int *i);
+void	skip_spaces(char *arg, int *i);
+char	*get_cmd(char *arg, int i, t_data_p *data);
+
 	// Here_doc
 int		check_heredoc(char *arg, t_data_p *data, int idx);
 int		get_heredoc_del(char *arg, int i, t_data_p *data);
@@ -141,12 +151,14 @@ char	*expend_var_in_buffer(char *buffer, char **expended_vars, t_data_p *data);
 int		format_del(char *del, t_data_p *data);
 void	fill_vars_tab(t_data_p *data, char **var, char *buffer, int *idx, int *k);
 char	*get_expend_var(t_data_p *data, char *buffer);
+	
 	// Here_doc utils
 int		nb_of_env_vars(char *buffer);
 char	*check_bsn_buffer(t_data_p *data, char *new_buffer);
 int		check_var(char *var);
 char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
+	
 	// Clear here_doc
 char	*clear_here_doc(t_data_p *data, char *arg);
 	// Utils
@@ -156,6 +168,8 @@ int 	get_in_out_files(char *arg, t_data_p *data, int idx);
 int 	count_in_out_files(char *arg);
 int 	get_file(char *arg, int *start, int *type);
 int 	idx_after_hd(char *arg, int *start);
+void 	fill_envp_cmd(t_data_p *data);
+
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
 char	**get_exp_vars_arg(char *arg, t_data_p *data);
