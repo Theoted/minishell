@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:29:02 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 17:31:47 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ struct s_data_p
 	char		**env_vars;
 	int			pipes_nb;
 	int			args_create;
+	char		*cmd_slash;
 	t_commands	*commands;
 	t_hd_data	hd_data;
 	t_track		*track;
@@ -113,16 +114,16 @@ int		open_outfile(t_commands *c, char *outfile);
 int		open_outfile_hb(t_commands *c, char *outfile_hb);
 void	e_heredoc(t_commands *c);
 int		open_files(t_commands *c);
-int		e_child(t_commands *c);
-void	e_exec(t_commands *c);
+int		e_child(t_data_p *d, t_commands *c);
+void	e_exec(t_data_p *d, t_commands *c);
 int		main (int argc, char **argv, char **envp);
+void	check_path(t_data_p *d, t_commands *c);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path
 int		find_env_path(char **envp, t_data_p *data);
 int		ft_access(char *arg);
 char	*expend_env_var(t_data_p *data, char **envp, char *var);
-
 	// Lexer
 int		lexer(char *arg, t_data_p *data);
 int		pipe_check(char *arg, int i);
@@ -131,7 +132,6 @@ int		split_args(char *arg, t_data_p *data);
 int		create_arg(char *str, int i, t_data_p *data, int bad_pipe);
 int		count_pipes(char *str);
 int		pipe_synthax(char *str, t_data_p data);
-
 	// Here_doc
 int		check_heredoc(char *arg, t_data_p *data, int idx);
 int		get_heredoc_del(char *arg, int i, t_data_p *data);
@@ -149,8 +149,6 @@ char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
 	// Clear here_doc
 char	*clear_here_doc(t_data_p *data, char *arg);
-
-
 	// Utils
 int 	state_checker(char *str, int start, int len);
 int 	last_in_redir(char *arg);
@@ -158,7 +156,6 @@ int 	get_in_out_files(char *arg, t_data_p *data, int idx);
 int 	count_in_out_files(char *arg);
 int 	get_file(char *arg, int *start, int *type);
 int 	idx_after_hd(char *arg, int *start);
-
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
 char	**get_exp_vars_arg(char *arg, t_data_p *data);

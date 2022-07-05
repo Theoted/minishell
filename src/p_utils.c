@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:24:26 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:41:24 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,6 @@ int get_in_out_files(char *arg, t_data_p *data, int idx)
     data->commands[idx].files = gc_calloc(count_in_out_files(arg) + 1,
                                           sizeof(t_files), &data->track);
     data->commands[idx].files[count_in_out_files(arg) + 1].stop = 1;
-    while (data->commands[idx].files[i].stop == 0)
-    {
-        printf("ok\n");
-        i++;
-    }
     while (arg[++i])
     {
         if (arg[i] == '<' || arg[i] == '>')

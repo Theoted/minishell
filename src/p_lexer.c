@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 15:25:22 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:53:04 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	lexer(char *arg, t_data_p *data)
 	data->args_create = 0;
 	data->args = gc_calloc(sizeof(char *), (data->pipes_nb + 2), &data->track);
 	data->commands = gc_calloc(sizeof(t_commands), (data->pipes_nb + 2), &data->track);
-	data->commands[data->pipes_nb + 2].stop = 1;
+	data->commands[data->pipes_nb + 1].stop = 1;
 	if (synthax_checker(arg)) // Have to add pipe synthax checker
 	{
 		printf("Synthax error\n");
