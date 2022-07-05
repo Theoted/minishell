@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/theodeville/Documents/programmation/minishell'
+make: Leaving directory `/Users/theodeville/Documents/programmation/minishell'
+ 
+Makefile:31: *** missing separator.  Stop.
+
