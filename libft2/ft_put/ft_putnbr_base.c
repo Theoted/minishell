@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/15 00:47:22 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/03/11 01:57:07 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 10:32:38 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ unsigned int	indx(char *str)
 unsigned int	check(char *base)
 {
 	unsigned int	i;
-	unsigned int	j;
 
-	j = 0;
 	i = 0;
 	if (indx(base) < 2)
 		return (0);

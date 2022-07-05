@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/29 16:45:00 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 14:32:07 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,26 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+/* la variable last_in_type dans la structure commande
+représente pour chaque commande le dernier type 
+de redirection sur l'entrée si il y en a une.
+	0 = aucune
+	1 = infile
+	2 = here_doc
+*/
+
 typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
 typedef struct s_hd_data t_hd_data;
+typedef struct s_files t_files;
+
+// Type: 1 = < , 2 = > , 3 = >>
+struct s_files
+{
+	char	*file;
+	int		type;
+	int		stop;
+};
 
 struct s_commands
 {
@@ -31,6 +48,8 @@ struct s_commands
 	int		infile;
 	int		outfile;
 	int		infile_type;
+	int		last_in_type;
+	t_files	*files;
 };
 
 struct s_hd_data
@@ -93,6 +112,11 @@ char	*clear_here_doc(t_data_p *data, char *arg);
 
 	// Utils
 int 	state_checker(char *str, int start, int len);
+int 	last_in_redir(char *arg);
+int 	get_in_out_files(char *arg, t_data_p *data, int idx);
+int 	count_in_out_files(char *arg);
+int 	get_file(char *arg, int *start, int *type);
+int 	idx_after_hd(char *arg, int *start);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);

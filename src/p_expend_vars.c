@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   p_expend_vars.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:42:56 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/22 10:09:56 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 11:21:56 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // je dois faire une fonction qui expend (ou pas) les variables d'env dans mon argument
-// voir si je peux pas faire une fonction qui a la fois expend les vars et a la fois
-// enleve les quotes
 
 char	**get_exp_vars_arg(char *arg, t_data_p *data)
 {
@@ -44,19 +42,3 @@ char	**get_exp_vars_arg(char *arg, t_data_p *data)
 	}
 	return (vars);
 }
-
-// int	check_arg_vars(char *arg, t_data_p *data)
-// {
-// 	char	**args;
-// 	char	*new_arg;
-// 	int		i;
-// 	int		j;
-// 	int		k;
-
-// 	args = get_exp_vars_arg(arg, data);
-// 	while (arg[i])
-// 	{
-		
-// 	}
-// 	return (0);
-// }

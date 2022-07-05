@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_clear_hd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 10:10:40 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/23 08:49:53 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/06/28 11:38:35 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,11 @@ char *clear_here_doc(t_data_p *data, char *arg)
 		if (!new && tmp)
 		{
 			new = gc_strdup(&data->track, tmp);
-			printf("new = %s\n", new);
 			tmp = 0;
 		}
 		else if (new && tmp)
 		{
 			new = gc_strjoin(&data->track, new, tmp);
-			printf("new = %s\n", new);
 			tmp = 0;
 		}
 	}

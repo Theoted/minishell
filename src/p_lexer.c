@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/22 10:21:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 14:33:35 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,11 @@ int	lexer(char *arg, t_data_p *data)
 	}
 	if (split_args(arg, data) != 0)
 		return (1);
+	int j = -1;
 	while (data->args[i])
 	{
+		data->commands[i].last_in_type = last_in_redir(data->args[i]);
+		get_in_out_files(data->args[i], data, i);
 		check_heredoc(data->args[i], data, i);
 		// check_arg_vars(data->args[i], data);
 		i++;

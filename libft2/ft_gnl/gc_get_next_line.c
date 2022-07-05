@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/13 16:08:28 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/21 15:07:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/06/08 10:34:17 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 static void	get_line(t_track **track, char **line, int fd, char *buffer)
 {
 	int		r;
-	char	*tmp;
 
 	r = read(fd, buffer, BUFFER_SIZE);
 	while (r > 0)
@@ -26,7 +25,6 @@ static void	get_line(t_track **track, char **line, int fd, char *buffer)
 			*line = gc_substr(track, buffer, 0, r);
 		else
 		{
-			tmp = *line;
 			*line = gc_strjoin(track, *line, buffer);
 		}
 		if (ft_strchr(buffer, '\n'))
@@ -39,7 +37,6 @@ static char	*parse_line(t_track **track, char **line)
 {
 	int		j;
 	char	*tmp;
-	char	*mem;
 
 	if (!*line)
 		return (NULL);
@@ -56,7 +53,6 @@ static char	*parse_line(t_track **track, char **line)
 		return (tmp);
 	}
 	j = ft_strlen(ft_strchr(*line, '\n'));
-	mem = *line;
 	tmp = gc_substr(track, *line, 0, ft_strlen(*line) - j + 1);
 	*line = gc_substr(track, ft_strchr(*line, '\n'), 1, j);
 	return (tmp);
