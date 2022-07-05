@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:06:25 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/04/07 14:09:43 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 14:12:29 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 # include <readline/history.h>
 # include <errno.h> 
 
-# define HEREDOC 1
-# define INFILE 2
+# define INFILE 1
+# define OUTFILE 2
+# define OUTFILE_HB 3
+
+# define HEREDOC_TYPE 1
+# define INFILE_TYPE 2
 
 typedef struct s_commands
 {
@@ -29,24 +33,26 @@ typedef struct s_commands
 	char	**args_vec;
 	char	**envp;
 	char	*cmd_path;
-	/* fd file */
-	int		infile;
-	int		outfile;
+	/* fd file && pipe*/
+	int		fd_in;
+	int		fd_out;
+	int		pfd[2];
 	char	*here_doc;
-	int		infile_type;
-	/* pipe */
-	int		pipe_heredoc1;
-	int		pipe_heredoc0;
-	int		next_pfd1;
-	int		next_pfd0;
-	int		prev_pfd1;
-	int		prev_pfd0;
+	 struct s_files	*files;
+	int		last_in_type;
 	/* pid */
 	int		pid;
 	int		pid_heredoc;
 	/* stop */
 	int		stop;
 }			t_commands;
+
+typedef struct s_files
+{
+	char	*file;
+	int		type;
+	int		stop;
+}			t_files;
 
 typedef struct s_hd_data
 {
@@ -75,18 +81,15 @@ typedef struct s_data_p
 
 /* ------------------- EXECUTION ------------------- */
 
-
-void	e_exec(t_data_p *data, t_commands *cmd);
-void	close_all_pipe(t_commands *c);
-void	open_all_pipe(t_data_p *data, t_commands *c);
-void	e_infile_heredoc_cmd_outfile(t_data_p *data, t_commands c);
-void	e_infile_heredoc_cmd(t_data_p *data, t_commands c);
-void	e_cmd_outfile(t_data_p *data, t_commands c);
-void	e_cmd_cmd(t_data_p *data, t_commands c);
-void	e_heredoc_pipe(t_data_p *data, t_commands *c, int i);
-void	e_heredoc(t_data_p *data, t_commands c);
-void	close_all_file(t_commands *c);
-
+void	e_execve(t_commands *c);
+int		open_infile(t_commands *c, char *infile);
+int		open_outfile(t_commands *c, char *outfile);
+int		open_outfile_hb(t_commands *c, char *outfile_hb);
+void	e_heredoc(t_commands *c);
+int		open_files(t_commands *c);
+int		e_child(t_commands *c);
+void	e_exec(t_commands *c);
+int		main (int argc, char **argv, char **envp);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path

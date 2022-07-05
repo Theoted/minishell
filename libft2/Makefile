@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 16:45:37 by rmattheo          #+#    #+#              #
-#    Updated: 2022/03/17 13:30:52 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/07/05 10:57:01 by pat              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,7 +89,7 @@ OBJS    = ${SRCS:.c=.o}
 
 CC        = gcc
 
-CFLAGS    = -Wall -Wextra -Werror
+# CFLAGS    = -Wall -Wextra -Werror
 
 %o : %c ${HEADER} Makefile
 		${CC} ${CFLAGS} -c $< -o $@
