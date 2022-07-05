@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 14:32:07 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:13:49 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-/* la variable last_in_type dans la structure commande
-représente pour chaque commande le dernier type 
-de redirection sur l'entrée si il y en a une.
-	0 = aucune
-	1 = infile
-	2 = here_doc
-*/
 
 typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
@@ -40,6 +33,13 @@ struct s_files
 	int		stop;
 };
 
+/* la variable last_in_type dans la structure commande
+représente pour chaque commande le dernier type 
+de redirection sur l'entrée si il y en a une.
+	0 = aucune
+	1 = infile
+	2 = here_doc
+*/
 struct s_commands
 {
 	char	**args_vec;
@@ -47,7 +47,6 @@ struct s_commands
 	char	*here_doc;
 	int		infile;
 	int		outfile;
-	int		infile_type;
 	int		last_in_type;
 	t_files	*files;
 };

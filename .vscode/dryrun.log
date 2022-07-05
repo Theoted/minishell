@@ -1,6 +1,10 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/theodeville/Documents/programmation/minishell'
+/Applications/Xcode.app/Contents/Developer/usr/bin/make -C libft2
+ 
+make[1]: Entering directory `/Users/theodeville/Documents/programmation/minishell/libft2'
+make[1]: `libft2.a' is up to date.
+make[1]: Leaving directory `/Users/theodeville/Documents/programmation/minishell/libft2'
+ 
 make: Leaving directory `/Users/theodeville/Documents/programmation/minishell'
  
-Makefile:31: *** missing separator.  Stop.
-

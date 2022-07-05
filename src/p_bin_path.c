@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/21 10:07:09 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 15:19:23 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,48 @@ char	*expend_env_var(t_data_p *data, char **envp, char *var)
 	gc_free_malloc(&data->track, (void **)&tmp);
 	return (var);
 }
+
+// int find_cmd_path(char *arg, t_data_p *data)
+// {
+	
+// }
+
+// char *get_cmd_in_arg(char *arg)
+// {
+	
+// }
+
+/*
+Cette fonction est la fonction principale de parsing de l'argument,
+pour trouver la commande outre les <, <<, >, >>
+*/
+// int	skip_in_out_hd(char *arg)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (arg[i])
+// 	{
+// 		if (arg[i] == ' ')
+// 			skip_spaces(arg, &i);
+// 		if (arg[i] == '<')
+			
+// 	}
+// 	return (0);
+// }
+
+// // Cette fonction skip les < et <<
+// int skip_in_hd()
+
+// // Cette fonction skip les > et >>
+// int skip_out()
+
+// // Cette fonction skip les espaces
+// int skip_spaces(char *arg, int *i)
+// {
+// 	while (arg[*i] == ' ' && arg[*i])
+// 		(*i)++;
+// }
 
 // Cette fonction sert a trouver le path d'un bin et de verifier si
 // il possede les droits

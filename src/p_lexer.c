@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 14:33:35 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/05 15:25:22 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int	lexer(char *arg, t_data_p *data)
 	data->pipes_nb = count_pipes(arg);
 	data->args_create = 0;
 	data->args = gc_calloc(sizeof(char *), (data->pipes_nb + 2), &data->track);
-	data->commands = gc_calloc(sizeof(t_commands), (data->pipes_nb + 1), &data->track);
+	data->commands = gc_calloc(sizeof(t_commands), (data->pipes_nb + 2), &data->track);
+	data->commands[data->pipes_nb + 2].stop = 1;
 	if (synthax_checker(arg)) // Have to add pipe synthax checker
 	{
 		printf("Synthax error\n");
@@ -119,7 +120,6 @@ int	lexer(char *arg, t_data_p *data)
 	}
 	if (split_args(arg, data) != 0)
 		return (1);
-	int j = -1;
 	while (data->args[i])
 	{
 		data->commands[i].last_in_type = last_in_redir(data->args[i]);
