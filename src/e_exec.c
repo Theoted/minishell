@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/05 17:01:16 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 18:46:33 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,9 @@ int	e_child(t_data_p *d,t_commands *c)
 {
 	close(c->pfd[0]);
 	open_files (c);
-	if (!c->fd_in)
+	if (c->fd_in == -1)
 		return (0);
-	if (!c->fd_out)
+	if (c->fd_out == -1)
 		return (0);
 	if (c->last_in_type == HEREDOC_TYPE)
 		e_heredoc(c);

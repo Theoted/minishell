@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:42:16 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/05 18:34:19 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define OUTFILE 2
 # define OUTFILE_HB 3
 
-# define HEREDOC_TYPE 1
-# define INFILE_TYPE 2
+# define HEREDOC_TYPE 2
+# define INFILE_TYPE 1
 
 typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
