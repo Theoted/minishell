@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 12:36:04 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/07/15 11:24:53 by theodeville      ###   ########.fr       */
+/*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
+/*   Updated: 2022/07/15 13:57:50 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
-#include "../include/gc.h"
+#include "../includes/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int b_cd(t_data_p *data, int idx)
 {
-	size_t	i;
-
-	i = 0;
-	if (n <= 0)
-		return (0);
-	while (n > i + 1 && s1[i] && s1[i] == s2[i])
-		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+    chdir(data->commands[idx].args_vec[1]);
+    return (0);
 }

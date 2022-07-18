@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 18:34:19 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/15 13:54:50 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,15 @@ typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
 typedef struct s_hd_data t_hd_data;
 typedef struct s_files t_files;
+typedef struct s_envp t_envp;
+
+struct s_envp
+{
+	char	*name;
+	char	*content;
+	struct	s_envp *next;
+};
+
 
 // Type: 1 = < , 2 = > , 3 = >>
 struct s_files
@@ -102,6 +111,8 @@ struct s_data_p
 	int			pipes_nb;
 	int			args_create;
 	char		*cmd_slash;
+	
+	t_envp		*envp;
 	t_commands	*commands;
 	t_hd_data	hd_data;
 	t_track		*track;
@@ -173,5 +184,31 @@ void 	fill_envp_cmd(t_data_p *data);
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
 char	**get_exp_vars_arg(char *arg, t_data_p *data);
+
+
+	// Built-ins
+		// UNSET
+void	init_our_envp(t_data_p *data);
+void    delete_env_node(t_envp **env_lst, char *name);
+void	print_env_list(t_envp *env_list);
+void    b_unset(t_data_p *data, int cmd_id);
+
+		// EXPORT
+void    b_export(t_data_p *data, int idx);
+
+		// EXIT
+int 	b_exit(char *input);
+
+		// CD
+int		b_cd(t_data_p *data, int idx);
+
+		//Built-ins init
+int		detect_buitins(t_data_p *data);
+void    exec_built_ins(t_data_p *data, int idx, char *builtin);
+t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
+
+		//Built-ins utils
+int		strncmp_len(char *s1, char *s2);
+void 	print_env_list(t_envp *env_list);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:42:46 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/14 12:57:01 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void fill_envp_cmd(t_data_p *data)
     i = 0;
     while (data->commands[i].stop == 0)
     {
-        data->commands->envp = data->env_vars;
+        data->commands[i].envp = data->env_vars;
         i++;
     }
 }

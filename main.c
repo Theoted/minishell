@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:44:17 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/16 14:24:11 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ int main(int ac, char **av, char **envp)
 	data_p.track = NULL;
 	find_env_path(envp, &data_p);
 	data_p.env_vars = envp;
+	init_our_envp(&data_p);
 	while (1)
 	{
 		data_p.stdin_arg = readline("\033[0;34mShellDePetiteTaille-0.0.42: \033[0m");
+		add_history(data_p.stdin_arg);
 		if (data_p.stdin_arg[0])
 			lexer(data_p.stdin_arg, &data_p);
-		break ;
+		if (b_exit(data_p.stdin_arg))
+			break ;
+		detect_buitins(&data_p);
+		// e_exec(&data_p, data_p.commands);
 	}
-	e_exec(&data_p, data_p.commands);
 	gc_free_all(&data_p.track);
 	free(data_p.stdin_arg);
 	return (0);
