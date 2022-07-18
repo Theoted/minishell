@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:37:19 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/18 16:46:16 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ char *expend_env_var(t_data_p *data, char **envp, char *var)
 // dans la structure command pour la var arg_vec
 char *get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 {
-	data->commands[idx].args_vec = gc_split(&data->track, skip_in_out_hd(arg, data), ' ');
+	data->commands[idx].args_vec = gc_split_spaces(&data->track, skip_in_out_hd(arg, data), ' ');
 	return (0);
 }
-
 
 // Cette fonction est la fonction principale de parsing de l'argument,
 // pour trouver la commande outre les <, <<, >, >> 
@@ -116,7 +115,7 @@ void skip_out(char *arg, int *i)
 // Cette fonction skip les espaces
 void skip_spaces(char *arg, int *i)
 {
-	while (arg[*i] == ' ' && arg[*i])
+	while (arg[*i] == ' ' && arg[*i] && !state_checker(arg, 0, *i))
 		(*i)++;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_unset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 10:25:10 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/15 12:20:27 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/18 11:12:23 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

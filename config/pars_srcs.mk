@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    pars_srcs.mk                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+         #
+#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 14:45:32 by tdeville          #+#    #+#              #
-#    Updated: 2022/07/15 13:52:00 by theodeville      ###   ########.fr        #
+#    Updated: 2022/07/18 09:56:47 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,5 +22,6 @@ SRCS +=	src/p_bin_path.c \
 		src/b_exit.c \
 		src/b_export.c \
 		src/b_cd.c \
+		src/b_echo.c \
 		src/b_exec_built_ins.c \
 		src/b_utils.c 

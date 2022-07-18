@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/15 13:54:50 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/18 16:48:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,16 @@ typedef struct s_data_p t_data_p;
 typedef struct s_hd_data t_hd_data;
 typedef struct s_files t_files;
 typedef struct s_envp t_envp;
+typedef struct s_echo t_echo;
+
+// Structure qui permet le parsing des arguments de echo
+struct s_echo
+{
+	char	*new;
+	char	*arg;
+	char	quote;
+	int		idx;
+};
 
 struct s_envp
 {
@@ -78,18 +88,6 @@ struct s_commands
 	int		stop;
 	
 };
-
-// struct s_commands
-// {
-// 	char	**args_vec;
-// 	char	*cmd_path;
-// 	char	*here_doc;
-// 	int		infile;
-// 	int		outfile;
-// 	int		infile_type;
-// 	int		last_in_type;
-// 	t_files	*files;
-// };
 
 struct s_hd_data
 {
@@ -201,6 +199,9 @@ int 	b_exit(char *input);
 
 		// CD
 int		b_cd(t_data_p *data, int idx);
+
+		// ECHO
+int		b_echo(t_data_p *data, int idx);
 
 		//Built-ins init
 int		detect_buitins(t_data_p *data);

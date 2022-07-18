@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_exec_built_ins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:09:41 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/15 13:54:57 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/18 10:24:00 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void    exec_built_ins(t_data_p *data, int idx, char *builtin)
     char    s[1000];
     
     if (!strncmp_len(builtin, "echo"))
-        ;
+        b_echo(data, idx);
     else if (!strncmp_len(builtin, "cd"))
         b_cd(data, idx);
     else if (!strncmp_len(builtin, "pwd"))

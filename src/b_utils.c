@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/15 12:10:39 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/18 09:59:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // Cette fonction permet d'executer un strncmp avec
 // comme longueur la string la plus grande
+// Renvoie 0 si les strings sont les memes
 int strncmp_len(char *s1, char *s2)
 {
     int len;

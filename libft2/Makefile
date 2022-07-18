@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
+#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 16:45:37 by rmattheo          #+#    #+#              #
-#    Updated: 2022/07/05 10:57:01 by pat              ###   ########lyon.fr    #
+#    Updated: 2022/07/18 14:20:49 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ SRCS	=	ft_check/ft_isalpha.c			\
 			ft_str/ft_strjoin.c			\
 			ft_str/ft_strlen_charset.c	\
 			ft_str/gc_split.c			\
+			ft_str/gc_split_spaces.c 	\
 			ft_str/gc_substr.c			\
 			ft_str/gc_strjoin.c			\
 			ft_str/gc_strdup.c			\

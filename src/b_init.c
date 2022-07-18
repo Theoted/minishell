@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/15 12:24:05 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/18 10:23:08 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,12 @@ void init_our_envp(t_data_p *data)
 	int i;
 
 	i = 0;
+	data->envp = NULL;
 	while (data->env_vars[i])
 	{
 		env_lstadd_back(&data->envp, env_lstnew(data,
-												ft_split(data->env_vars[i], '=')[0],
-												ft_split(data->env_vars[i], '=')[1]));
+												gc_split(&data->track, data->env_vars[i], '=')[0],
+												gc_split(&data->track, data->env_vars[i], '=')[1]));
 		i++;
 	}
 }
