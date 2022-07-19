@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:39:46 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/19 14:57:09 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ int	here_doc_write(t_data_p *data, char *buffer, int idx)
 // dans le buffer du here_doc et les met dans un tabl vars
 // a laide de la fonction fill_vars_tab
 // Ensuite on boucle sur le tableau et on expend les variables
-// existantes grave a la fonction expend_env_var
+// existantes grace a la fonction expend_env_var
 char	*get_expend_var(t_data_p *data, char *buffer)
 {
 	int		i;
@@ -157,7 +157,7 @@ char	*get_expend_var(t_data_p *data, char *buffer)
 		while (vars[i])
 		{
 			tmp = vars[i];
-			vars[i] = expend_env_var(data, data->env_vars, vars[i]);
+			vars[i] = expend_env_var(data, data->envp, vars[i]);
 			if (!ft_strncmp(vars[i], tmp, ft_strlen(vars[i])))
 				vars[i] = gc_strjoin(&data->track, "$", tmp);
 			i++;
@@ -168,7 +168,8 @@ char	*get_expend_var(t_data_p *data, char *buffer)
 
 // Cette fonction permet de remplire les cases du tableau vars crée
 // dans la fonction get_expended_var avec toutes les variables d'environnement
-// Exemple: [0] = "$USER", [1] = "$PATH", [2] = "$non"
+// Exemple: [0] = "USER", [1] = "PATH", [2] = "non"
+// Suite a quoi dans on join le dollard dans la deuxieme partie de get_expend_var
 void	fill_vars_tab(t_data_p *data, char **var, char *buffer, int *idx, int *k)
 {
 	int	j;
@@ -178,7 +179,7 @@ void	fill_vars_tab(t_data_p *data, char **var, char *buffer, int *idx, int *k)
 	check = 0;
 	while (buffer[*idx] != ' ' && buffer[*idx])
 	{
-		if (buffer[*idx] == '\n' || buffer[*idx] == '\'' || buffer[*idx] == '\"')
+		if (buffer[*idx] == '\n' || buffer[*idx] == ' ')
 			break ;
 		(*idx)++;
 		if (buffer[*idx] == '$')
@@ -228,7 +229,14 @@ char	*expend_var_in_buffer(char *buffer, char **expended_vars, t_data_p *data)
 		}
 		else if (i == 0)
 		{
-			if (expended_vars[k] && check_var(expended_vars[k]))
+			if (check_solo_var(buffer) == 1 && expended_vars[k][0] == '$')
+				data->hd_data.tmp1 = gc_strdup(&data->track, "");
+			else if (check_solo_var(buffer) == 2)
+			{
+				data->hd_data.tmp1 = gc_strdup(&data->track, buffer);
+				data->hd_data.check = 2;
+			}
+			else if (expended_vars[k] && check_var(expended_vars[k]))
 				data->hd_data.tmp1 = gc_strdup(&data->track, expended_vars[k++]);
 			else if (expended_vars[k] && !check_var(expended_vars[k]))
 			{
@@ -239,13 +247,13 @@ char	*expend_var_in_buffer(char *buffer, char **expended_vars, t_data_p *data)
 		while (buffer[i])
 		{
 			if (data->hd_data.check == 1 && (buffer[i + 1] == '\'' 
-				|| buffer[i + 1] == '\"'))
+				|| buffer[i + 1] == '\"') && data->hd_data.check != 2)
 			{
 				data->hd_data.check = 0;
 				break ;
 			}
-			if (buffer[i + 1] == ' ' || buffer[i + 1] == '$'
-				|| buffer[i + 1] == '\'' || buffer[i + 1] == '\"')
+			if (!ft_isalnum(buffer[i + 1]) &&
+				data->hd_data.check != 2)
 				break ;
 			i++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 17:42:42 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 14:08:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ int	lexer(char *arg, t_data_p *data)
 		get_in_out_files(data->args[i], data, i);
 		check_heredoc(data->args[i], data, i);
 		get_cmd_in_arg(data->args[i], data, i);
+		printf("%s\n", data->commands[i].here_doc);
 		// check_arg_vars(data->args[i], data);
 		i++;
 	}

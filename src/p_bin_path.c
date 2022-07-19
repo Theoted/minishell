@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/18 16:46:16 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 15:10:45 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,21 @@ int find_env_path(char **envp, t_data_p *data)
 
 // Permet d'expend les variables d'envrionnement si elles existes
 // Si elle existe la fonction renvoie la variable, sinon elle ne renvoie rien
-char *expend_env_var(t_data_p *data, char **envp, char *var)
+char *expend_env_var(t_data_p *data, t_envp *envp, char *var)
 {
 	int i;
 	char *env_var;
-	char *tmp;
 
 	i = -1;
-	tmp = gc_strjoin(&data->track, var, "=");
-	while (envp[++i])
+	while (envp)
 	{
-		if (!ft_strncmp(envp[i], tmp, ft_strlen(tmp)))
+		if (!strncmp_len(envp->name, var))
 		{
-			env_var = gc_substr(&data->track, envp[i], ft_strlen(tmp), ft_strlen(envp[i]));
-			gc_free_malloc(&data->track, (void **)&tmp);
+			env_var = envp->content;
 			return (env_var);
 		}
+		envp = envp->next;
 	}
-	gc_free_malloc(&data->track, (void **)&tmp);
 	return (var);
 }
 
@@ -59,7 +56,13 @@ char *expend_env_var(t_data_p *data, char **envp, char *var)
 // dans la structure command pour la var arg_vec
 char *get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 {
-	data->commands[idx].args_vec = gc_split_spaces(&data->track, skip_in_out_hd(arg, data), ' ');
+	char	*cmd;
+
+	cmd = skip_in_out_hd(arg, data);
+	if (cmd)
+		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
+	else
+		data->commands[idx].args_vec = NULL;
 	return (0);
 }
 
@@ -73,6 +76,7 @@ char *skip_in_out_hd(char *arg, t_data_p *data)
 
 	i = -1;
 	check = 0;
+	cmd = NULL;
 	while (arg[++i])
 	{
 		if (arg[i] == ' ')

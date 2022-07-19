@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/18 16:48:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 15:12:04 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,9 @@ void	check_path(t_data_p *d, t_commands *c);
 	// Bin Path
 int		find_env_path(char **envp, t_data_p *data);
 int		ft_access(char *arg);
-char	*expend_env_var(t_data_p *data, char **envp, char *var);
+char	*expend_env_var(t_data_p *data, t_envp *envp, char *var);
+// char	*expend_env_var(t_data_p *data, char **envp, char *var);
+
 	// Lexer
 int		lexer(char *arg, t_data_p *data);
 int		pipe_check(char *arg, int i);
@@ -167,6 +169,7 @@ char	*check_bsn_buffer(t_data_p *data, char *new_buffer);
 int		check_var(char *var);
 char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
+int		check_solo_var(char *buffer);
 	
 	// Clear here_doc
 char	*clear_here_doc(t_data_p *data, char *arg);
@@ -202,6 +205,7 @@ int		b_cd(t_data_p *data, int idx);
 
 		// ECHO
 int		b_echo(t_data_p *data, int idx);
+int		expend_echo_env_vars(t_data_p *data, char **arg);
 
 		//Built-ins init
 int		detect_buitins(t_data_p *data);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/18 09:59:52 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 11:05:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 int strncmp_len(char *s1, char *s2)
 {
     int len;
-    
+    if (!s1 || !s2)
+      return (-1);
     if (ft_strlen(s1) < ft_strlen(s2))
         len = ft_strlen(s2);
     else

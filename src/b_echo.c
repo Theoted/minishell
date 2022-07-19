@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/18 16:46:30 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 15:24:06 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char *remove_quotes(t_data_p *data, char *arg)
     int i;
 
     i = -1;
-    echo_data.new = NULL;
+    echo_data.new = "";
     echo_data.quote = 0;
     echo_data.arg = arg;
     while (arg[++i])
@@ -140,6 +140,7 @@ int b_echo(t_data_p *data, int idx)
                 bn = 0;
             }
         }
+        expend_echo_env_vars(data, &data->commands[idx].args_vec[i]);
         printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
         if (av_len > 2)
             printf(" ");

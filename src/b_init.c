@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/18 10:23:08 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 11:47:43 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ int detect_buitins(t_data_p *data)
 	i = 0;
 	while (data->commands[i].stop == 0)
 	{
+		if (!data->commands[i].args_vec)
+		{
+			i++;
+			continue ;
+		}
 		j = 0;
 		while (j < 7)
 		{

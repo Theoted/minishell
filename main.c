@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/18 10:23:20 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 15:29:20 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int main(int ac, char **av, char **envp)
 			break ;
 		detect_buitins(&data_p);
 		// e_exec(&data_p, data_p.commands);
+		free(data_p.stdin_arg);
 	}
 	gc_free_all(&data_p.track);
 	free(data_p.stdin_arg);
