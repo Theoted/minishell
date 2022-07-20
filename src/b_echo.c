@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/19 15:24:06 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/20 14:14:30 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,34 @@ char *remove_quotes(t_data_p *data, char *arg)
     return (echo_data.new);
 }
 
-int arg_vec_len(t_data_p *data, int idx)
+// Retourne 1 si le premier char de l'argument a un tiret et un 'n' 
+// ou plus sinon retourne 0
+int check_n(char *arg)
 {
     int i;
 
     i = 1;
-    while (data->commands[idx].args_vec[i])
+    if (arg[0] != '-')
+        return (0);
+    while (arg[i])
+    {
+        if (arg[i] != 'n')
+            return (0);
         i++;
-    return (i);
+    }
+    return (1);
+}
+
+int arg_vec_len(t_data_p *data, int idx)
+{
+    int i;
+    int j;
+
+    i = 0;
+    j = 0;
+    while (data->commands[idx].args_vec[++i])
+        j++;
+    return (j);
 }
 
 int b_echo(t_data_p *data, int idx)
@@ -125,26 +145,26 @@ int b_echo(t_data_p *data, int idx)
     int bn;
     char *new;
     int av_len;
+    int check;
 
-    i = 1;
+    i = 0;
     bn = 1;
     new = NULL;
     av_len = arg_vec_len(data, idx);
-    while (data->commands[idx].args_vec[i])
+    check = 0;
+    while (data->commands[idx].args_vec[++i])
     {
-        if (bn == 1)
+        if (check_n(data->commands[idx].args_vec[i]) && check == 0)
         {
-            if (!strncmp_len(data->commands[idx].args_vec[1], "-n"))
-            {
-                i++;
-                bn = 0;
-            }
+            bn = 0;
+            continue ;
         }
-        expend_echo_env_vars(data, &data->commands[idx].args_vec[i]);
+        check = 1;
+        data->commands[idx].args_vec[i] = get_echo_env_var
+            (data, data->commands[idx].args_vec[i]);
         printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
-        if (av_len > 2)
+        if (av_len > 2 && i < av_len)
             printf(" ");
-        i++;
     }
     if (bn)
         printf("\n");

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/19 15:12:04 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/20 14:46:02 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 
 
 # define INFILE 1
@@ -206,6 +208,7 @@ int		b_cd(t_data_p *data, int idx);
 		// ECHO
 int		b_echo(t_data_p *data, int idx);
 int		expend_echo_env_vars(t_data_p *data, char **arg);
+char    *get_echo_env_var(t_data_p *data, char *arg);
 
 		//Built-ins init
 int		detect_buitins(t_data_p *data);

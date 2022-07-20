@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/19 15:29:20 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/20 14:47:20 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,33 @@ void	free_all(char **arg)
 	free(arg);
 }
 
+void	rm_chapeau_c(void)
+{
+	struct termios t;
+	tcgetattr(0, &t);
+	t.c_lflag &= ~ECHOCTL;
+	tcsetattr(0, TCSANOW, &t);
+}
+
 void	sig_handler(int signo)
 {
-	printf("coucou\n");
-	(void)signo;
+	if (signo == 2)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 int main(int ac, char **av, char **envp)
 {
-	t_data_p		data_p;
-	signal(SIGINT, sig_handler);
-	// sleep(10);
+	t_data_p			data_p;
+	struct sigaction	sa;
+
+	rm_chapeau_c();
+	sa.sa_handler = &sig_handler;
+	sigaction(2, &sa, NULL);
 	(void)ac;
 	(void)av;
 	data_p.track = NULL;
@@ -46,6 +62,8 @@ int main(int ac, char **av, char **envp)
 	{
 		data_p.stdin_arg = readline("\033[0;34mShellDePetiteTaille-0.0.42: \033[0m");
 		add_history(data_p.stdin_arg);
+		if (data_p.stdin_arg == NULL)
+			break ;
 		if (data_p.stdin_arg[0])
 			lexer(data_p.stdin_arg, &data_p);
 		if (b_exit(data_p.stdin_arg))
