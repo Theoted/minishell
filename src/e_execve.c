@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 20:18:13 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 20:57:17 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,30 @@ static int ft_strcmp(char *arg, char *built)
 	}
 	return (1);
 }
-void	e_execve(t_commands *c)
+static void ft_exec_built(t_data_p *d, t_commands *c, int idx)
 {
+	char    s[1000];
+
 	if(ft_strcmp(c->args_vec[0], "cd"))
-		exit(0);
+		 b_cd(d, idx);
 	if(ft_strcmp(c->args_vec[0], "env"))
-		exit(0);
+		print_env_list(d->envp);
 	if(ft_strcmp(c->args_vec[0], "export"))
-		exit(0);
+		b_export(d, idx);
 	if(ft_strcmp(c->args_vec[0], "unset"))
-		exit(0);
+		b_unset(d, idx);
 	if(ft_strcmp(c->args_vec[0], "pwd"))
+	{
+		printf("%s\n", getcwd(s, 100));
 		exit(0);
+	}
 	if(ft_strcmp(c->args_vec[0], "echo"))
-		exit(0);
+		b_echo(d, idx);
+}
+
+void	e_execve(t_data_p *d,t_commands *c, int idx)
+{
+	ft_exec_built(d, c, idx);
 	if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
 	{
 		write(2, "bash: ", 6);

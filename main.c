@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 20:22:13 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 20:59:27 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int main(int ac, char **av, char **envp)
 			lexer(data_p.stdin_arg, &data_p);
 		if (b_exit(data_p.stdin_arg))
 			break ;
-		detect_buitins(&data_p);
 		e_exec(&data_p, data_p.commands);
 		free(data_p.stdin_arg);
 	}

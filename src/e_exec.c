@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 20:22:48 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 20:50:38 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	open_files(t_commands *c)
 }
 
 /* execution de la commande dans le child */
-int	e_child(t_data_p *d,t_commands *c)
+int	e_child(t_data_p *d,t_commands *c, int idx)
 {
 	open_files (c);
 	if (c->last_in_type == HEREDOC_TYPE)
@@ -110,7 +110,7 @@ int	e_child(t_data_p *d,t_commands *c)
 		dup2(c->pfd[1], STDOUT_FILENO);
 	close(c->pfd[1]);
 	check_path(d, c);
-	e_execve(c);
+	e_execve(d, c, idx);
 	return (1);
 }
 
@@ -128,7 +128,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 		c[i].pid = fork();
 		if (!c[i].pid)
 		{
-			if (!e_child(d, &c[i]))
+			if (!e_child(d, &c[i], i))
 				return ;
 		}
 		else

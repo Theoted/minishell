@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 12:03:09 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 20:52:40 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,13 @@ struct s_data_p
 
 /* ------------------- EXECUTION ------------------- */
 
-void	e_execve(t_commands *c);
+void	e_execve(t_data_p *d, t_commands *c, int idx);
 int		open_infile(t_commands *c, char *infile);
 int		open_outfile(t_commands *c, char *outfile);
 int		open_outfile_hb(t_commands *c, char *outfile_hb);
 void	e_heredoc(t_commands *c);
 int		open_files(t_commands *c);
-int		e_child(t_data_p *d, t_commands *c);
+int		e_child(t_data_p *d, t_commands *c, int idx);
 void	e_exec(t_data_p *d, t_commands *c);
 int		main (int argc, char **argv, char **envp);
 void	check_path(t_data_p *d, t_commands *c);
