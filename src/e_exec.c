@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/05 18:46:33 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 11:25:42 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	open_infile(t_commands *c, char *infile)
 		write(2, c->files[1].file, ft_strlen(infile));
 		write(2, " : is a directory\n", 19);
 	}
+	close(c->fd_in);
 	c->fd_in = open(infile, O_RDONLY);
 	if (c->fd_in == -1)
 	{
@@ -97,19 +98,15 @@ int	open_files(t_commands *c)
 /* execution de la commande dans le child */
 int	e_child(t_data_p *d,t_commands *c)
 {
-	close(c->pfd[0]);
 	open_files (c);
-	if (c->fd_in == -1)
-		return (0);
-	if (c->fd_out == -1)
-		return (0);
 	if (c->last_in_type == HEREDOC_TYPE)
 		e_heredoc(c);
 	if (c->last_in_type != HEREDOC_TYPE)
 		dup2(c->fd_in, STDIN_FILENO);
 	if (c->fd_in)
 		close(c->fd_in);
-	else
+	close(c->pfd[0]);
+	if(c->fd_out == 0)
 		dup2(c->pfd[1], STDOUT_FILENO);
 	close(c->pfd[1]);
 	check_path(d, c);
@@ -122,24 +119,14 @@ void	e_exec(t_data_p *d, t_commands *c)
 {
 	int	i;
 
-	c->fd_in = 0;
 	i = -1;
 	while (c[++i].stop == 0)
 	{
+		c[i].fd_out = 1;
 		pipe(c[i].pfd);
 		c[i].pid = fork();
 		if (!c[i].pid)
 		{
-			// dprintf(2, "/////%i/////\n", i);
-			// dprintf(2, "infile = %s\n", c[i].files[0].file);
-			// dprintf(2, "infile_type = %i\n", c[i].files[0].type);
-			// dprintf(2, "last_infile_type = %i\n", c[i].last_in_type);
-			// dprintf(2, "outfile = %s\n", c[i].files[1].file);
-			// dprintf(2, "outfile_type = %i\n", c[i].files[1].type);
-			// dprintf(2, "envp = %s\n", c[i].envp[1]);
-			// dprintf(2, "cmd_path = %s\n", c[i].cmd_path);
-			// dprintf(2, "cmd = %s\n", c[i].args_vec[0]);
-			// dprintf(2, "/////FIN/////\n");
 			if (!e_child(d, &c[i]))
 				return ;
 		}
@@ -148,9 +135,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 			close(c[i].pfd[1]);
 			if (c[i].fd_in)
 				close(c->fd_in);
-			if (c[i].fd_out)
-				close(c[i].fd_out);
-			c[i].fd_in = dup(c->pfd[0]);
+			c[i + 1].fd_in = dup(c->pfd[0]);
 			close(c[i].pfd[0]);
 		}
 	}
