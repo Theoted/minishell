@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 11:29:27 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 12:43:16 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,8 @@ void	e_exec(t_data_p *d, t_commands *c)
 	i = -1;
 	while (c[++i].stop == 0)
 	{
-		c[i].fd_out = 1;
+		if (c[i + 1].stop)
+			c[i].fd_out = 1;
 		pipe(c[i].pfd);
 		c[i].pid = fork();
 		if (!c[i].pid)

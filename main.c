@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/20 14:47:20 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 14:39:24 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sig_handler(int signo)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
@@ -62,14 +62,16 @@ int main(int ac, char **av, char **envp)
 	{
 		data_p.stdin_arg = readline("\033[0;34mShellDePetiteTaille-0.0.42: \033[0m");
 		add_history(data_p.stdin_arg);
+		if (b_exit(data_p.stdin_arg))
+			break ;
 		if (data_p.stdin_arg == NULL)
 			break ;
 		if (data_p.stdin_arg[0])
+		{
 			lexer(data_p.stdin_arg, &data_p);
-		if (b_exit(data_p.stdin_arg))
-			break ;
-		detect_buitins(&data_p);
-		// e_exec(&data_p, data_p.commands);
+			detect_buitins(&data_p);
+			e_exec(&data_p, data_p.commands);	
+		}
 		free(data_p.stdin_arg);
 	}
 	gc_free_all(&data_p.track);
