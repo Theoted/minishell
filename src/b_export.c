@@ -3,16 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/16 15:04:11 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/21 16:21:30 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void env_lst_addfront(t_envp **alst, t_envp *new)
+void    print_export(t_envp *envp)
+{
+    t_envp *tmp;
+
+    tmp = envp;
+    while (tmp)
+    {
+        printf("declare -x %s", tmp->name);
+        if (tmp->content)
+            printf("=\"%s\"", tmp->content);
+        printf("\n");
+        tmp = tmp->next;
+    }
+}
+
+void    env_lst_addfront(t_envp **alst, t_envp *new)
 {
     if (!alst || !new)
         return;
@@ -20,14 +35,14 @@ void env_lst_addfront(t_envp **alst, t_envp *new)
     *alst = new;
 }
 
-void env_lst_change_content(t_envp *node, char *content)
+void    env_lst_change_content(t_envp *node, char *content)
 {
     if (!node)
         return;
     node->content = content;
 }
 
-t_envp *check_if_exist(t_envp *alst, char *name)
+t_envp  *check_if_exist(t_envp *alst, char *name)
 {
     while (alst)
     {
@@ -52,18 +67,33 @@ int contains_equal(char *arg)
     return (0);
 }
 
+// Creer une variable d'environnement avec un contenu qui pointe sur NULL
+int create_var_no_content
+    (t_data_p *data, char *arg, char **content, char **name)
+{
+    *name = gc_strdup(&data->track, arg);
+    *content = NULL;
+    return (1);
+}
+
 int check_arg(t_data_p *data, char *arg, char **content, char **name)
 {
-    int i;
+    int     i;
+    t_envp  *tmp;
 
     i = 0;
+    tmp = data->envp;
     if (arg[0] == '=')
     {
         printf("export: `%s': not a valid identifier\n", arg);
         return (1);
     }
     if (!contains_equal(arg))
+    {
+        if (!check_if_exist(tmp, arg))
+            return (create_var_no_content(data, arg, content, name));
         return (1);
+    }
     while (arg[i] && arg[i] != '=')
     {
         if (arg[i] == ' ')
@@ -83,6 +113,8 @@ void b_export(t_data_p *data, int idx)
     t_envp *in_list;
 
     i = 1;
+    if (!arg_vec_len(data, idx))
+        print_export(data->envp);
     while (data->commands[idx].args_vec[i])
     {
         content = NULL;

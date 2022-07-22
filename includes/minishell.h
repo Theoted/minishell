@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/20 14:46:02 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/21 14:06:35 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,5 +218,6 @@ t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
 		//Built-ins utils
 int		strncmp_len(char *s1, char *s2);
 void 	print_env_list(t_envp *env_list);
+int		arg_vec_len(t_data_p *data, int idx);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/19 11:05:42 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/21 14:18:36 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,25 @@
 // Renvoie 0 si les strings sont les memes
 int strncmp_len(char *s1, char *s2)
 {
-    int len;
-    if (!s1 || !s2)
-      return (-1);
-    if (ft_strlen(s1) < ft_strlen(s2))
-        len = ft_strlen(s2);
-    else
-        len = ft_strlen(s1);
-    return (ft_strncmp(s1, s2, len));
+	int len;
+	if (!s1 || !s2)
+		return (-1);
+	if (ft_strlen(s1) < ft_strlen(s2))
+		len = ft_strlen(s2);
+	else
+		len = ft_strlen(s1);
+	return (ft_strncmp(s1, s2, len));
 }
 
 void print_env_list(t_envp *env_list)
 {
-  while (env_list)
-  {
-	printf("%s=%s\n", env_list->name, env_list->content);
-	env_list = env_list->next;
-  }
+	t_envp *tmp;
+
+	tmp = env_list;
+	while (tmp)
+	{
+		if (tmp->content)
+			printf("%s=%s\n", tmp->name, tmp->content);
+		tmp = tmp->next;
+	}
 }
