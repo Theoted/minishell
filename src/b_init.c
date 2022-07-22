@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/19 11:47:43 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 12:19:36 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 t_envp *env_lstlast(t_envp *lst)
 {
 	while (lst->next)
+	{
 		lst = lst->next;
+	}
 	return (lst);
 }
 
@@ -23,7 +25,7 @@ t_envp *env_lstnew(t_data_p *data, char *name, char *content)
 {
 	t_envp *lstnew;
 
-	lstnew = gc_calloc(sizeof(t_list), 0, &data->track);
+	lstnew = gc_calloc(sizeof(t_envp), 	1, &data->track);
 	if (!lstnew)
 		return (0);
 	lstnew->name = name;
@@ -35,7 +37,6 @@ t_envp *env_lstnew(t_data_p *data, char *name, char *content)
 void env_lstadd_back(t_envp **alst, t_envp *new)
 {
 	t_envp *last;
-
 	if (!new || !alst)
 		return;
 	if (!*alst)

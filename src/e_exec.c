@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 11:29:27 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 19:40:42 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	e_child(t_data_p *d,t_commands *c)
 	close(c->pfd[1]);
 	check_path(d, c);
 	e_execve(c);
-	exit(1);
+	return (1);
 }
 
 /* Parcours le tableau de commande et fork apres chaque commandes pour l'executer et creation du pipe */
@@ -122,7 +122,8 @@ void	e_exec(t_data_p *d, t_commands *c)
 	i = -1;
 	while (c[++i].stop == 0)
 	{
-		c[i].fd_out = 1;
+		if (c[i + 1].stop)
+			c[i].fd_out = 1;
 		pipe(c[i].pfd);
 		c[i].pid = fork();
 		if (!c[i].pid)
@@ -134,7 +135,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 		{
 			close(c[i].pfd[1]);
 			if (c[i].fd_in)
-				close(c->fd_in);
+				close(c[i].fd_in);
 			c[i + 1].fd_in = dup(c->pfd[0]);
 			close(c[i].pfd[0]);
 		}

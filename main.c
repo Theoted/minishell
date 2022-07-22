@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/20 14:47:20 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 15:04:22 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	sig_handler(int signo)
 	{
 		printf("\n");
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
@@ -69,7 +69,7 @@ int main(int ac, char **av, char **envp)
 		if (b_exit(data_p.stdin_arg))
 			break ;
 		detect_buitins(&data_p);
-		// e_exec(&data_p, data_p.commands);
+		e_exec(&data_p, data_p.commands);
 		free(data_p.stdin_arg);
 	}
 	gc_free_all(&data_p.track);

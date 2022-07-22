@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/07/15 10:43:08 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 20:18:13 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,34 @@ void	check_path(t_data_p *d, t_commands *c)
 		gc_free_malloc(&d->track, (void **)&c->cmd_path);
 	}
 }
+static int ft_strcmp(char *arg, char *built)
+{
+	int i;
 
+	i = -1;
+	if (ft_strlen(arg) != ft_strlen(built))
+		return (0);
+	while (arg[++i])
+	{
+		if (arg[i] != built[i])
+			return (0);
+	}
+	return (1);
+}
 void	e_execve(t_commands *c)
 {
+	if(ft_strcmp(c->args_vec[0], "cd"))
+		exit(0);
+	if(ft_strcmp(c->args_vec[0], "env"))
+		exit(0);
+	if(ft_strcmp(c->args_vec[0], "export"))
+		exit(0);
+	if(ft_strcmp(c->args_vec[0], "unset"))
+		exit(0);
+	if(ft_strcmp(c->args_vec[0], "pwd"))
+		exit(0);
+	if(ft_strcmp(c->args_vec[0], "echo"))
+		exit(0);
 	if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
 	{
 		write(2, "bash: ", 6);
