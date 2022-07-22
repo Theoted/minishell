@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:41:26 by pat               #+#    #+#             */
-/*   Updated: 2022/03/17 13:31:10 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/18 14:20:03 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	gc_free_malloc_split(t_track **track, void ***del);
 void	*gc_calloc(size_t count, size_t size, t_track **track);
 /* str */
 char	**gc_split(t_track **track, char const *s, char c);
+char	**gc_split_spaces(t_track **track, char const *s, char c);
 char	*gc_strdup(t_track **track, const char *src);
 char	*gc_strjoin(t_track **track, char const *s1, char const *s2);
 char	*gc_substr(t_track **track, const char *s,

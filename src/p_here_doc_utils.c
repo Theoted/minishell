@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:28:03 by tdeville          #+#    #+#             */
-/*   Updated: 2022/03/17 14:02:33 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/19 15:06:59 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,38 @@ int	nb_of_env_vars(char *buffer)
 	return (count);
 }
 
+// Revoie 1 si la variable est seule dans le buffer et que son premier char est $ 
+// sinon renvoie 0
+// Renvoi 2 si le premier char est un dollard, et que le deuxieme est un char non alphanum
+int	check_solo_var(char *buffer)
+{
+	int	i;
+
+	i = 0;
+	if (buffer[i] == '$')
+	{
+		while (buffer[i])
+		{
+			if (!ft_isalnum(buffer[i]))
+			{
+				if (check_var(buffer))
+					return (2);
+				return (0);
+			}
+			i++;
+		}
+		return (1);
+	}
+	return (0);
+}
+
+// Check si le premier char est un $ si oui
+// Renvoi 1 si il y a un char non alphanum apres le dollard sinon renvoie 0
 int	check_var(char *var)
 {
 	if (var[0] == '$')
 	{
-		if (var[1] == '\'' || var[1] == '\"')
+		if (!ft_isalnum(var[1]))
 			return (1);
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_expend_vars.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/21 09:42:56 by tdeville          #+#    #+#             */
-/*   Updated: 2022/06/28 11:21:56 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/19 10:35:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**get_exp_vars_arg(char *arg, t_data_p *data)
 		while (vars[i])
 		{
 			tmp = vars[i];
-			vars[i] = expend_env_var(data, data->env_vars, vars[i]);
+			vars[i] = expend_env_var(data, data->envp, vars[i]);
 			if (!ft_strncmp(vars[i], tmp, ft_strlen(vars[i])))
 				vars[i] = gc_strjoin(&data->track, "$", tmp);
 			i++;

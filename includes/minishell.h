@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/05 18:34:19 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/21 14:06:35 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 
 
 # define INFILE 1
@@ -31,6 +33,25 @@ typedef struct s_commands t_commands;
 typedef struct s_data_p t_data_p;
 typedef struct s_hd_data t_hd_data;
 typedef struct s_files t_files;
+typedef struct s_envp t_envp;
+typedef struct s_echo t_echo;
+
+// Structure qui permet le parsing des arguments de echo
+struct s_echo
+{
+	char	*new;
+	char	*arg;
+	char	quote;
+	int		idx;
+};
+
+struct s_envp
+{
+	char	*name;
+	char	*content;
+	struct	s_envp *next;
+};
+
 
 // Type: 1 = < , 2 = > , 3 = >>
 struct s_files
@@ -70,18 +91,6 @@ struct s_commands
 	
 };
 
-// struct s_commands
-// {
-// 	char	**args_vec;
-// 	char	*cmd_path;
-// 	char	*here_doc;
-// 	int		infile;
-// 	int		outfile;
-// 	int		infile_type;
-// 	int		last_in_type;
-// 	t_files	*files;
-// };
-
 struct s_hd_data
 {
 	int		expend_var;
@@ -102,6 +111,8 @@ struct s_data_p
 	int			pipes_nb;
 	int			args_create;
 	char		*cmd_slash;
+	
+	t_envp		*envp;
 	t_commands	*commands;
 	t_hd_data	hd_data;
 	t_track		*track;
@@ -124,7 +135,9 @@ void	check_path(t_data_p *d, t_commands *c);
 	// Bin Path
 int		find_env_path(char **envp, t_data_p *data);
 int		ft_access(char *arg);
-char	*expend_env_var(t_data_p *data, char **envp, char *var);
+char	*expend_env_var(t_data_p *data, t_envp *envp, char *var);
+// char	*expend_env_var(t_data_p *data, char **envp, char *var);
+
 	// Lexer
 int		lexer(char *arg, t_data_p *data);
 int		pipe_check(char *arg, int i);
@@ -158,6 +171,7 @@ char	*check_bsn_buffer(t_data_p *data, char *new_buffer);
 int		check_var(char *var);
 char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
+int		check_solo_var(char *buffer);
 	
 	// Clear here_doc
 char	*clear_here_doc(t_data_p *data, char *arg);
@@ -173,5 +187,37 @@ void 	fill_envp_cmd(t_data_p *data);
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
 char	**get_exp_vars_arg(char *arg, t_data_p *data);
+
+
+	// Built-ins
+		// UNSET
+void	init_our_envp(t_data_p *data);
+void    delete_env_node(t_envp **env_lst, char *name);
+void	print_env_list(t_envp *env_list);
+void    b_unset(t_data_p *data, int cmd_id);
+
+		// EXPORT
+void    b_export(t_data_p *data, int idx);
+
+		// EXIT
+int 	b_exit(char *input);
+
+		// CD
+int		b_cd(t_data_p *data, int idx);
+
+		// ECHO
+int		b_echo(t_data_p *data, int idx);
+int		expend_echo_env_vars(t_data_p *data, char **arg);
+char    *get_echo_env_var(t_data_p *data, char *arg);
+
+		//Built-ins init
+int		detect_buitins(t_data_p *data);
+void    exec_built_ins(t_data_p *data, int idx, char *builtin);
+t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
+
+		//Built-ins utils
+int		strncmp_len(char *s1, char *s2);
+void 	print_env_list(t_envp *env_list);
+int		arg_vec_len(t_data_p *data, int idx);
 
 #endif
