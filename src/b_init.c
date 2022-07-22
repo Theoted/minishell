@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/22 12:18:07 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 20:22:39 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 t_envp *env_lstlast(t_envp *lst)
 {
 	while (lst->next)
+	{
 		lst = lst->next;
+	}
 	return (lst);
 }
 
@@ -35,7 +37,6 @@ t_envp *env_lstnew(t_data_p *data, char *name, char *content)
 void env_lstadd_back(t_envp **alst, t_envp *new)
 {
 	t_envp *last;
-
 	if (!new || !alst)
 		return;
 	if (!*alst)

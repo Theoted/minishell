@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 12:43:16 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 20:22:48 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	e_child(t_data_p *d,t_commands *c)
 	close(c->pfd[1]);
 	check_path(d, c);
 	e_execve(c);
-	exit(1);
+	return (1);
 }
 
 /* Parcours le tableau de commande et fork apres chaque commandes pour l'executer et creation du pipe */
@@ -135,7 +135,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 		{
 			close(c[i].pfd[1]);
 			if (c[i].fd_in)
-				close(c->fd_in);
+				close(c[i].fd_in);
 			c[i + 1].fd_in = dup(c->pfd[0]);
 			close(c[i].pfd[0]);
 		}

@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 14:39:24 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/22 20:22:13 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ int main(int ac, char **av, char **envp)
 		if (data_p.stdin_arg == NULL)
 			break ;
 		if (data_p.stdin_arg[0])
-		{
 			lexer(data_p.stdin_arg, &data_p);
-			detect_buitins(&data_p);
-			e_exec(&data_p, data_p.commands);	
-		}
+		if (b_exit(data_p.stdin_arg))
+			break ;
+		detect_buitins(&data_p);
+		e_exec(&data_p, data_p.commands);
 		free(data_p.stdin_arg);
 	}
 	gc_free_all(&data_p.track);
