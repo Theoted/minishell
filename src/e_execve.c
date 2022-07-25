@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/07/25 16:03:16 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 16:32:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,21 @@ void	check_path(t_data_p *d, t_commands *c)
 		c->cmd_path = gc_strdup(&d->track, c->args_vec[0]);
 	d->cmd_slash = gc_strjoin(&d->track, "/", c->args_vec[0]);
 	/* Check les commandes dans les variables d'environnement */
-	while (d->env_path[++i])
+	if (d->env_path)
 	{
-		c->cmd_path = gc_strjoin(&d->track,
-			d->env_path[i], d->cmd_slash);
-		if (!access(c->args_vec[0], X_OK))
+		while (d->env_path[++i])
 		{
-			c->cmd_path = c->args_vec[0];
-			return ;
+			c->cmd_path = gc_strjoin(&d->track,
+				d->env_path[i], d->cmd_slash);
+			if (!access(c->args_vec[0], X_OK))
+			{
+				c->cmd_path = c->args_vec[0];
+				return ;
+			}
+			if (!access(c->cmd_path, X_OK))
+				return ;
+			gc_free_malloc(&d->track, (void **)&c->cmd_path);
 		}
-		if (!access(c->cmd_path, X_OK))
-			return ;
-		gc_free_malloc(&d->track, (void **)&c->cmd_path);
 	}
 }
 static int ft_strcmp(char *arg, char *built)
@@ -85,5 +88,6 @@ void	e_execve(t_data_p *d,t_commands *c, int idx)
 		write(2, "bash: ", 6);
 		write(2, c->args_vec[0], ft_strlen(c->args_vec[0]));
 		write(2, ": command not found\n", 21);
+		exit(0);
 	}
 }
