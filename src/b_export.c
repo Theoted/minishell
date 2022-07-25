@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/22 20:56:06 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:49:22 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int check_arg(t_data_p *data, char *arg, char **content, char **name)
     return (0);
 }
 
-void b_export(t_data_p *data, int idx)
+int b_export(t_data_p *data, int idx)
 {
     int i;
     char *content;
@@ -131,5 +131,5 @@ void b_export(t_data_p *data, int idx)
         }
         i++;
     }
-    exit(0);
+    return (1);
 }

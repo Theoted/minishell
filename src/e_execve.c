@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 20:57:17 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:53:20 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	check_path(t_data_p *d, t_commands *c)
 			return ;
 		}
 		if (!access(c->cmd_path, X_OK))
-		{
 			return ;
-		}
 		gc_free_malloc(&d->track, (void **)&c->cmd_path);
 	}
 }
@@ -52,18 +50,24 @@ static int ft_strcmp(char *arg, char *built)
 	}
 	return (1);
 }
-static void ft_exec_built(t_data_p *d, t_commands *c, int idx)
+int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 {
 	char    s[1000];
 
 	if(ft_strcmp(c->args_vec[0], "cd"))
-		 b_cd(d, idx);
+		 return(b_cd(d, idx));
+	if(ft_strcmp(c->args_vec[0], "export"))
+		return(b_export(d, idx));
+	if(ft_strcmp(c->args_vec[0], "unset"))
+		return(b_unset(d, idx));
+	return (0);
+}
+void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx)
+{
+	char	s[1000];
+
 	if(ft_strcmp(c->args_vec[0], "env"))
 		print_env_list(d->envp);
-	if(ft_strcmp(c->args_vec[0], "export"))
-		b_export(d, idx);
-	if(ft_strcmp(c->args_vec[0], "unset"))
-		b_unset(d, idx);
 	if(ft_strcmp(c->args_vec[0], "pwd"))
 	{
 		printf("%s\n", getcwd(s, 100));
@@ -75,7 +79,7 @@ static void ft_exec_built(t_data_p *d, t_commands *c, int idx)
 
 void	e_execve(t_data_p *d,t_commands *c, int idx)
 {
-	ft_exec_built(d, c, idx);
+	ft_exec_built_fork(d, c, idx);
 	if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
 	{
 		write(2, "bash: ", 6);

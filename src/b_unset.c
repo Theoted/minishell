@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 10:25:10 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/22 20:56:32 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:51:38 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    delete_env_node(t_envp **env_lst, char *name)
     prev->next = temp->next;
 }
 
-void    b_unset(t_data_p *data, int cmd_id)
+int b_unset(t_data_p *data, int cmd_id)
 {
     int i;
 
@@ -43,5 +43,5 @@ void    b_unset(t_data_p *data, int cmd_id)
         delete_env_node(&data->envp, data->commands[cmd_id].args_vec[i]);
         i++;
     }
-    exit(0);
+   return(1);
 }

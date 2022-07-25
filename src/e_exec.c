@@ -6,19 +6,36 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/22 20:50:38 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:59:49 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /* Ouverture de l'infile */
+// int ft_check_file_exist(t_commands *c, char *infile)
+// {
+// 	int	i;
+// 	int	j;
+
+// 	i = 0;
+	
+// 	while (c->files[i].stop)
+// 	{
+// 		j = 0;
+// 		if (if ft_strlen(c->files[i].file) !=  ft_strlen(infile))
+// 			return (0)
+// 		if(c->files[i].file[j] != infile[j] || )
+// 			return (0)
+// 	}
+// 	return (1);
+// }
 int	open_infile(t_commands *c, char *infile)
 {
 	c->fd_in = open(infile, O_DIRECTORY);
 	if (c->fd_in != 0 && c->fd_in != -1)
 	{
-		write(2, c->files[1].file, ft_strlen(infile));
+		write(2, infile, ft_strlen(infile));
 		write(2, " : is a directory\n", 19);
 	}
 	close(c->fd_in);
@@ -26,7 +43,7 @@ int	open_infile(t_commands *c, char *infile)
 	if (c->fd_in == -1)
 	{
 		perror(infile);
-		return (0);
+		exit(0);
 	}
 	return (1);
 }
@@ -37,7 +54,7 @@ int	open_outfile(t_commands *c, char *outfile)
 	if (c->fd_out == -1)
 	{
 		perror(outfile);
-		return (0);
+		exit(0);
 	}
 	dup2(c->fd_out, STDOUT_FILENO);
 	close(c->fd_out);
@@ -50,7 +67,7 @@ int	open_outfile_hb(t_commands *c, char *outfile_hb)
 	if (c->fd_out == -1)
 	{
 		perror(outfile_hb);
-		return (0);
+		exit(0);
 	}
 	dup2(c->fd_out, STDOUT_FILENO);
 	close(c->fd_out);
@@ -125,19 +142,22 @@ void	e_exec(t_data_p *d, t_commands *c)
 		if (c[i + 1].stop)
 			c[i].fd_out = 1;
 		pipe(c[i].pfd);
-		c[i].pid = fork();
-		if (!c[i].pid)
+		if(!ft_exec_built_nofork(d, c, i))
 		{
-			if (!e_child(d, &c[i], i))
-				return ;
-		}
-		else
-		{
-			close(c[i].pfd[1]);
-			if (c[i].fd_in)
-				close(c[i].fd_in);
-			c[i + 1].fd_in = dup(c->pfd[0]);
-			close(c[i].pfd[0]);
+			c[i].pid = fork();
+			if (!c[i].pid)
+			{
+				if (!e_child(d, &c[i], i))
+					return ;
+			}
+			else
+			{
+				close(c[i].pfd[1]);
+				if (c[i].fd_in)
+					close(c[i].fd_in);
+				c[i + 1].fd_in = dup(c->pfd[0]);
+				close(c[i].pfd[0]);
+			}
 		}
 	}
 	i = -1;
