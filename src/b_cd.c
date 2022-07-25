@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/25 15:23:05 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 16:02:24 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,5 @@ int b_cd(t_data_p *data, int idx)
     getcwd(cwd, sizeof(cwd));
     chdir(data->commands[idx].args_vec[1]);
     change_oldpwd(data, data->envp, cwd);
-    return (0);
+    return (1);
 }

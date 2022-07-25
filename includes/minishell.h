@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/25 15:11:19 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 16:02:37 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,10 +196,10 @@ char	**get_exp_vars_arg(char *arg, t_data_p *data);
 void	init_our_envp(t_data_p *data);
 void    delete_env_node(t_envp **env_lst, char *name);
 void	print_env_list(t_envp *env_list);
-void    b_unset(t_data_p *data, int cmd_id);
+int		b_unset(t_data_p *data, int cmd_id);
 
 		// EXPORT
-void    b_export(t_data_p *data, int idx);
+int		b_export(t_data_p *data, int idx);
 
 		// EXIT
 int 	b_exit(char *input);
@@ -221,5 +221,7 @@ t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
 int		strncmp_len(char *s1, char *s2);
 void 	print_env_list(t_envp *env_list);
 int		arg_vec_len(t_data_p *data, int idx);
+void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx);
+int		ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx);
 
 #endif
