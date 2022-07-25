@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 10:25:10 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/25 16:02:59 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 16:08:56 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int b_unset(t_data_p *data, int cmd_id)
         delete_env_node(&data->envp, data->commands[cmd_id].args_vec[i]);
         i++;
     }
-   return(1);
+    find_env_path(data->envp, data);
+    return(1);
 }

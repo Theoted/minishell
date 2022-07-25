@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/25 16:02:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 16:11:33 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,7 @@ int b_export(t_data_p *data, int idx)
         }
         i++;
     }
+    printf("%s=%s\n", data->envp->name, data->envp->content);
+    find_env_path(data->envp, data);
     return (1);
 }
