@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/07/25 16:03:16 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 16:25:44 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	check_path(t_data_p *d, t_commands *c)
 			return ;
 		}
 		if (!access(c->cmd_path, X_OK))
+		{
+			dprintf(2, "c->cmd_path = %s\n", c->cmd_path);
 			return ;
+		}
 		gc_free_malloc(&d->track, (void **)&c->cmd_path);
 	}
 }
