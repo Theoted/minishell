@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 20:41:41 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:44:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ int b_echo(t_data_p *data, int idx)
         data->commands[idx].args_vec[i] = get_echo_env_var
             (data, data->commands[idx].args_vec[i]);
         printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
-        if (av_len > 2 && i < av_len)
+        if (av_len > 1 && i < av_len)
             printf(" ");
     }
     if (bn)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 20:52:40 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:11:19 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ void	check_path(t_data_p *d, t_commands *c);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path
-int		find_env_path(char **envp, t_data_p *data);
+int 	find_env_path(t_envp *envp, t_data_p *data);
 int		ft_access(char *arg);
 char	*expend_env_var(t_data_p *data, t_envp *envp, char *var);
 // char	*expend_env_var(t_data_p *data, char **envp, char *var);
@@ -140,14 +140,16 @@ char	*expend_env_var(t_data_p *data, t_envp *envp, char *var);
 	// Lexer
 int		lexer(char *arg, t_data_p *data);
 int		pipe_check(char *arg, int i);
-int		synthax_checker(char *arg);
 int		split_args(char *arg, t_data_p *data);
 int		create_arg(char *str, int i, t_data_p *data, int bad_pipe);
 int		count_pipes(char *str);
+
+	// Synthax_checker
+int		synthax_checker(char *arg);
 int		pipe_synthax(char *str, t_data_p data);
 
 	// Get cmd
-char 	*get_cmd_in_arg(char *arg, t_data_p *data, int idx);
+int		get_cmd_in_arg(char *arg, t_data_p *data, int idx);
 char 	*skip_in_out_hd(char *arg, t_data_p *data);
 void	skip_in_hd(char *arg, int *i);
 void	skip_out(char *arg, int *i);
@@ -172,8 +174,9 @@ char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
 int		check_solo_var(char *buffer);
 	
-	// Clear here_doc
+	// Clear here_doc A SUPPRIMER
 char	*clear_here_doc(t_data_p *data, char *arg);
+
 	// Utils
 int 	state_checker(char *str, int start, int len);
 int 	last_in_redir(char *arg);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 11:29:34 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 14:39:10 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int get_in_out_files(char *arg, t_data_p *data, int idx)
     data->commands[idx].files[count_in_out_files(arg) + 1].stop = 1;
     while (arg[++i])
     {
-        if (arg[i] == '<' || arg[i] == '>')
+        if ((arg[i] == '<' || arg[i] == '>') && !state_checker(arg, 0, i))
         {
             len = get_file(arg, &i, &in_type);
             if (len != -1)
@@ -147,14 +147,14 @@ int count_in_out_files(char *arg)
     count = 0;
     while (arg[++i])
     {
-        if (arg[i] == '<')
+        if (arg[i] == '<' && !state_checker(arg, 0, i))
         {
             if (arg[i + 1] == '<')
                 i++;
             else
                 count++;
         }
-        else if (arg[i] == '>')
+        else if (arg[i] == '>' && !state_checker(arg, 0, i))
         {
             if (arg[i + 1] == '>')
                 i++;

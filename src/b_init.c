@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/22 20:22:39 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/07/25 14:56:15 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_envp *env_lstlast(t_envp *lst)
 	return (lst);
 }
 
-t_envp *env_lstnew(t_data_p *data, char *name, char *content)
+t_envp	*env_lstnew(t_data_p *data, char *name, char *content)
 {
 	t_envp *lstnew;
 
@@ -34,11 +34,23 @@ t_envp *env_lstnew(t_data_p *data, char *name, char *content)
 	return (lstnew);
 }
 
-void env_lstadd_back(t_envp **alst, t_envp *new)
+// Increment la variable shlvl mais ne fonctionne pas car la liste de var
+// s'initialise avec les variables d'env du shell de base
+void	update_shlvl(t_data_p *data,t_envp *node)
+{
+	int	shlvl;
+	shlvl = ft_atoi(node->content);
+	shlvl++;
+	node->content = gc_strdup(&data->track, ft_itoa(shlvl));
+}
+
+void	env_lstadd_back(t_data_p *data, t_envp **alst, t_envp *new)
 {
 	t_envp *last;
 	if (!new || !alst)
 		return;
+	if (!strncmp_len(new->name, "SHLVL"))
+		update_shlvl(data, new);
 	if (!*alst)
 	{
 		*alst = new;
@@ -92,7 +104,7 @@ void init_our_envp(t_data_p *data)
 	data->envp = NULL;
 	while (data->env_vars[i])
 	{
-		env_lstadd_back(&data->envp, env_lstnew(data,
+		env_lstadd_back(data, &data->envp, env_lstnew(data,
 												gc_split(&data->track, data->env_vars[i], '=')[0],
 												gc_split(&data->track, data->env_vars[i], '=')[1]));
 		i++;

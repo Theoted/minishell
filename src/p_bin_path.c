@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/19 15:10:45 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:41:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 
 // Cette fonction trouve la variable d'environnement PATH
 // et la split dans env_path (structure t_args)
-int find_env_path(char **envp, t_data_p *data)
+int find_env_path(t_envp *envp, t_data_p *data)
 {
 	int i;
 	char *path;
 
 	i = -1;
-	while (envp[++i])
+	path = NULL;
+	while (envp)
 	{
-		if (!ft_strncmp(envp[i], "PATH=", 5))
+		if (!strncmp_len(envp->name, "PATH"))
 		{
-			path = gc_substr(&data->track, envp[i], 5, ft_strlen(&envp[i][5]));
+			path = gc_strdup(&data->track, envp->content);
 			data->env_path = gc_split(&data->track, path, ':');
 			return (0);
 		}
+		envp = envp->next;
 	}
 	return (1);
 }
@@ -54,7 +56,7 @@ char *expend_env_var(t_data_p *data, t_envp *envp, char *var)
 
 // Cette fonction recupere la commande en raw et la split
 // dans la structure command pour la var arg_vec
-char *get_cmd_in_arg(char *arg, t_data_p *data, int idx)
+int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 {
 	char	*cmd;
 
@@ -79,11 +81,11 @@ char *skip_in_out_hd(char *arg, t_data_p *data)
 	cmd = NULL;
 	while (arg[++i])
 	{
-		if (arg[i] == ' ')
+		if (arg[i] == ' ' && !state_checker(arg, 0, i))
 			skip_spaces(arg, &i);
-		else if (arg[i] == '<')
+		else if (arg[i] == '<' && !state_checker(arg, 0, i))
 			skip_in_hd(arg, &i);
-		else if (arg[i] == '>')
+		else if (arg[i] == '>' && !state_checker(arg, 0, i))
 			skip_out(arg, &i);
 		else
 		{
@@ -132,8 +134,12 @@ char *get_cmd(char *arg, int i, t_data_p *data)
 
 	j = 0;
 	check = 0;
-	while (arg[i + j] && arg[i + j] != '<' && arg[i + j] != '>')
+	while (arg[i + j])
+	{
+		if ((arg[i + j] == '<' || arg[i + j] == '>') && !state_checker(arg, 0, i + j))
+			break ;
 		j++;
+	}
 	return (gc_substr(&data->track, arg, i, j));
 }
 

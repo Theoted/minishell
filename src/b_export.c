@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/22 20:56:06 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 15:20:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int check_arg(t_data_p *data, char *arg, char **content, char **name)
     }
     while (arg[i] && arg[i] != '=')
     {
+        printf("test\n");
         if (arg[i] == ' ')
             return (1);
         i++;
@@ -131,5 +132,4 @@ void b_export(t_data_p *data, int idx)
         }
         i++;
     }
-    exit(0);
 }

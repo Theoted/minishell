@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/20 09:36:13 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/25 14:28:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,6 @@ int	create_arg(char *str, int i, t_data_p *data, int bad_pipe)
 	return (0);
 }
 
-int	synthax_checker(char *arg)
-{
-	int		i;
-	char	quote;
-
-	i = 0;
-	quote = 0;
-	while (arg[i])
-	{
-		if ((arg[i] == '\'' || arg[i] == '\"') && quote == 0)
-			quote = arg[i];
-		else if (arg[i] == quote && quote)
-			quote = 0;
-		i++;
-	}
-	if (quote)
-		return (1);
-	return (0);
-}
-
 // Fonction qui split l'argument principale via les |
 int	split_args(char *arg, t_data_p *data)
 {
@@ -115,7 +95,7 @@ int	lexer(char *arg, t_data_p *data)
 	data->commands = gc_calloc(sizeof(t_commands), (data->pipes_nb + 2), &data->track);
 	data->commands[data->pipes_nb + 1].stop = 1;
 	fill_envp_cmd(data);
-	if (synthax_checker(arg)) // Have to add pipe synthax checker
+	if (synthax_checker(arg)) 
 	{
 		printf("Synthax error\n");
 		return (1);
@@ -126,7 +106,8 @@ int	lexer(char *arg, t_data_p *data)
 	{
 		data->commands[i].last_in_type = last_in_redir(data->args[i]);
 		get_in_out_files(data->args[i], data, i);
-		check_heredoc(data->args[i], data, i);
+		if (check_heredoc(data->args[i], data, i))
+			return (1);
 		get_cmd_in_arg(data->args[i], data, i);
 		// check_arg_vars(data->args[i], data);
 		i++;
@@ -134,45 +115,3 @@ int	lexer(char *arg, t_data_p *data)
 	return (0);
 }
 
-int	pipe_check(char *arg, int i)
-{
-	char	quote;
-	int		j;
-	
-	quote = 0;
-	j = 0;
-	while (j < i)
-	{
-		if ((arg[j] == '\'' || arg[j] == '\"') && quote == 0)
-			quote = arg[j];
-		else if (arg[j] == quote && quote)
-			quote = 0;
-		j++;
-	}
-	if (quote)
-		return (1);
-	return (0);
-}
-
-int	pipe_synthax(char *str, t_data_p data)
-{
-	int	i;
-	int	valid_pipe_nb;
-
-	i = 0;
-	valid_pipe_nb = 0;
-	while (str[i])
-	{
-		if (str[i] == '|' && (!pipe_check(str, i)))
-			valid_pipe_nb++;
-		if (str[i] == '|' && (!pipe_check(str, i))
-			&& valid_pipe_nb == data.pipes_nb)
-		{
-			while (str[++i])
-				if (ft_isalpha(str[i]))
-					return (1);
-		}
-		i++;
-	}
-	return (0);
-}
