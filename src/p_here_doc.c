@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/19 14:57:09 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/23 13:08:55 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	check_heredoc(char *arg, t_data_p *data, int idx)
 	{
 		if (arg[i] == '<' && arg[i + 1] == '<')
 		{
+			if (arg[i + 2] == '<')
+			{
+				printf("Here-string is not considered\n");
+				gc_free_all(&data->track);
+				exit(0);
+			}
 			get_heredoc_del(arg, i + 2, data);
 			ft_here_doc(data, idx);
 			// clear_here_doc(data, arg);

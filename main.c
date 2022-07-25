@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/22 20:59:27 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/22 21:16:07 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ int main(int ac, char **av, char **envp)
 		if (data_p.stdin_arg == NULL)
 			break ;
 		if (data_p.stdin_arg[0])
+		{
 			lexer(data_p.stdin_arg, &data_p);
+			e_exec(&data_p, data_p.commands);
+		}
 		if (b_exit(data_p.stdin_arg))
 			break ;
-		e_exec(&data_p, data_p.commands);
 		free(data_p.stdin_arg);
 	}
 	gc_free_all(&data_p.track);
