@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/07/25 14:42:13 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/07/27 15:15:42 by pat              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,14 @@ NAME	= minishell
 HEADER	= includes/minishell.h libft2/include/libft2.h libft2/include/gc.h
 LIBFT	= libft2
 
-EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
+EXECINCLUDES =	-lreadline
 
 # -I./readline/include -L./readline/lib -lncurses
 
 SRCS	+=	main.c			\
 			src/e_exec.c	\
-			src/e_execve.c
+			src/e_execve.c	\
+			src/e_built.c
 
 OBJS	= ${SRCS:.c=.o}
 

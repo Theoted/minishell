@@ -3,33 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/07/25 16:07:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 15:28:45 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Ouverture de l'infile */
-// int ft_check_file_exist(t_commands *c, char *infile)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-	
-// 	while (c->files[i].stop)
-// 	{
-// 		j = 0;
-// 		if (if ft_strlen(c->files[i].file) !=  ft_strlen(infile))
-// 			return (0)
-// 		if(c->files[i].file[j] != infile[j] || )
-// 			return (0)
-// 	}
-// 	return (1);
-// }
 int	open_infile(t_commands *c, char *infile)
 {
 	c->fd_in = open(infile, O_DIRECTORY);
@@ -47,6 +29,7 @@ int	open_infile(t_commands *c, char *infile)
 	}
 	return (1);
 }
+
 /* Ouverture de l'outfile */
 int	open_outfile(t_commands *c, char *outfile)
 {
@@ -60,6 +43,7 @@ int	open_outfile(t_commands *c, char *outfile)
 	close(c->fd_out);
 	return (1);
 }
+
 /* Ouverture de l'outfile_hb */
 int	open_outfile_hb(t_commands *c, char *outfile_hb)
 {
@@ -74,17 +58,6 @@ int	open_outfile_hb(t_commands *c, char *outfile_hb)
 	return (1);
 }
 
-void	e_heredoc(t_commands *c)
-{
-	int	pipe_heredoc[2];
-
-	pipe(pipe_heredoc);
-	write(pipe_heredoc[1], c->here_doc, ft_strlen(c->here_doc));
-	close(pipe_heredoc[1]);
-	dup2(pipe_heredoc[0], STDIN_FILENO);
-	close(pipe_heredoc[0]);
-}
-
 /* Ouverture de tous les files dans l'ordre */
 int	open_files(t_commands *c)
 {
@@ -95,12 +68,12 @@ int	open_files(t_commands *c)
 	{
 		if (c->files[i].type == INFILE)
 		{
-			if(open_infile(c, c->files[i].file) == 0)
+			if (open_infile(c, c->files[i].file) == 0)
 				return (0);
 		}
 		else if (c->files[i].type == OUTFILE)
 		{
-			if(open_outfile(c, c->files[i].file) == 0)
+			if (open_outfile(c, c->files[i].file) == 0)
 				return (0);
 		}
 		else if (c->files[i].type == OUTFILE_HB)
@@ -112,26 +85,8 @@ int	open_files(t_commands *c)
 	return (1);
 }
 
-/* execution de la commande dans le child */
-int	e_child(t_data_p *d,t_commands *c, int idx)
-{
-	open_files (c);
-	if (c->last_in_type == HEREDOC_TYPE)
-		e_heredoc(c);
-	if (c->last_in_type != HEREDOC_TYPE)
-		dup2(c->fd_in, STDIN_FILENO);
-	if (c->fd_in)
-		close(c->fd_in);
-	close(c->pfd[0]);
-	if(c->fd_out == 0)
-		dup2(c->pfd[1], STDOUT_FILENO);
-	close(c->pfd[1]);
-	check_path(d, c);
-	e_execve(d, c, idx);
-	return (1);
-}
-
-/* Parcours le tableau de commande et fork apres chaque commandes pour l'executer et creation du pipe */
+/* Parcours le tableau de commande et fork 
+	apres chaque commandes pour l'executer et creation du pipe */
 void	e_exec(t_data_p *d, t_commands *c)
 {
 	int	i;
@@ -142,22 +97,16 @@ void	e_exec(t_data_p *d, t_commands *c)
 		if (c[i + 1].stop)
 			c[i].fd_out = 1;
 		pipe(c[i].pfd);
-		if(!ft_exec_built_nofork(d, c, i))
+		if (!ft_exec_built_nofork(d, c, i))
 		{
 			c[i].pid = fork();
 			if (!c[i].pid)
 			{
-				if (!e_child(d, &c[i], i))
+				if (e_child(d, &c[i], i) == -1)
 					return ;
 			}
 			else
-			{
-				close(c[i].pfd[1]);
-				if (c[i].fd_in)
-					close(c[i].fd_in);
-				c[i + 1].fd_in = dup(c->pfd[0]);
-				close(c[i].pfd[0]);
-			}
+				dup_fd_in_pipe(c, i);
 		}
 	}
 	i = -1;

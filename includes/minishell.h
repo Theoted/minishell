@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 14:48:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 16:14:50 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int		e_child(t_data_p *d, t_commands *c, int idx);
 void	e_exec(t_data_p *d, t_commands *c);
 int		main (int argc, char **argv, char **envp);
 void	check_path(t_data_p *d, t_commands *c);
+void	dup_fd_in_pipe(t_commands *c, int i);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path
