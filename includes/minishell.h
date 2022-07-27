@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/25 16:02:37 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 14:48:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,24 @@ typedef struct s_hd_data t_hd_data;
 typedef struct s_files t_files;
 typedef struct s_envp t_envp;
 typedef struct s_echo t_echo;
+typedef struct s_echo_2 t_echo_2;
+typedef struct s_echo_env t_echo_env;
+
+// Structure qui permet le parsing des variables d'environnements
+struct s_echo_env
+{
+	char	*new;
+	char	*tmp;	
+};
+
+// Structure qui permet l'execution de echo
+struct s_echo_2
+{
+	int		bn;
+	char	*new;
+	int		av_len;
+	int		check;
+};
 
 // Structure qui permet le parsing des arguments de echo
 struct s_echo
@@ -92,8 +110,12 @@ struct s_commands
 
 struct s_hd_data
 {
+	int		i;
+	int		j;
+	int		k;
 	int		expend_var;
 	int		check;
+	char	**expended_vars;
 	char	*tmp;
 	char	*tmp1;
 	char	*new_buffer;
@@ -133,9 +155,7 @@ void	check_path(t_data_p *d, t_commands *c);
 /* ------------------- PARSING ------------------- */
 	// Bin Path
 int 	find_env_path(t_envp *envp, t_data_p *data);
-int		ft_access(char *arg);
 char	*expend_env_var(t_data_p *data, t_envp *envp, char *var);
-// char	*expend_env_var(t_data_p *data, char **envp, char *var);
 
 	// Lexer
 int		lexer(char *arg, t_data_p *data);
@@ -163,7 +183,7 @@ int		ft_here_doc(t_data_p *data, int idx);
 int		here_doc_write(t_data_p *data, char *buffer, int idx);
 char	*expend_var_in_buffer(char *buffer, char **expended_vars, t_data_p *data);
 int		format_del(char *del, t_data_p *data);
-void	fill_vars_tab(t_data_p *data, char **var, char *buffer, int *idx, int *k);
+void	fill_vars_tab(t_data_p *data, char **var, char *buffer, t_hd_data *hdd);
 char	*get_expend_var(t_data_p *data, char *buffer);
 	
 	// Here_doc utils
@@ -173,25 +193,20 @@ int		check_var(char *var);
 char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
 int		check_solo_var(char *buffer);
-	
-	// Clear here_doc A SUPPRIMER
-char	*clear_here_doc(t_data_p *data, char *arg);
 
 	// Utils
 int 	state_checker(char *str, int start, int len);
 int 	last_in_redir(char *arg);
 int 	get_in_out_files(char *arg, t_data_p *data, int idx);
-int 	count_in_out_files(char *arg);
+int 	in_out_len(char *arg);
 int 	get_file(char *arg, int *start, int *type);
 int 	idx_after_hd(char *arg, int *start);
 void 	fill_envp_cmd(t_data_p *data);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
-char	**get_exp_vars_arg(char *arg, t_data_p *data);
 
-
-	// Built-ins
+/* ------------------- BUILT-INS ------------------- */
 		// UNSET
 void	init_our_envp(t_data_p *data);
 void    delete_env_node(t_envp **env_lst, char *name);
@@ -200,6 +215,11 @@ int		b_unset(t_data_p *data, int cmd_id);
 
 		// EXPORT
 int		b_export(t_data_p *data, int idx);
+		// EXPORT 2
+void	print_export(t_envp *envp);
+void	env_lst_addfront(t_envp **alst, t_envp *new);
+void	env_lst_change_content(t_envp *node, char *content);
+t_envp	*check_if_exist(t_envp *alst, char *name);
 
 		// EXIT
 int 	b_exit(char *input);
@@ -208,13 +228,16 @@ int 	b_exit(char *input);
 int		b_cd(t_data_p *data, int idx);
 
 		// ECHO
-int		b_echo(t_data_p *data, int idx);
+void	b_echo(t_data_p *data, int idx);
 int		expend_echo_env_vars(t_data_p *data, char **arg);
 char    *get_echo_env_var(t_data_p *data, char *arg);
+		// ECHO UTILS
+int		word_end_id(char *arg, int i);
+int		next_quote_id(char *arg, char quote, int i, t_echo *e_d);
+int		arg_vec_len(t_data_p *data, int idx);
+int		check_n(char *arg);
 
 		//Built-ins init
-int		detect_buitins(t_data_p *data);
-void    exec_built_ins(t_data_p *data, int idx, char *builtin);
 t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
 
 		//Built-ins utils

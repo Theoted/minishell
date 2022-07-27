@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/25 14:28:14 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 10:30:09 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,14 +92,12 @@ int	lexer(char *arg, t_data_p *data)
 	data->pipes_nb = count_pipes(arg);
 	data->args_create = 0;
 	data->args = gc_calloc(sizeof(char *), (data->pipes_nb + 2), &data->track);
-	data->commands = gc_calloc(sizeof(t_commands), (data->pipes_nb + 2), &data->track);
+	data->commands = gc_calloc(sizeof(t_commands),
+			(data->pipes_nb + 2), &data->track);
 	data->commands[data->pipes_nb + 1].stop = 1;
 	fill_envp_cmd(data);
-	if (synthax_checker(arg)) 
-	{
-		printf("Synthax error\n");
+	if (synthax_checker(arg))
 		return (1);
-	}
 	if (split_args(arg, data) != 0)
 		return (1);
 	while (data->args[i])
@@ -109,9 +107,7 @@ int	lexer(char *arg, t_data_p *data)
 		if (check_heredoc(data->args[i], data, i))
 			return (1);
 		get_cmd_in_arg(data->args[i], data, i);
-		// check_arg_vars(data->args[i], data);
 		i++;
 	}
 	return (0);
 }
-

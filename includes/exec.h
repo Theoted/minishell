@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 18:06:25 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/07/05 14:41:54 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 10:14:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ int		main (int argc, char **argv, char **envp);
 /* ------------------- PARSING ------------------- */
 	// Bin Path
 int		find_env_path(char **envp, t_data_p *data);
-int		ft_access(char *arg);
 char	*expend_env_var(t_data_p *data, char **envp, char *var);
+char	*skip_in_out_hd(char *arg, t_data_p *data);
 
 	// Lexer
 int		lexer(char *arg, t_data_p *data);
@@ -121,9 +121,6 @@ char	*check_bsn_buffer(t_data_p *data, char *new_buffer);
 int		check_var(char *var);
 char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
-	// Clear here_doc
-char	*clear_here_doc(t_data_p *data, char *arg);
-
 
 	// Utils
 int 	state_checker(char *str, int start, int len);

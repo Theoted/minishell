@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/22 20:56:46 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 10:03:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 // Cette fonction permet d'executer un strncmp avec
 // comme longueur la string la plus grande
 // Renvoie 0 si les strings sont les memes
-int strncmp_len(char *s1, char *s2)
+int	strncmp_len(char *s1, char *s2)
 {
-	int len;
+	int	len;
+
 	if (!s1 || !s2)
 		return (-1);
 	if (ft_strlen(s1) < ft_strlen(s2))
@@ -27,9 +28,9 @@ int strncmp_len(char *s1, char *s2)
 	return (ft_strncmp(s1, s2, len));
 }
 
-void print_env_list(t_envp *env_list)
+void	print_env_list(t_envp *env_list)
 {
-	t_envp *tmp;
+	t_envp	*tmp;
 
 	tmp = env_list;
 	while (tmp)

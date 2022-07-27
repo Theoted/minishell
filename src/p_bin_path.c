@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/25 16:33:52 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 10:13:24 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 // Cette fonction trouve la variable d'environnement PATH
 // et la split dans env_path (structure t_args)
-int find_env_path(t_envp *envp, t_data_p *data)
+int	find_env_path(t_envp *envp, t_data_p *data)
 {
-	int i;
-	char *path;
+	int		i;
+	char	*path;
 
 	i = -1;
 	path = NULL;
@@ -38,10 +38,10 @@ int find_env_path(t_envp *envp, t_data_p *data)
 
 // Permet d'expend les variables d'envrionnement si elles existes
 // Si elle existe la fonction renvoie la variable, sinon elle ne renvoie rien
-char *expend_env_var(t_data_p *data, t_envp *envp, char *var)
+char	*expend_env_var(t_data_p *data, t_envp *envp, char *var)
 {
-	int i;
-	char *env_var;
+	int		i;
+	char	*env_var;
 
 	i = -1;
 	while (envp)
@@ -67,107 +67,5 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else
 		data->commands[idx].args_vec = NULL;
-	return (0);
-}
-
-// Cette fonction est la fonction principale de parsing de l'argument,
-// pour trouver la commande outre les <, <<, >, >> 
-char *skip_in_out_hd(char *arg, t_data_p *data)
-{
-	int i;
-	int check;
-	char *cmd;
-
-	i = -1;
-	check = 0;
-	cmd = NULL;
-	while (arg[++i])
-	{
-		if (arg[i] == ' ' && !state_checker(arg, 0, i))
-			skip_spaces(arg, &i);
-		else if (arg[i] == '<' && !state_checker(arg, 0, i))
-			skip_in_hd(arg, &i);
-		else if (arg[i] == '>' && !state_checker(arg, 0, i))
-			skip_out(arg, &i);
-		else
-		{
-			cmd = get_cmd(arg, i, data);
-			break;
-		}
-	}
-	return (cmd);
-}
-
-// Cette fonction skip les < et <<
-void skip_in_hd(char *arg, int *i)
-{
-	if (arg[*i + 1] == '<')
-		(*i)++;
-	(*i)++;
-	skip_spaces(arg, i);
-	while (arg[*i] != ' ' && arg[*i] != '>' && arg[*i])
-		(*i)++;
-}
-
-// Cette fonction skip les > et >>
-void skip_out(char *arg, int *i)
-{
-	if (arg[*i + 1] == '>')
-		(*i)++;
-	(*i)++;
-	skip_spaces(arg, i);
-	while (arg[*i] != ' ' && arg[*i] != '<' && arg[*i])
-		(*i)++;
-}
-
-// Cette fonction skip les espaces
-void skip_spaces(char *arg, int *i)
-{
-	while (arg[*i] == ' ' && arg[*i] && !state_checker(arg, 0, *i))
-		(*i)++;
-}
-
-// Cette fonction recupere la commande
-char *get_cmd(char *arg, int i, t_data_p *data)
-{
-	int j;
-	int t;
-	int check;
-
-	j = 0;
-	check = 0;
-	while (arg[i + j])
-	{
-		if ((arg[i + j] == '<' || arg[i + j] == '>') && !state_checker(arg, 0, i + j))
-			break ;
-		j++;
-	}
-	return (gc_substr(&data->track, arg, i, j));
-}
-
-// Cette fonction sert a trouver le path d'un bin et de verifier si
-// il possede les droits
-
-// int	find_bin_path(t_args *args)
-// {
-// 	int		i;
-// 	char	*str;
-// 	char	*env_path_slash;
-
-// 	i = 0;
-// 	while (args->env_path[i])
-// 	{
-// 		env_path_slash = ft_strjoin(args->env_path[i], "/");
-// 		str = ft_strjoin(env_path_slash)
-// 		if (ft_access())
-// 	}
-// }
-
-// Cette fonction check si le path envoyé existe et possède les droits
-int ft_access(char *arg)
-{
-	if (!access(arg, X_OK))
-		if (!access(arg, R_OK | W_OK))
-			return (1);
 	return (0);
 }

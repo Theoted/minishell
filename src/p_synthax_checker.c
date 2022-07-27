@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:09:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/25 14:27:09 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 10:32:08 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	pipe_check(char *arg, int i)
 {
 	char	quote;
 	int		j;
-	
+
 	quote = 0;
 	j = 0;
 	while (j < i)
@@ -56,31 +56,31 @@ int	pipe_synthax(char *str, t_data_p data)
 }
 
 // check le cas du >>>
-int check_chevrons(char *arg, int *i)
+int	check_chevrons(char *arg, int *i)
 {
-    if (arg[*i + 1] == '>' && arg[*i + 2] == '>')
-    {
-        printf("Chevrons: ");
-        return (1);
-    }
-    if (arg[*i + 1] == '>' && arg[*i + 2] != '>')
-        (*i)++;
-    return (0);
+	if (arg[*i + 1] == '>' && arg[*i + 2] == '>')
+	{
+		printf("Chevrons: Synthax error\n");
+		return (1);
+	}
+	if (arg[*i + 1] == '>' && arg[*i + 2] != '>')
+		(*i)++;
+	return (0);
 }
 
 // Return 0 si il y a du contenu apres un pipe. Sinon return 1
-int check_content_after_pipe(char *arg, int i)
+int	check_content_after_pipe(char *arg, int i)
 {
-    while (arg[++i])
-    {
-        if (arg[i] == '|')
-            break ;
-        if ((arg[i] >= 33 && arg[i] <= 125) || 
-            (arg[i] >= 125 && arg[i] <= 126))
-            return (0);
-    }
-    printf("Pipe: ");
-    return (1);
+	while (arg[++i])
+	{
+		if (arg[i] == '|')
+			break ;
+		if ((arg[i] >= 33 && arg[i] <= 125)
+			|| (arg[i] >= 125 && arg[i] <= 126))
+			return (0);
+	}
+	printf("Pipe: Synthax error\n");
+	return (1);
 }
 
 int	synthax_checker(char *arg)
@@ -88,28 +88,24 @@ int	synthax_checker(char *arg)
 	int		i;
 	char	quote;
 
-	i = 0;
+	i = -1;
 	quote = 0;
-	while (arg[i])
+	while (arg[++i])
 	{
 		if ((arg[i] == '\'' || arg[i] == '\"') && quote == 0)
 			quote = arg[i];
 		else if (arg[i] == quote && quote)
 			quote = 0;
-        else if (arg[i] == '|' && quote == 0)
-        {
-            if (check_content_after_pipe(arg, i))
-                return (1);
-        }
-        else if (arg[i] == '>')
-            if (check_chevrons(arg, &i))
-                return (1);
-		i++;
+		else if (arg[i] == '|' && quote == 0)
+		{
+			if (check_content_after_pipe(arg, i))
+				return (1);
+		}
+		else if (arg[i] == '>')
+			if (check_chevrons(arg, &i))
+				return (1);
 	}
 	if (quote)
-    {
-        printf("Quotes: ");
-		return (1);
-    }
+		return (printf("Quotes: Synthax error\n"));
 	return (0);
 }

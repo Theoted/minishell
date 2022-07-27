@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 14:28:03 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/19 15:06:59 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 15:19:13 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,27 @@ int	nb_of_env_vars(char *buffer)
 	return (count);
 }
 
-// Revoie 1 si la variable est seule dans le buffer et que son premier char est $ 
+// Revoie 1 si la variable est seule dans
+// le buffer et que son premier char est $ 
 // sinon renvoie 0
-// Renvoi 2 si le premier char est un dollard, et que le deuxieme est un char non alphanum
+// Renvoi 2 si le premier char est un dollard,
+// et que le deuxieme est un char non alphanum
 int	check_solo_var(char *buffer)
 {
 	int	i;
+	int	check;
 
 	i = 0;
+	check = 0;
 	if (buffer[i] == '$')
 	{
-		while (buffer[i])
+		while (buffer[++i])
+		{
+			if (buffer[i] == '$')
+				check++;
+		}
+		i = -1;
+		while (buffer[++i])
 		{
 			if (!ft_isalnum(buffer[i]))
 			{
@@ -46,7 +56,6 @@ int	check_solo_var(char *buffer)
 					return (2);
 				return (0);
 			}
-			i++;
 		}
 		return (1);
 	}
@@ -69,7 +78,7 @@ int	check_var(char *var)
 char	*check_bsn_buffer(t_data_p *data, char *new_buffer)
 {
 	int		len;
-	
+
 	len = ft_strlen(new_buffer);
 	if (new_buffer[len - 1] != '\n')
 	{
@@ -86,7 +95,8 @@ char	*trim_last_bsn(t_data_p *data, char *here_doc_content)
 	len = ft_strlen(here_doc_content);
 	if (here_doc_content[len - 1] == '\n')
 	{
-		here_doc_content = gc_substr(&data->track, here_doc_content, 0, len - 1);
+		here_doc_content
+			= gc_substr(&data->track, here_doc_content, 0, len - 1);
 		return (here_doc_content);
 	}
 	return (here_doc_content);
