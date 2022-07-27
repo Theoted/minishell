@@ -6,11 +6,20 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/07/25 16:36:31 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/07/27 15:30:32 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	dup_fd_in_pipe(t_commands *c, int i)
+{
+	close(c[i].pfd[1]);
+	if (c[i].fd_in)
+		close(c[i].fd_in);
+	c[i + 1].fd_in = dup(c->pfd[0]);
+	close(c[i].pfd[0]);
+}
 
 void	check_path(t_data_p *d, t_commands *c)
 {
@@ -27,7 +36,7 @@ void	check_path(t_data_p *d, t_commands *c)
 		while (d->env_path[++i])
 		{
 			c->cmd_path = gc_strjoin(&d->track,
-				d->env_path[i], d->cmd_slash);
+					d->env_path[i], d->cmd_slash);
 			if (!access(c->args_vec[0], X_OK))
 			{
 				c->cmd_path = c->args_vec[0];
@@ -39,48 +48,8 @@ void	check_path(t_data_p *d, t_commands *c)
 		}
 	}
 }
-static int ft_strcmp(char *arg, char *built)
-{
-	int i;
 
-	i = -1;
-	if (ft_strlen(arg) != ft_strlen(built))
-		return (0);
-	while (arg[++i])
-	{
-		if (arg[i] != built[i])
-			return (0);
-	}
-	return (1);
-}
-int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
-{
-	char    s[1000];
-
-	if(ft_strcmp(c->args_vec[0], "cd"))
-		 return(b_cd(d, idx));
-	if(ft_strcmp(c->args_vec[0], "export"))
-		return(b_export(d, idx));
-	if(ft_strcmp(c->args_vec[0], "unset"))
-		return(b_unset(d, idx));
-	return (0);
-}
-void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx)
-{
-	char	s[1000];
-
-	if(ft_strcmp(c->args_vec[0], "env"))
-		print_env_list(d->envp);
-	if(ft_strcmp(c->args_vec[0], "pwd"))
-	{
-		printf("%s\n", getcwd(s, 100));
-		exit(0);
-	}
-	if(ft_strcmp(c->args_vec[0], "echo"))
-		b_echo(d, idx);
-}
-
-void	e_execve(t_data_p *d,t_commands *c, int idx)
+void	e_execve(t_data_p *d, t_commands *c, int idx)
 {
 	ft_exec_built_fork(d, c, idx);
 	if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
@@ -90,4 +59,35 @@ void	e_execve(t_data_p *d,t_commands *c, int idx)
 		write(2, ": command not found\n", 21);
 		exit(0);
 	}
+}
+
+/* dup heredoc */
+void	e_heredoc(t_commands *c)
+{
+	int	pipe_heredoc[2];
+
+	pipe(pipe_heredoc);
+	write(pipe_heredoc[1], c->here_doc, ft_strlen(c->here_doc));
+	close(pipe_heredoc[1]);
+	dup2(pipe_heredoc[0], STDIN_FILENO);
+	close(pipe_heredoc[0]);
+}
+
+/* execution de la commande dans le child */
+int	e_child(t_data_p *d, t_commands *c, int idx)
+{
+	open_files (c);
+	if (c->last_in_type == HEREDOC_TYPE)
+		e_heredoc(c);
+	if (c->last_in_type != HEREDOC_TYPE)
+		dup2(c->fd_in, STDIN_FILENO);
+	if (c->fd_in)
+		close(c->fd_in);
+	close(c->pfd[0]);
+	if (c->fd_out == 0)
+		dup2(c->pfd[1], STDOUT_FILENO);
+	close(c->pfd[1]);
+	check_path(d, c);
+	e_execve(d, c, idx);
+	return (1);
 }
