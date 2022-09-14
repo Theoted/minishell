@@ -6,13 +6,14 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:30 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 10:40:14 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/13 08:43:28 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // Cette fonction permet de savoir si on est dans des guillemets
+// Renvoie 0 si on est pas dans un quote
 int	state_checker(char *str, int start, int len)
 {
 	int	i;

@@ -6,11 +6,19 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 09:47:18 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/14 11:02:37 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	init_ed(t_echo_2 *echo_data, t_data_p *data, int idx)
+{
+	echo_data->bn = 1;
+	echo_data->new = NULL;
+	echo_data->av_len = arg_vec_len(data, idx);
+	echo_data->check = 0;
+}
 
 // Cette fonction supprimer les quotes a supprimer dans l'argument
 void	parse_quotes(t_data_p *data, t_echo *echo_data, int *i, char *arg)
@@ -34,6 +42,7 @@ void	parse_quotes(t_data_p *data, t_echo *echo_data, int *i, char *arg)
 		echo_data->new = gc_strjoin(&data->track, tmp, echo_data->new);
 	}
 	(*i) = next_quote_id(arg, echo_data->quote, (*i), echo_data);
+	echo_data->quote = 0;
 }
 
 // Cette fonction recuperer les mots qui ne sont pas entre quotes
@@ -64,9 +73,11 @@ char	*remove_quotes(t_data_p *data, char *arg)
 	int		i;
 
 	i = -1;
-	echo_data.new = "";
+	echo_data.new = NULL;
 	echo_data.quote = 0;
 	echo_data.arg = arg;
+	if (!arg)
+		return ("");
 	while (arg[++i])
 	{
 		echo_data.idx = i;
@@ -91,11 +102,8 @@ void	b_echo(t_data_p *data, int idx)
 	int			i;
 	t_echo_2	e_d;
 
+	init_ed(&e_d, data, idx);
 	i = 0;
-	e_d.bn = 1;
-	e_d.new = NULL;
-	e_d.av_len = arg_vec_len(data, idx);
-	e_d.check = 0;
 	while (data->commands[idx].args_vec[++i])
 	{
 		if (check_n(data->commands[idx].args_vec[i]) && e_d.check == 0)
@@ -106,6 +114,8 @@ void	b_echo(t_data_p *data, int idx)
 		e_d.check = 1;
 		data->commands[idx].args_vec[i] = get_echo_env_var
 			(data, data->commands[idx].args_vec[i]);
+		data->commands[idx].args_vec[i] = echo_parse_bs
+			(data->commands[idx].args_vec[i], data);
 		printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
 		if (e_d.av_len > 1 && i < e_d.av_len)
 			printf(" ");

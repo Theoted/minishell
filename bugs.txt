@@ -1,0 +1,36 @@
+export USER="echo lol"
+export lol=cat -> $lol fichier
+expend var d'env dans les arguments
+
+
+
+builtins doivent etre lancés dans des processus si il y a des pipes
+    cd .. | echo lol ne doit pas changer le dossier du process principal
+    echo lol | export a=gfuygugfuy -> export command not found
+    export a=hfufgf | echo lol -> crée une variable d'env avec l'argument du echo
+
+cd -> doit t'emmener a la racine tdeville/ sauf si HOME est unset
+    Si HOME unset: cd: HOME not set
+cd ~ -> racine tdeville
+cd - -> Revoie au OLDPWD et affiche la ou on est arrive
+    If OLDPWD not set : OLDPWD is not set ;
+check si a chaque utilisation du CD je set OLDPWD
+Bien checker le retour de chdir pour gerer les cas d'erreur
+
+
+exit gdeuwguy =
+    exit
+    exit: gdeuwguy: numeric argument required (pareil avec plus de int ou long max et renvoie un exit status de 255)
+    le exit fonctionne quand meme
+exit fait modulo 256 de l'int qui esst donné et le stocke dans la variable $?
+
+CHECK LEAKS
+    autre term
+    ps -> pid minishell
+    leaks pid
+
+    leaks
+        leaks sur des espaces comme commande 
+
+
+Checker tout les pipes/fd sur activity monitor

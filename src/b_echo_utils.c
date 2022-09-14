@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 10:46:13 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/13 13:13:50 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,32 @@
 // ou plus sinon retourne 0
 int	check_n(char *arg)
 {
-	int	i;
+	int		i;
 
-	i = 1;
-	if (arg[0] != '-')
-		return (0);
-	while (arg[i])
+	i = -1;
+	while (arg[++i] && arg[i] != '-')
 	{
-		if (arg[i] != 'n')
-			return (0);
-		i++;
+		if (arg[i] == '\'' || arg[i] == '\"')
+		{
+			if (arg[i + 1] == arg[i])
+				i++;
+			else if (arg[i + 1] == '-')
+			{
+				i++;
+				break ;
+			}
+			else
+				return (0);
+		}
 	}
-	return (1);
+	if (arg[i] == '-')
+	{	
+		while (arg[++i])
+			if (arg[i] != 'n' && arg[i] != '\'' && arg[i] != '\"')
+				return (0);
+		return (1);
+	}
+	return (0);
 }
 
 int	arg_vec_len(t_data_p *data, int idx)
@@ -51,10 +65,7 @@ int	next_quote_id(char *arg, char quote, int i, t_echo *e_d)
 	while (arg[i])
 	{
 		if (arg[i] == quote)
-		{
-			e_d->quote = 0;
 			return (i);
-		}
 		i++;
 	}
 	return (-1);

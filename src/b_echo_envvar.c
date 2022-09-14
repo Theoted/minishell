@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:27:36 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 09:26:27 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/14 11:03:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,18 @@ int	get_next_dollard_id(char *arg, int i)
 {
 	while (arg[i])
 	{
-		if (arg[i] == '$')
+		if (arg[i] == '$' && (state_checker(arg, 0, i) != 39))
 			return (i);
 		i++;
 	}
 	return (i);
+}
+
+int	check_num(char *arg, int i)
+{
+	if (arg[i + 1] >= 48 && arg[i + 1] <= 57 && state_checker(arg, 0, i) != 39)
+		return (1);
+	return (0);
 }
 
 int	get_echo_env_var_doll(t_data_p *data, char *arg, t_echo_env *e_d, int *i)
@@ -42,16 +49,25 @@ int	get_echo_env_var_doll(t_data_p *data, char *arg, t_echo_env *e_d, int *i)
 	int	j;
 
 	j = 1;
-	while ((ft_isalnum(arg[(*i) + j]) || arg[(*i) + j] == '_') && arg[(*i) + j])
-		j++;
-	if (j == 1)
-		e_d->tmp = gc_strdup(&data->track, "$");
-	else if (arg[(*i) - 1] && arg[(*i) - 1] == '\'')
-		e_d->tmp = gc_substr(&data->track, arg, (*i), j);
-	else
+	if (check_num(arg, *i))
 	{
-		e_d->tmp = gc_substr(&data->track, arg, (*i), j);
-		expend_echo_env_vars(data, &e_d->tmp);
+		e_d->tmp = gc_strdup(&data->track, "");
+		j++;
+	}
+	else
+	{		
+		while ((ft_isalnum(arg[(*i) + j]) || arg[(*i) + j] == '_')
+			&& arg[(*i) + j])
+			j++;
+		if (j == 1)
+			e_d->tmp = gc_strdup(&data->track, "$");
+		else if (arg[(*i) - 1] && state_checker(arg, 0, *i) == 39)
+			e_d->tmp = gc_substr(&data->track, arg, (*i), j);
+		else
+		{
+			e_d->tmp = gc_substr(&data->track, arg, (*i), j);
+			expend_echo_env_vars(data, &e_d->tmp);
+		}
 	}
 	if (!e_d->new)
 		e_d->new = gc_strdup(&data->track, e_d->tmp);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 10:13:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/14 12:09:24 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,33 @@ char	*expend_env_var(t_data_p *data, t_envp *envp, char *var)
 	return (var);
 }
 
+int	find_char(char *arg, char c)
+{
+	int	i;
+
+	i = -1;
+	while (arg[++i])
+	{
+		if (arg[i] == c)
+			return (1);
+	}
+	return (0);
+}
+
+int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
+{
+	int		i;
+	char	*tmp;
+
+	i = -1;
+	while (arg_vec[++i])
+	{
+		while (find_char(arg_vec[i], '\"') || find_char(arg_vec[i], '\''))
+			arg_vec[i] = gc_strtrim(&data->track, arg_vec[i], "\"\'");
+	}
+	return (0);
+}
+
 // Cette fonction recupere la commande en raw et la split
 // dans la structure command pour la var arg_vec
 int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
@@ -67,5 +94,6 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else
 		data->commands[idx].args_vec = NULL;
+	remove_quotes_arg_vec(data, data->commands[idx].args_vec);
 	return (0);
 }

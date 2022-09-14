@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 16:12:19 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/12 14:35:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ int	ft_here_doc(t_data_p *data, int idx)
 		gc_free_malloc(&data->track, (void **)&buffer);
 	}
 	gc_free_malloc(&data->track, (void **)&buffer);
-	if (data->commands[idx].here_doc)
-		data->commands[idx].here_doc
-			= trim_last_bsn(data, data->commands[idx].here_doc);
 	return (0);
 }
 
@@ -106,7 +103,7 @@ void	fill_vars_tab(t_data_p *data, char **var,
 		if (buffer[hdd->i] == '\n' || buffer[hdd->i] == ' ')
 			break ;
 		(hdd->i)++;
-		if (buffer[hdd->i] == '$')
+		if (buffer[hdd->i] == '$' || !ft_isalnum(buffer[hdd->i]))
 		{
 			check = 1;
 			break ;

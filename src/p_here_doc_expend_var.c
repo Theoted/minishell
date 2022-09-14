@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:37:39 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 16:04:57 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/12 14:49:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,60 +23,50 @@ void	init_hdd_struct(t_hd_data *hdd, char **expended_vars)
 	hdd->expended_vars = expended_vars;
 }
 
-void	expend_var_in_buffer1(char *buffer, char **expended_vars, t_hd_data *hdd, t_data_p *data)
+// Return 1 si la var n'exist pas; 2 si c'est un $ seul; 0 si la var existe
+int	check_expended_var(char *expended_var)
+{
+	if (ft_strlen(expended_var) == 1)
+		return (2);
+	if (expended_var[0] == '$')
+		return (1);
+	return (0);
+}
+
+// Fonction qui expend la variable et crée le nouveau buffer.
+// C'est cette fonction qui set aussi 
+// l'id afin de pouvoir avancer dans le buffer
+void	expend_env(char *expended_var, char *buffer,
+	t_data_p *data, t_hd_data *hdd)
 {
 	hdd->tmp = gc_substr(&data->track, buffer, hdd->j, (hdd->i - hdd->j));
-	if (expended_vars[hdd->k] && check_var(expended_vars[hdd->k]))
-		hdd->tmp1 = gc_strjoin(&data->track,
-				hdd->tmp, expended_vars[hdd->k++]);
-	else if (expended_vars[hdd->k] && !check_var(expended_vars[hdd->k]))
+	if (expended_var && (!check_expended_var(expended_var)))
 	{
-		hdd->tmp1 = gc_strdup(&data->track, hdd->tmp);
-		hdd->check = 1;
-				hdd->k++;
-	}
-	else if (!expended_vars[hdd->k])
-		hdd->tmp1 = gc_strdup(&data->track, hdd->tmp);
-}
-
-void	expend_var_in_buffer2(char *buffer, char **expended_vars, t_hd_data *hdd, t_data_p *data)
-{
-	if (check_solo_var(buffer) == 1 && expended_vars[hdd->k][0] == '$')
-		hdd->tmp1 = gc_strdup(&data->track, "");
-	else if (check_solo_var(buffer) == 2)
-	{
-		hdd->tmp1 = gc_strdup(&data->track, buffer);
-		hdd->check = 2;
-	}
-	else if (expended_vars[hdd->k] && check_var(expended_vars[hdd->k]))
-		hdd->tmp1
-			= gc_strdup(&data->track, expended_vars[hdd->k++]);
-	else if (expended_vars[hdd->k] && !check_var(expended_vars[hdd->k]))
-	{
-		hdd->check = 1;
+		hdd->tmp1 = gc_strjoin(&data->track, hdd->tmp, expended_var);
+		hdd->i = set_id_after_env(buffer, hdd->i) - 1;
 		hdd->k++;
 	}
+	else if (expended_var && (check_expended_var(expended_var) == 2))
+	{
+		hdd->tmp1 = gc_strjoin(&data->track, hdd->tmp, expended_var);
+		hdd->k++;
+	}
+	else
+		hdd->tmp1 = gc_strdup(&data->track, hdd->tmp);
+	if (expended_var && check_expended_var(expended_var) == 1)
+		hdd->i = set_id_after_env(buffer, hdd->i) - 1;
 }
 
-void	expend_var_in_buffer3(char *buffer, char **expended_vars, t_hd_data *hdd, t_data_p *data)
+// Simple fonction qui fill le new buffer
+void	fill_new_buffer(t_data_p *data, t_hd_data *hdd)
 {
-		while (buffer[hdd->i])
-		{
-			if (hdd->check == 1 && (buffer[hdd->i + 1] == '\''
-					|| buffer[hdd->i + 1] == '\"') && hdd->check != 2)
-			{
-				hdd->check = 0;
-				break ;
-			}
-			if (!ft_isalnum(buffer[hdd->i + 1])
-				&& hdd->check != 2)
-				break ;
-			hdd->i++;
-		}
+	if (!hdd->new_buffer)
+		hdd->new_buffer = gc_strdup(&data->track, hdd->tmp1);
+	else if (hdd->new_buffer)
+		hdd->new_buffer = gc_strjoin(&data->track, hdd->new_buffer, hdd->tmp1);
 }
 
-// Cette fonction est la fonction qui expend toutes les variables
-// d'environnement dans le buffer
+// Fonction principale qui permet d'expend ou non les variable d'env.
 char	*expend_var_in_buffer(char *buffer,
 		char **expended_vars, t_data_p *data)
 {
@@ -86,22 +76,11 @@ char	*expend_var_in_buffer(char *buffer,
 	while (buffer[++hdd.i])
 	{
 		hdd.j = hdd.i;
-		while (buffer[hdd.i] != '$' && buffer[hdd.i])
+		while (buffer[hdd.i] != '$' && buffer[hdd.i + 1])
 			hdd.i++;
-		if (hdd.i > 0)
-			expend_var_in_buffer1(buffer, expended_vars, &hdd, data);
-		else if (hdd.i == 0)
-			expend_var_in_buffer2(buffer, expended_vars, &hdd, data);
-		expend_var_in_buffer2(buffer, expended_vars, &hdd, data);
-		if (!hdd.new_buffer && hdd.tmp1)
-			hdd.new_buffer
-				= gc_strdup(&data->track, hdd.tmp1);
-		else if (!hdd.new_buffer && !hdd.tmp1)
-			continue ;
-		else
-			hdd.new_buffer = gc_strjoin(&data->track,
-					hdd.new_buffer, hdd.tmp1);
+		expend_env(expended_vars[hdd.k], buffer, data, &hdd);
+		fill_new_buffer(data, &hdd);
 	}
-	hdd.new_buffer = check_bsn_buffer(data, hdd.new_buffer);
+	hdd.new_buffer = gc_strjoin(&data->track, hdd.new_buffer, "\n");
 	return (hdd.new_buffer);
 }

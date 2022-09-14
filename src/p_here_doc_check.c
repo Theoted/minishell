@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:38:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 14:39:08 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/12 14:48:53 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,14 @@ int	format_del(char *del, t_data_p *data)
 	}
 	data->hd_data.here_doc_del = gc_strdup(&data->track, new_del);
 	return (0);
+}
+
+int	set_id_after_env(char *buffer, int i)
+{
+	while (buffer[++i])
+	{
+		if (buffer[i] == ' ' || !ft_isalnum(buffer[i]))
+			return (i);
+	}
+	return (i);
 }

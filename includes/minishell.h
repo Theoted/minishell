@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 16:14:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/13 10:46:57 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ typedef struct s_echo_env t_echo_env;
 struct s_echo_env
 {
 	char	*new;
-	char	*tmp;	
+	char	*tmp;
+	char	quote;
 };
 
 // Structure qui permet l'execution de echo
@@ -194,6 +195,7 @@ int		check_var(char *var);
 char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
 int		check_solo_var(char *buffer);
+int		set_id_after_env(char *buffer, int i);
 
 	// Utils
 int 	state_checker(char *str, int start, int len);
@@ -232,6 +234,9 @@ int		b_cd(t_data_p *data, int idx);
 void	b_echo(t_data_p *data, int idx);
 int		expend_echo_env_vars(t_data_p *data, char **arg);
 char    *get_echo_env_var(t_data_p *data, char *arg);
+char	*echo_parse_bs(char *arg, t_data_p *data);
+char	*echo_trim_bs(char *arg, int *i, t_data_p *data);
+
 		// ECHO UTILS
 int		word_end_id(char *arg, int i);
 int		next_quote_id(char *arg, char quote, int i, t_echo *e_d);

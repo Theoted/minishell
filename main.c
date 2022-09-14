@@ -6,11 +6,24 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 16:14:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/12 15:01:03 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+int	check_spaces(char *arg)
+{
+	int	i;
+
+	i = -1;
+	while (arg[++i])
+	{
+		if (arg[i] != ' ')
+			return (1);
+	}
+	return (0);
+}
 
 void	free_all(char **arg)
 {
@@ -66,6 +79,8 @@ int main(int ac, char **av, char **envp)
 			break ;
 		if (data_p.stdin_arg == NULL)
 			break ;
+		if (!check_spaces(data_p.stdin_arg))
+			continue ;
 		if (data_p.stdin_arg[0])
 		{
 			if (!lexer(data_p.stdin_arg, &data_p))
