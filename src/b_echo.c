@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/14 11:02:37 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 10:33:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ void	e_create_arg(t_data_p *data, t_echo *echo_data)
 	}
 }
 
-// Cette fonction est la fonction PRINCIPALE qui permet de parser l'argument de
-// echo en lui enlevant les quotes necessaires
+// Cette fonction est la fonction PRINCIPALE qui permet de parser un
+// argument en lui enlevant les quotes necessaires
 char	*remove_quotes(t_data_p *data, char *arg)
 {
 	t_echo	echo_data;

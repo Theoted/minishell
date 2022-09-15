@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/07/27 10:02:03 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 11:48:31 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	env_lstadd_back(t_data_p *data, t_envp **alst, t_envp *new)
 
 	if (!new || !alst)
 		return ;
-	if (!strncmp_len(new->name, "SHLVL"))
-		update_shlvl(data, new);
+	// if (!strncmp_len(new->name, "SHLVL"))
+	// 	update_shlvl(data, new);
 	if (!*alst)
 	{
 		*alst = new;

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/14 12:09:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 10:24:10 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,41 @@ int	find_char(char *arg, char c)
 	return (0);
 }
 
+// Cette fonction parse les quotes du content
+// char	*export_parse_quotes(t_data_p *data, char *content)
+// {
+// 	int	i;
+
+// 	i = -1;
+// 	while (content[++i])
+// 	{
+		
+// 	}
+// }
+
+int	remove_export_content_quotes(t_data_p *data, char *arg)
+{
+	int		i;
+	int		j;
+	char	*content;
+	
+	i = -1;
+	j = 0;
+	content = NULL;
+	while (arg[++i])
+	{
+		if (arg[i] == '=')
+		{
+			while (arg[i + j])
+				j++;	
+			content = gc_substr(&data->track, arg, i + 1, j);
+			content = remove_quotes(data, content);
+			break ;
+		}
+	}
+	return (0);
+}
+
 int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 {
 	int		i;
@@ -77,8 +112,10 @@ int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 	i = -1;
 	while (arg_vec[++i])
 	{
-		while (find_char(arg_vec[i], '\"') || find_char(arg_vec[i], '\''))
-			arg_vec[i] = gc_strtrim(&data->track, arg_vec[i], "\"\'");
+		remove_export_content_quotes(data, arg_vec[i]);
+		if (arg_vec[i][0] == '\"' || arg_vec[i][0] == '\'')
+			while (find_char(arg_vec[i], '\"') || find_char(arg_vec[i], '\''))
+				arg_vec[i] = gc_strtrim(&data->track, arg_vec[i], "\"\'");
 	}
 	return (0);
 }
@@ -88,12 +125,17 @@ int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 {
 	char	*cmd;
+	int		i;
 
+	i = -1;
 	cmd = skip_in_out_hd(arg, data);
 	if (cmd)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else
 		data->commands[idx].args_vec = NULL;
 	remove_quotes_arg_vec(data, data->commands[idx].args_vec);
+	while (data->commands[idx].args_vec[++i])
+		data->commands[idx].args_vec[i] = get_echo_env_var
+			(data, data->commands[idx].args_vec[i]);
 	return (0);
 }

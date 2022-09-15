@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/13 10:46:57 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 10:09:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ void	skip_in_hd(char *arg, int *i);
 void	skip_out(char *arg, int *i);
 void	skip_spaces(char *arg, int *i);
 char	*get_cmd(char *arg, int i, t_data_p *data);
+char	*remove_quotes(t_data_p *data, char *arg);
 
 	// Here_doc
 int		check_heredoc(char *arg, t_data_p *data, int idx);

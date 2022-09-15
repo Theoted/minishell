@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/12 15:01:03 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 11:35:51 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int main(int ac, char **av, char **envp)
 	t_data_p			data_p;
 	struct sigaction	sa;
 
-	rm_chapeau_c();
-	sa.sa_handler = &sig_handler;
-	sigaction(2, &sa, NULL);
+	// rm_chapeau_c();
+	// sa.sa_handler = &sig_handler;
+	// sigaction(2, &sa, NULL);
 	(void)ac;
 	(void)av;
 	data_p.track = NULL;
@@ -80,7 +80,10 @@ int main(int ac, char **av, char **envp)
 		if (data_p.stdin_arg == NULL)
 			break ;
 		if (!check_spaces(data_p.stdin_arg))
+		{
+			free(data_p.stdin_arg);
 			continue ;
+		}
 		if (data_p.stdin_arg[0])
 		{
 			if (!lexer(data_p.stdin_arg, &data_p))

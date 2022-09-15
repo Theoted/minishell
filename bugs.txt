@@ -1,7 +1,6 @@
-export USER="echo lol"
-export lol=cat -> $lol fichier
-expend var d'env dans les arguments
-
+export USER="echo lol"              DONE
+export lol=cat -> $lol fichier      DONE
+expend var d'env dans les arguments DONE
 
 
 builtins doivent etre lancés dans des processus si il y a des pipes
@@ -9,13 +8,13 @@ builtins doivent etre lancés dans des processus si il y a des pipes
     echo lol | export a=gfuygugfuy -> export command not found
     export a=hfufgf | echo lol -> crée une variable d'env avec l'argument du echo
 
-cd -> doit t'emmener a la racine tdeville/ sauf si HOME est unset
+cd -> doit t'emmener a la racine tdeville/ sauf si HOME est unset   DONE
     Si HOME unset: cd: HOME not set
-cd ~ -> racine tdeville
-cd - -> Revoie au OLDPWD et affiche la ou on est arrive
+cd ~ -> racine tdeville                                             DONE
+cd - -> Revoie au OLDPWD et affiche la ou on est arrive             DONE
     If OLDPWD not set : OLDPWD is not set ;
-check si a chaque utilisation du CD je set OLDPWD
-Bien checker le retour de chdir pour gerer les cas d'erreur
+check si a chaque utilisation du CD je set OLDPWD                   DONE
+Bien checker le retour de chdir pour gerer les cas d'erreur         -1 non geré mais pas besoin pour le moment
 
 
 exit gdeuwguy =
@@ -24,6 +23,9 @@ exit gdeuwguy =
     le exit fonctionne quand meme
 exit fait modulo 256 de l'int qui esst donné et le stocke dans la variable $?
 
+Voir pour gestion du SHLVL
+
+
 CHECK LEAKS
     autre term
     ps -> pid minishell
@@ -31,6 +33,7 @@ CHECK LEAKS
 
     leaks
         leaks sur des espaces comme commande 
+        leaks sur SHLVL. 
 
 
 Checker tout les pipes/fd sur activity monitor
