@@ -8,6 +8,7 @@ builtins doivent etre lancés dans des processus si il y a des pipes
     echo lol | export a=gfuygugfuy -> export command not found
     export a=hfufgf | echo lol -> crée une variable d'env avec l'argument du echo
 
+
 cd -> doit t'emmener a la racine tdeville/ sauf si HOME est unset   DONE
     Si HOME unset: cd: HOME not set
 cd ~ -> racine tdeville                                             DONE
@@ -17,11 +18,14 @@ check si a chaque utilisation du CD je set OLDPWD                   DONE
 Bien checker le retour de chdir pour gerer les cas d'erreur         -1 non geré mais pas besoin pour le moment
 
 
+echo $$ a faire
+
 exit gdeuwguy =
     exit
     exit: gdeuwguy: numeric argument required (pareil avec plus de int ou long max et renvoie un exit status de 255)
     le exit fonctionne quand meme
 exit fait modulo 256 de l'int qui esst donné et le stocke dans la variable $?
+
 
 Voir pour gestion du SHLVL
 
@@ -37,3 +41,33 @@ CHECK LEAKS
 
 
 Checker tout les pipes/fd sur activity monitor
+Enlever bash dans les message d'erreurs
+
+
+OPEN FILES & REDIRECTIONS
+    pas de message d'erreur pour cat file > test 1
+        -> cat: 1: No such file or directory
+    
+
+
+TEST THALLARD https://github.com/thallard/minishell_tester/tree/main/file_tests
+
+Pipes:
+    8
+    9
+    10
+    11
+    14
+    15
+    16
+    20
+
+Echo:
+    22
+    27
+    28
+    43
+    44
+    47
+    59
+

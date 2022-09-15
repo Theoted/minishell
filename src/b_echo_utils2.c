@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/13 11:49:36 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 13:26:48 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,16 @@ char	*echo_parse_bs(char *arg, t_data_p *data)
 	new = NULL;
 	tmp = NULL;
 	i = -1;
+	printf("test\n");
 	while (arg[++i])
 	{
-		if (arg[i] == '\\')
+		if (arg[i] == '\\' && !state_checker(arg, 0, i))
 			tmp = echo_trim_bs(arg, &i, data);
 		else
 		{
 			j = i;
-			while (arg[i] != '\\' && arg[i])
+			while ((arg[i] != '\\'
+					|| (arg[i] == '\\' && state_checker(arg, 0, i))) && arg[i])
 				i++;
 			tmp = gc_substr(&data->track, arg, j, (i - j));
 			i--;

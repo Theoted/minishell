@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/15 11:26:48 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 11:55:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ int	b_cd(t_data_p *data, int idx)
 	getcwd(cwd, sizeof(cwd));
 	if (chdir(data->commands[idx].args_vec[1]) == -1)
 	{
-		if (!data->commands[idx].args_vec[1] 
+		if (!data->commands[idx].args_vec[1]
 			|| !strncmp_len(data->commands[idx].args_vec[1], "~"))
-				chdir(get_home_oldpwd(data, 1));
+			chdir(get_home_oldpwd(data, 1));
 		else if (!strncmp_len(data->commands[idx].args_vec[1], "-"))
-				chdir(get_home_oldpwd(data, 2));
+			chdir(get_home_oldpwd(data, 2));
 	}
 	change_oldpwd(data, data->envp, cwd);
 	return (1);

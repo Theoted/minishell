@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 10:09:14 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 13:11:43 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ int 	in_out_len(char *arg);
 int 	get_file(char *arg, int *start, int *type);
 int 	idx_after_hd(char *arg, int *start);
 void 	fill_envp_cmd(t_data_p *data);
+int		find_char(char *arg, char c);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 10:24:10 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/15 12:58:43 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,24 +69,12 @@ int	find_char(char *arg, char c)
 	return (0);
 }
 
-// Cette fonction parse les quotes du content
-// char	*export_parse_quotes(t_data_p *data, char *content)
-// {
-// 	int	i;
-
-// 	i = -1;
-// 	while (content[++i])
-// 	{
-		
-// 	}
-// }
-
 int	remove_export_content_quotes(t_data_p *data, char *arg)
 {
 	int		i;
 	int		j;
 	char	*content;
-	
+
 	i = -1;
 	j = 0;
 	content = NULL;
@@ -95,7 +83,7 @@ int	remove_export_content_quotes(t_data_p *data, char *arg)
 		if (arg[i] == '=')
 		{
 			while (arg[i + j])
-				j++;	
+				j++;
 			content = gc_substr(&data->track, arg, i + 1, j);
 			content = remove_quotes(data, content);
 			break ;
@@ -112,10 +100,13 @@ int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 	i = -1;
 	while (arg_vec[++i])
 	{
-		remove_export_content_quotes(data, arg_vec[i]);
-		if (arg_vec[i][0] == '\"' || arg_vec[i][0] == '\'')
-			while (find_char(arg_vec[i], '\"') || find_char(arg_vec[i], '\''))
-				arg_vec[i] = gc_strtrim(&data->track, arg_vec[i], "\"\'");
+		if (strncmp_len(arg_vec[0], "echo"))
+		{	
+			remove_export_content_quotes(data, arg_vec[i]);
+			if (arg_vec[i][0] == '\"' || arg_vec[i][0] == '\'')
+				while (find_char(arg_vec[i], '\"') || find_char(arg_vec[i], '\''))
+					arg_vec[i] = gc_strtrim(&data->track, arg_vec[i], "\"\'");
+		}
 	}
 	return (0);
 }
