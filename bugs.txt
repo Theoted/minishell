@@ -18,7 +18,7 @@ check si a chaque utilisation du CD je set OLDPWD                   DONE
 Bien checker le retour de chdir pour gerer les cas d'erreur         -1 non geré mais pas besoin pour le moment
 
 
-echo $$ a faire
+echo $$ a faire     A voir
 
 exit gdeuwguy =
     exit
@@ -36,8 +36,7 @@ CHECK LEAKS
     leaks pid
 
     leaks
-        leaks sur des espaces comme commande 
-        leaks sur SHLVL. 
+        leaks sur SHLVL.
 
 
 Checker tout les pipes/fd sur activity monitor
@@ -57,17 +56,13 @@ Pipes:
     9
     10
     11
-    14
-    15
-    16
+    15 -> marche mais seg fault des fois
     20
 
+    les problemes de ces tests sont du au fait que certains built ins fonctionne
+    alors qu'il ne devrais pas lors ce qu'il y a des pipes voir ligne 6 a 9 de ce
+    file.
+
 Echo:
-    22
-    27
-    28
-    43
-    44
-    47
     59
 
