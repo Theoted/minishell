@@ -6,11 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/20 08:52:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 11:58:47 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+
+int	g_status;
 
 int	check_spaces(char *arg)
 {
@@ -89,7 +91,10 @@ int main(int ac, char **av, char **envp)
 		if (data_p.stdin_arg[0])
 		{
 			if (!lexer(data_p.stdin_arg, &data_p))
+			{
+				printf("%s\n", data_p.commands[0].args_vec[0]);
 				e_exec(&data_p, data_p.commands);
+			}
 		}
 		if (data_p.stdin_arg)
 			free(data_p.stdin_arg);

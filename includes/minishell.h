@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/19 15:19:44 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 11:58:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,8 @@ void	check_path(t_data_p *d, t_commands *c);
 void	dup_fd_in_pipe(t_commands *c, int i);
 void	action(int sig);
 void	sig_quit(int sig);
+void	sig_quit_hd(int sig);
+
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path

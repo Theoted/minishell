@@ -6,11 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/12 14:35:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 12:07:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+extern int g_status;
 
 // -------------------------- HERE DOC --------------------------
 int	ft_here_doc(t_data_p *data, int idx)
@@ -18,23 +20,30 @@ int	ft_here_doc(t_data_p *data, int idx)
 	int		del_len;
 	int		longest;
 	char	*buffer;
-
-	data->commands[idx].here_doc = NULL;
-	del_len = ft_strlen(data->hd_data.here_doc_del);
-	while (1)
+	int		pid;
+	
+	pid = fork();
+	if (pid == 0)
 	{
-		write(STDOUT_FILENO, "> ", 2);
-		buffer = gc_get_next_line(&data->track, STDIN_FILENO);
-		longest = del_len;
-		if (ft_strlen(buffer) > (size_t)del_len)
-			longest = (ft_strlen(buffer) - 1);
-		if (!ft_strncmp(buffer,
-				data->hd_data.here_doc_del, longest))
-			break ;
-		here_doc_write(data, buffer, idx);
+		data->commands[idx].here_doc = NULL;
+		del_len = ft_strlen(data->hd_data.here_doc_del);
+		signal(SIGINT, sig_quit_hd);
+		while (1)
+		{
+			write(STDOUT_FILENO, "> ", 2);
+			buffer = gc_get_next_line(&data->track, STDIN_FILENO);
+			longest = del_len;
+			if (ft_strlen(buffer) > (size_t)del_len)
+				longest = (ft_strlen(buffer) - 1);
+			if (!ft_strncmp(buffer,
+					data->hd_data.here_doc_del, longest))
+				break ;
+			here_doc_write(data, buffer, idx);
+			gc_free_malloc(&data->track, (void **)&buffer);
+		}
 		gc_free_malloc(&data->track, (void **)&buffer);
 	}
-	gc_free_malloc(&data->track, (void **)&buffer);
+	waitpid(pid, NULL, 0);
 	return (0);
 }
 

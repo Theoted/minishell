@@ -6,11 +6,19 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/19 11:15:26 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 12:09:55 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+extern int g_status;
+
+void	sig_quit_hd(int sig)
+{
+	(void)sig;
+	exit(0);
+}
 
 void	sig_quit(int sig)
 {
