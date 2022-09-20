@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 12:58:43 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 09:02:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 	char	*tmp;
 
 	i = -1;
+	if (!arg_vec)
+		return (1);
 	while (arg_vec[++i])
 	{
 		if (strncmp_len(arg_vec[0], "echo"))
@@ -124,7 +126,8 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else
 		data->commands[idx].args_vec = NULL;
-	remove_quotes_arg_vec(data, data->commands[idx].args_vec);
+	if (remove_quotes_arg_vec(data, data->commands[idx].args_vec))
+		return (1);
 	while (data->commands[idx].args_vec[++i])
 		data->commands[idx].args_vec[i] = get_echo_env_var
 			(data, data->commands[idx].args_vec[i]);

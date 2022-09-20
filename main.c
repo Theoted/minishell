@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 11:35:51 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 08:52:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int main(int ac, char **av, char **envp)
 	find_env_path(data_p.envp, &data_p);
 	while (1)
 	{
+		signal(SIGQUIT, action);
+		signal(SIGINT, sig_quit);
 		data_p.stdin_arg = readline("\033[0;34mShellDePetiteTaille-0.0.42: \033[0m");
 		add_history(data_p.stdin_arg);
 		if (b_exit(data_p.stdin_arg))

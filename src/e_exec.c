@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/09/15 08:24:30 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 09:12:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,12 @@ void	e_exec(t_data_p *d, t_commands *c)
 	i = -1;
 	while (c[++i].stop == 0)
 	{
+		if (!c[i].args_vec)
+			continue ;
 		if (c[i + 1].stop)
 			c[i].fd_out = 1;
 		pipe(c[i].pfd);
-		if (!ft_exec_built_nofork(d, c, i))
+		if (!ft_exec_built_nofork(d, &c[i], i))
 		{
 			c[i].pid = fork();
 			if (!c[i].pid)

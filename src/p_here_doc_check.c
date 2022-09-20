@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:38:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/12 14:48:53 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 08:38:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	check_heredoc(char *arg, t_data_p *data, int idx)
 	{
 		if (arg[i] == '<' && arg[i + 1] == '<')
 		{
+			if (check_heredoc2(arg, i + 2))
+				return (1);
 			if (arg[i + 2] == '<')
 			{
 				printf("Chevrons: Synthax error\n");

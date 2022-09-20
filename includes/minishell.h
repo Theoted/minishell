@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 13:11:43 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/19 15:19:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ void	e_exec(t_data_p *d, t_commands *c);
 int		main (int argc, char **argv, char **envp);
 void	check_path(t_data_p *d, t_commands *c);
 void	dup_fd_in_pipe(t_commands *c, int i);
+void	action(int sig);
+void	sig_quit(int sig);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path
@@ -169,6 +171,8 @@ int		count_pipes(char *str);
 	// Synthax_checker
 int		synthax_checker(char *arg);
 int		pipe_synthax(char *str, t_data_p data);
+int		check_space(char *arg);
+int		check_heredoc2(char *arg, int i);
 
 	// Get cmd
 int		get_cmd_in_arg(char *arg, t_data_p *data, int idx);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:09:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 10:32:08 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/19 15:04:01 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int	synthax_checker(char *arg)
 
 	i = -1;
 	quote = 0;
+	if (check_space(arg))
+		return (printf("Synthax Error\n"));
 	while (arg[++i])
 	{
 		if ((arg[i] == '\'' || arg[i] == '\"') && quote == 0)

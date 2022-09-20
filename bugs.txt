@@ -3,10 +3,10 @@ export lol=cat -> $lol fichier      DONE
 expend var d'env dans les arguments DONE
 
 
-builtins doivent etre lancés dans des processus si il y a des pipes
-    cd .. | echo lol ne doit pas changer le dossier du process principal
-    echo lol | export a=gfuygugfuy -> export command not found
-    export a=hfufgf | echo lol -> crée une variable d'env avec l'argument du echo
+builtins doivent etre lancés dans des processus si il y a des pipes                 DONE
+    cd .. | echo lol ne doit pas changer le dossier du process principal            DONE
+    echo lol | export a=gfuygugfuy -> export command not found                      DONE
+    export a=hfufgf | echo lol -> crée une variable d'env avec l'argument du echo   DONE
 
 
 cd -> doit t'emmener a la racine tdeville/ sauf si HOME est unset   DONE
@@ -25,9 +25,6 @@ exit gdeuwguy =
     exit: gdeuwguy: numeric argument required (pareil avec plus de int ou long max et renvoie un exit status de 255)
     le exit fonctionne quand meme
 exit fait modulo 256 de l'int qui esst donné et le stocke dans la variable $?
-
-
-Voir pour gestion du SHLVL
 
 
 CHECK LEAKS
@@ -51,18 +48,16 @@ OPEN FILES & REDIRECTIONS
 
 TEST THALLARD https://github.com/thallard/minishell_tester/tree/main/file_tests
 
-Pipes:
-    8
-    9
-    10
-    11
-    15 -> marche mais seg fault des fois
-    20
 
-    les problemes de ces tests sont du au fait que certains built ins fonctionne
-    alors qu'il ne devrais pas lors ce qu'il y a des pipes voir ligne 6 a 9 de ce
-    file.
 
-Echo:
-    59
+19/09/22
 
+Regler la gestion de synthax error DONE -> Manque quelques message d'erreurs mais pas de crash
+Faire des signaux pixels
+    - here doc dans un fork, ecrire dans un pipe
+gestion du SHLVL
+    - voir en cas de suppression de la variable
+Voir pour lancement du minishell sans ENV (env -i)
+    - segfault en cas de cd 
+
+Segfault si here_doc sans commande  DONE

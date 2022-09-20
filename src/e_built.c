@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/09/15 08:42:30 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/20 09:10:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,23 @@ int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 	char	s[1000];
 
 	if (ft_strcmp(c->args_vec[0], "cd"))
+	{
+		if (d->pipes_nb > 0)
+			return (1);
 		return (b_cd(d, idx));
+	}
 	if (ft_strcmp(c->args_vec[0], "export"))
+	{
+		if (d->pipes_nb > 0)
+			return (1);
 		return (b_export(d, idx));
+	}
 	if (ft_strcmp(c->args_vec[0], "unset"))
+	{
+		if (d->pipes_nb > 0)
+			return (1);
 		return (b_unset(d, idx));
+	}
 	return (0);
 }
 
