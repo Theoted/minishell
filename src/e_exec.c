@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/09/20 09:12:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 11:59:14 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 	int	i;
 
 	i = -1;
+	signal(SIGINT, sig_handler_parent);
 	while (c[++i].stop == 0)
 	{
 		if (!c[i].args_vec)
@@ -104,6 +105,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 			c[i].pid = fork();
 			if (!c[i].pid)
 			{
+				sig_child();
 				if (e_child(d, &c[i], i) == -1)
 					return ;
 			}

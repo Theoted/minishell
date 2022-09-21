@@ -6,13 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/20 12:07:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 12:13:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int g_status;
+extern int	g_status;
 
 // -------------------------- HERE DOC --------------------------
 int	ft_here_doc(t_data_p *data, int idx)
@@ -21,13 +21,14 @@ int	ft_here_doc(t_data_p *data, int idx)
 	int		longest;
 	char	*buffer;
 	int		pid;
-	
+
+	signal(SIGINT, sig_handler_parent_hd);
 	pid = fork();
 	if (pid == 0)
 	{
+		sig_child();
 		data->commands[idx].here_doc = NULL;
 		del_len = ft_strlen(data->hd_data.here_doc_del);
-		signal(SIGINT, sig_quit_hd);
 		while (1)
 		{
 			write(STDOUT_FILENO, "> ", 2);

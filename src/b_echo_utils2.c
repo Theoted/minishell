@@ -6,61 +6,39 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 13:26:48 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 09:57:35 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*echo_trim_bs(char *arg, int *i, t_data_p *data)
+extern int	g_status;
+
+char	*check_exit_status(t_data_p *data, char *arg, int i)
 {
-	char	*new;
-	int		count;
 	int		j;
-
-	new = "";
-	count = 0;
-	j = -1;
-	while (arg[*i] && arg[*i] == '\\')
-	{
-		(*i)++;
-		count++;
-	}
-	(*i)--;
-	new = gc_calloc(count / 2, sizeof(char), &data->track);
-	while (++j < count / 2)
-		new[j] = '\\';
-	return (new);
-}
-
-char	*echo_parse_bs(char *arg, t_data_p *data)
-{
-	char	*new;
 	char	*tmp;
-	int		i;
-	int		j;
+	char	*tmp1;
 
-	new = NULL;
 	tmp = NULL;
-	i = -1;
-	printf("test\n");
+	tmp1 = NULL;
 	while (arg[++i])
 	{
-		if (arg[i] == '\\' && !state_checker(arg, 0, i))
-			tmp = echo_trim_bs(arg, &i, data);
-		else
+		j = i;
+		while (arg[i] && arg[i] != '$')
+			i++;
+		if (arg[i] == '$' && arg[i + 1] == '?')
 		{
-			j = i;
-			while ((arg[i] != '\\'
-					|| (arg[i] == '\\' && state_checker(arg, 0, i))) && arg[i])
-				i++;
-			tmp = gc_substr(&data->track, arg, j, (i - j));
-			i--;
+			tmp = gc_strjoin(&data->track, gc_substr
+					(&data->track, arg, j, (i - j)), ft_itoa(g_status));
+			i++;
 		}
-		if (!new)
-			new = gc_strdup(&data->track, tmp);
 		else
-			new = gc_strjoin(&data->track, new, tmp);
+			tmp = gc_substr(&data->track, arg, j, (i - j));
+		if (!tmp1)
+			tmp1 = gc_strdup(&data->track, tmp);
+		else
+			tmp1 = gc_strjoin(&data->track, tmp1, tmp);
 	}
-	return (new);
+	return (tmp1);
 }

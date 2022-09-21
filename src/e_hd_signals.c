@@ -1,50 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   p_synthax_checker2.c                               :+:      :+:    :+:   */
+/*   e_hd_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 14:06:50 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/21 09:58:32 by tdeville         ###   ########lyon.fr   */
+/*   Created: 2022/09/21 11:34:39 by tdeville          #+#    #+#             */
+/*   Updated: 2022/09/21 11:40:03 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	check_heredoc2(char *arg, int i)
+void	sig_parent_hd(void)
 {
-	int	check;
-
-	check = 0;
-	while (arg[i])
-	{
-		if (ft_isalnum(arg[i]))
-			check = 1;
-		i++;
-	}
-	if (check)
-		return (0);
-	printf("synthax error: no del for here doc\n");
-	return (1);
+    write(2, "\b\b", 2);
+	write(2, "  \n", 3);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 }
 
-int	check_space(char *arg)
+void	sig_handler_parent_hd(int sig)
 {
-	int	i;
-
-	i = -1;
-	if (arg[0] == '|')
-		return (1);
-	if (arg[0] == ' ')
-	{
-		while (arg[++i])
-		{
-			if (ft_isalnum(arg[i]))
-				return (0);
-			if (arg[i] == '|')
-				return (1);
-		}
-	}
-	return (0);
+	(void)sig;
+	sig_parent_hd();
 }

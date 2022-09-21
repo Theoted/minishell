@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/20 11:58:42 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 14:46:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,14 @@ int		main (int argc, char **argv, char **envp);
 void	check_path(t_data_p *d, t_commands *c);
 void	dup_fd_in_pipe(t_commands *c, int i);
 void	action(int sig);
-void	sig_quit(int sig);
-void	sig_quit_hd(int sig);
+void	sig_int(int sig);
+void	sig_child(void);
+void	sig_parent(void);
+void	sig_handler_parent(int sig);
+void	sig_handler_parent_hd(int sig);
 
+//		Replace line
+void	rl_replace_line (const char *text, int clear_undo);
 
 /* ------------------- PARSING ------------------- */
 	// Bin Path
@@ -217,6 +222,10 @@ int		find_char(char *arg, char c);
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
 
+	// Init
+void	env_lstadd_back(t_data_p *data, t_envp **alst, t_envp *new);
+t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
+
 /* ------------------- BUILT-INS ------------------- */
 		// UNSET
 void	init_our_envp(t_data_p *data);
@@ -244,6 +253,7 @@ int		expend_echo_env_vars(t_data_p *data, char **arg);
 char    *get_echo_env_var(t_data_p *data, char *arg);
 char	*echo_parse_bs(char *arg, t_data_p *data);
 char	*echo_trim_bs(char *arg, int *i, t_data_p *data);
+char	*check_exit_status(t_data_p *data, char *arg, int i);
 
 		// ECHO UTILS
 int		word_end_id(char *arg, int i);

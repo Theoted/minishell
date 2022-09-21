@@ -18,8 +18,6 @@ check si a chaque utilisation du CD je set OLDPWD                   DONE
 Bien checker le retour de chdir pour gerer les cas d'erreur         -1 non geré mais pas besoin pour le moment
 
 
-echo $$ a faire     A voir
-
 exit gdeuwguy =
     exit
     exit: gdeuwguy: numeric argument required (pareil avec plus de int ou long max et renvoie un exit status de 255)
@@ -61,3 +59,18 @@ Voir pour lancement du minishell sans ENV (env -i)
     - segfault en cas de cd 
 
 Segfault si here_doc sans commande  DONE
+
+
+HEREDOC:
+    Dans here_doc si ctrl + D = pareil que mettre le del
+    Si pas de commande dans le HD, boucle inf si pipe apres
+    quand complete le HD, ne sort pas d'un des process
+
+GROS CHANGEMENTS:
+    j'ai mis le here doc a l'interieur de l'exec et je l'ai retiré
+    du lexer
+    Voir pour set la variable global dans les signaux a l'interieur des
+    process
+
+
+e_exec -> ligne 109 -> je passe l'adresse de l'emplacement du tableau

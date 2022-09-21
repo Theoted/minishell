@@ -6,41 +6,50 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/15 11:55:42 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 16:03:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	insert_node_after(t_envp *envp, char *after_name, t_envp *new)
+void	insert_node_after(t_envp **envp, char *after_name, t_envp *new, t_data_p *data)
 {
 	t_envp	*tmp;
-
-	while (strncmp_len(envp->name, after_name) && envp)
-		envp = envp->next;
-	if (!strncmp_len(envp->name, after_name))
+	t_envp	*tmp1;
+	
+	tmp1 = *envp;
+	if (!*envp && !strncmp_len(after_name, "PWD"))
 	{
-		tmp = envp->next;
-		envp->next = new;
+		env_lstadd_back(data, envp, new);
+		return ;
+	}
+	while (strncmp_len(tmp1->name, after_name) && tmp1)
+		tmp1 = tmp1->next;
+	if (!strncmp_len(tmp1->name, after_name))
+	{
+		tmp = tmp1->next;
+		tmp1->next = new;
 		new->next = tmp;
 	}
 }
 
-t_envp	*find_node(t_envp *envp, char *name)
+t_envp	*find_node(t_envp **envp, char *name)
 {
-	while (strncmp_len(envp->name, name) && envp)
+	if (!*envp)
+		return (NULL);
+	while (strncmp_len((*envp)->name, name) && *envp)
 	{
-		if (envp->next)
-			envp = envp->next;
+		if ((*envp)->next)
+			*envp = (*envp)->next;
 		else
 			break ;
 	}
-	if (!strncmp_len(envp->name, name))
-		return (envp);
+	if (!strncmp_len((*envp)->name, name))
+		return (*envp);
 	return (NULL);
 }
 
-void	change_oldpwd(t_data_p *data, t_envp *envp, char *cwd)
+void	change_oldpwd(t_data_p *data, t_envp **envp, char *cwd)
 {
 	t_envp	*node;
 
@@ -49,7 +58,7 @@ void	change_oldpwd(t_data_p *data, t_envp *envp, char *cwd)
 		node->content = gc_strdup(&data->track, cwd);
 	else
 	{
-		insert_node_after(envp, "PWD", env_lstnew(data, "OLDPWD", cwd));
+		insert_node_after(envp, "PWD", env_lstnew(data, "OLDPWD", cwd), data);
 		node = find_node(envp, "OLDPWD");
 		node->content = gc_strdup(&data->track, cwd);
 	}
@@ -61,22 +70,25 @@ char	*get_home_oldpwd(t_data_p *data, int x)
 	t_envp	*tmp;
 
 	tmp = data->envp;
-	while (tmp->next)
+	if (tmp)
 	{
-		if (x == 1)
+		while (tmp->next)
 		{
-			if (!strncmp_len(tmp->name, "HOME"))
-				return (tmp->content);
-		}
-		else if (x == 2)
-		{
-			if (!strncmp_len(tmp->name, "OLDPWD"))
+			if (x == 1)
 			{
-				printf("%s\n", tmp->content);
-				return (tmp->content);
+				if (!strncmp_len(tmp->name, "HOME"))
+					return (tmp->content);
 			}
+			else if (x == 2)
+			{
+				if (!strncmp_len(tmp->name, "OLDPWD"))
+				{
+					printf("%s\n", tmp->content);
+					return (tmp->content);
+				}
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
 	if (x == 1)
 		printf("cd: HOME not set\n");
@@ -98,7 +110,10 @@ int	b_cd(t_data_p *data, int idx)
 			chdir(get_home_oldpwd(data, 1));
 		else if (!strncmp_len(data->commands[idx].args_vec[1], "-"))
 			chdir(get_home_oldpwd(data, 2));
+		else
+			printf("cd: %s: No such file or directory\n",
+				data->commands[idx].args_vec[1]);
 	}
-	change_oldpwd(data, data->envp, cwd);
+	change_oldpwd(data, &data->envp, cwd);
 	return (1);
 }

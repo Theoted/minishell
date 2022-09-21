@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/20 12:09:55 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/21 12:02:17 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,39 @@
 
 extern int g_status;
 
-void	sig_quit_hd(int sig)
+void	sig_handler_parent(int sig)
 {
-	(void)sig;
-	exit(0);
+	if (sig == SIGINT)
+		g_status = 1;
+	sig_parent();
 }
 
-void	sig_quit(int sig)
+void	sig_int(int sig)
 {
-	(void)sig;
-	rl_on_new_line();
-	rl_redisplay();
-	write(2, "  ", 2);
-	write(2, "\b\b", 2);
+	if (sig == SIGINT)
+	{
+		rl_on_new_line();
+		rl_redisplay();
+		write(2, "  ", 2);
+		write(2, "\b\b", 2);
+		write(2, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		g_status = 1;
+	}
+}
+
+void	sig_parent(void)
+{
 	write(2, "\n", 1);
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 }
 
-void	action(int sig)
+void	sig_child(void)
 {
-	(void)sig;
-	rl_on_new_line();
-	rl_redisplay();
-	write(2, "  ", 2);
-	write(2, "\b\b", 2);
+	g_status = 130;
+	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 }
