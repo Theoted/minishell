@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/21 14:46:52 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 14:16:24 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ struct s_commands
 	int		fd_out;
 	int		pfd[2];
 	char	*here_doc;
+	int		pipehd[2];
 	int		infile;
 	int		outfile;
 	int		last_in_type;
@@ -121,6 +122,7 @@ struct s_hd_data
 	char	*tmp1;
 	char	*new_buffer;
 	char	*here_doc_del;
+	int		hd_pipe[2];
 };
 
 struct s_data_p

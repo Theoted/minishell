@@ -43,9 +43,7 @@ OPEN FILES & REDIRECTIONS
         -> cat: 1: No such file or directory
     
 
-
 TEST THALLARD https://github.com/thallard/minishell_tester/tree/main/file_tests
-
 
 
 19/09/22
@@ -63,8 +61,8 @@ Segfault si here_doc sans commande  DONE
 
 HEREDOC:
     Dans here_doc si ctrl + D = pareil que mettre le del
-    Si pas de commande dans le HD, boucle inf si pipe apres
-    quand complete le HD, ne sort pas d'un des process
+    Si pas de commande dans le HD, boucle inf si pipe apres avec commande qui attend de la data
+    quand complete le HD, ne sort pas d'un des process  DONE
 
 GROS CHANGEMENTS:
     j'ai mis le here doc a l'interieur de l'exec et je l'ai retiré

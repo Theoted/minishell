@@ -6,13 +6,22 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/21 12:13:49 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/22 14:29:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 extern int	g_status;
+
+char	*get_pipe_content(int fd, t_data_p *data)
+{
+	char	get_pipe_content[999999];
+	
+	ft_bzero(get_pipe_content, 999999);
+	read(fd, get_pipe_content, 999999);
+	return (gc_strdup(&data->track, get_pipe_content));
+}
 
 // -------------------------- HERE DOC --------------------------
 int	ft_here_doc(t_data_p *data, int idx)
@@ -21,7 +30,9 @@ int	ft_here_doc(t_data_p *data, int idx)
 	int		longest;
 	char	*buffer;
 	int		pid;
+	int		pipehd[2];
 
+	pipe(pipehd);
 	signal(SIGINT, sig_handler_parent_hd);
 	pid = fork();
 	if (pid == 0)
@@ -43,7 +54,14 @@ int	ft_here_doc(t_data_p *data, int idx)
 			gc_free_malloc(&data->track, (void **)&buffer);
 		}
 		gc_free_malloc(&data->track, (void **)&buffer);
+		close(pipehd[0]);
+		write(pipehd[1], data->commands[idx].here_doc,
+			ft_strlen(data->commands[idx].here_doc));
+		exit(0);
 	}
+	close(pipehd[1]);
+	data->commands[idx].here_doc = get_pipe_content(pipehd[0], data);
+	close(pipehd[0]);
 	waitpid(pid, NULL, 0);
 	return (0);
 }
