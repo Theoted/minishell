@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 14:45:32 by tdeville          #+#    #+#              #
-#    Updated: 2022/09/21 11:35:07 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/09/26 08:34:33 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS +=	src/p_bin_path.c \
 		src/p_here_doc_expend_var.c \
 		src/p_here_doc.c \
 		src/p_here_doc_utils.c \
+		src/p_here_doc_utils2.c \
 		src/p_synthax_checker.c \
 		src/p_synthax_checker2.c \
 		src/b_init.c \

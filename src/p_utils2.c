@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:30 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/13 08:43:28 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 08:55:17 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,17 @@ int	last_in_redir(char *arg)
 		}
 	}
 	return (check);
+}
+
+int	find_char(char *arg, char c)
+{
+	int	i;
+
+	i = -1;
+	while (arg[++i])
+	{
+		if (arg[i] == c)
+			return (1);
+	}
+	return (0);
 }

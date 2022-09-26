@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 11:34:39 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/21 11:40:03 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 08:56:27 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sig_parent_hd(void)
 {
-    write(2, "\b\b", 2);
+	write(2, "\b\b", 2);
 	write(2, "  \n", 3);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);

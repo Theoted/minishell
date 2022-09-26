@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/22 14:16:24 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 08:48:01 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,6 +210,8 @@ char	*trim_last_bsn(t_data_p *data, char *here_doc_content);
 int		check_del(char *del);
 int		check_solo_var(char *buffer);
 int		set_id_after_env(char *buffer, int i);
+char	*get_pipe_content(int fd, t_data_p *data);
+int		hd_loop(t_data_p *data, int idx, int del_len);
 
 	// Utils
 int 	state_checker(char *str, int start, int len);

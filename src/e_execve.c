@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/09/22 14:18:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 09:35:30 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,7 @@ int	e_child(t_data_p *d, t_commands *c, int idx)
 {
 	open_files (c);
 	if (c->last_in_type == HEREDOC_TYPE)
-	{
-		// if (check_heredoc(d->args[idx], d, idx))
-		// 	exit(1);
 		e_heredoc(c);
-	}
 	if (c->last_in_type != HEREDOC_TYPE)
 		dup2(c->fd_in, STDIN_FILENO);
 	if (c->fd_in)

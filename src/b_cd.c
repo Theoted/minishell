@@ -6,17 +6,18 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/21 16:03:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 08:57:12 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	insert_node_after(t_envp **envp, char *after_name, t_envp *new, t_data_p *data)
+void	insert_node_after(t_envp **envp, char *after_name,
+		t_envp *new, t_data_p *data)
 {
 	t_envp	*tmp;
 	t_envp	*tmp1;
-	
+
 	tmp1 = *envp;
 	if (!*envp && !strncmp_len(after_name, "PWD"))
 	{

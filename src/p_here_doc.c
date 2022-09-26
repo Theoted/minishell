@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/22 14:29:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 11:30:01 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,9 @@
 
 extern int	g_status;
 
-char	*get_pipe_content(int fd, t_data_p *data)
-{
-	char	get_pipe_content[999999];
-	
-	ft_bzero(get_pipe_content, 999999);
-	read(fd, get_pipe_content, 999999);
-	return (gc_strdup(&data->track, get_pipe_content));
-}
-
 // -------------------------- HERE DOC --------------------------
 int	ft_here_doc(t_data_p *data, int idx)
 {
-	int		del_len;
-	int		longest;
-	char	*buffer;
 	int		pid;
 	int		pipehd[2];
 
@@ -39,21 +27,9 @@ int	ft_here_doc(t_data_p *data, int idx)
 	{
 		sig_child();
 		data->commands[idx].here_doc = NULL;
-		del_len = ft_strlen(data->hd_data.here_doc_del);
 		while (1)
-		{
-			write(STDOUT_FILENO, "> ", 2);
-			buffer = gc_get_next_line(&data->track, STDIN_FILENO);
-			longest = del_len;
-			if (ft_strlen(buffer) > (size_t)del_len)
-				longest = (ft_strlen(buffer) - 1);
-			if (!ft_strncmp(buffer,
-					data->hd_data.here_doc_del, longest))
+			if (hd_loop(data, idx, ft_strlen(data->hd_data.here_doc_del)))
 				break ;
-			here_doc_write(data, buffer, idx);
-			gc_free_malloc(&data->track, (void **)&buffer);
-		}
-		gc_free_malloc(&data->track, (void **)&buffer);
 		close(pipehd[0]);
 		write(pipehd[1], data->commands[idx].here_doc,
 			ft_strlen(data->commands[idx].here_doc));

@@ -6,13 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/21 12:02:17 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 08:55:55 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int g_status;
+extern int	g_status;
 
 void	sig_handler_parent(int sig)
 {
