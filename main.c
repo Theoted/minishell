@@ -3,16 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/27 10:29:05 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 13:42:09 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+#include <termios.h>
 
 int     g_status;
+
+#define SET 0
+#define RESET 1
+
+void    change_termios(int action)
+{
+    static struct termios old_termios;
+    struct termios new_termios;
+
+    if (action == SET)
+    {
+        tcgetattr(0, &old_termios);
+        new_termios = old_termios;
+        new_termios.c_lflag &= ~ECHOCTL;
+        tcsetattr(0, 0, &new_termios);
+    }
+    else
+    {
+        tcsetattr(0, 0, &old_termios);
+    }
+}
 
 int check_spaces(char *arg)
 {
@@ -54,11 +76,13 @@ int main(int ac, char **av, char **envp)
     {
         signal(SIGQUIT, SIG_IGN);
         signal(SIGINT, sig_int);
+        change_termios(SET);
         data_p.stdin_arg = readline("\033[0;34mShellDePetiteTaille-0.0.42: \033[0m");
         sig_parent();
         add_history(data_p.stdin_arg);
         if (!data_p.stdin_arg)
         {
+            change_termios(RESET);
             printf("exit\n");
             gc_free_all(&data_p.track);
             return (0);
@@ -71,9 +95,12 @@ int main(int ac, char **av, char **envp)
         if (data_p.stdin_arg[0])
         {
             if (!lexer(data_p.stdin_arg, &data_p))
+            {
+                change_termios(RESET);
                 e_exec(&data_p, data_p.commands);
-
+            }
         }
+        change_termios(RESET);
         if (data_p.stdin_arg)
             free(data_p.stdin_arg);
     }

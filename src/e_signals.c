@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_signals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/27 10:23:01 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 13:38:32 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void    sig_int(int sig)
 {
     if (sig == SIGINT)
     {
-        rl_on_new_line();
-        rl_redisplay();
-        write(2, "  ", 2);
-        write(2, "\b\b", 2);
+        // rl_on_new_line();
+        // rl_redisplay();
+        // write(2, "  ", 2);
+        // write(2, "\b\b", 2);
         write(2, "\n", 1);
         rl_on_new_line();
         rl_replace_line("", 0);
