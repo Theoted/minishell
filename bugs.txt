@@ -72,3 +72,12 @@ GROS CHANGEMENTS:
 
 
 e_exec -> ligne 109 -> je passe l'adresse de l'emplacement du tableau
+
+
+
+
+
+A FAIRE 
+
+exit 
+Set la variable global 

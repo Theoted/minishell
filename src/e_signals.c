@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/26 08:55:55 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 14:18:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,14 @@ void	sig_parent(void)
 	signal(SIGINT, SIG_IGN);
 }
 
+void	sig_handler_child(int sig)
+{
+	if (sig == SIGINT)
+		g_status = 130;
+}
+
 void	sig_child(void)
 {
-	g_status = 130;
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 }

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/26 08:48:01 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/26 13:51:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void	sig_child(void);
 void	sig_parent(void);
 void	sig_handler_parent(int sig);
 void	sig_handler_parent_hd(int sig);
+void	sig_handler_child(int sig);
 
 //		Replace line
 void	rl_replace_line (const char *text, int clear_undo);
