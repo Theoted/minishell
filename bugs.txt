@@ -94,3 +94,6 @@ voir pour le else write \n dans e_exec.c ligne 121 - 122
 
 voir si creation de file sans commande (>> out)     DONE
 voir pour valeur d'exit dans le HD
+
+
+GERER SHLVL
