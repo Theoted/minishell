@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/09/26 11:28:06 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/09/27 09:54:54 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,10 @@ all: maker ${NAME}
 %.o : %.c	${HEADER}
 		${CC} ${CFLAGS} -c $< -o $@
 
+# -fsanitize=address -g3
 
 ${NAME}: ${OBJS} libft2/libft2.a
-		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a -fsanitize=address -g3
+		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a 
 
 maker:
 		${MAKE} -C ${LIBFT}

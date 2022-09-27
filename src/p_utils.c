@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 10:45:42 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 11:28:28 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	get_in_out_files(char *arg, t_data_p *data, int idx)
 				data->commands[idx].files[++j].file
 					= gc_substr(&data->track, arg, i, len);
 				data->commands[idx].files[j].type = in_type;
+				data->commands[idx].files[j].file
+					= remove_quotes(data, data->commands[idx].files[j].file);
 			}
 		}
 	}

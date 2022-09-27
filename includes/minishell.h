@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/26 13:51:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 09:21:06 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,7 +247,7 @@ void	env_lst_change_content(t_envp *node, char *content);
 t_envp	*check_if_exist(t_envp *alst, char *name);
 
 		// EXIT
-int 	b_exit(char *input);
+int		b_exit(t_data_p *d, int idx);
 
 		// CD
 int		b_cd(t_data_p *data, int idx);
