@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 08:33:28 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/26 11:29:22 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/27 13:59:40 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_pipe_content(int fd, t_data_p *data)
 	char	get_pipe_content[3];
 	char	*tmp;
 	int		r;
-	
+
 	r = read(fd, get_pipe_content, 2);
 	get_pipe_content[2] = 0;
 	tmp = NULL;
