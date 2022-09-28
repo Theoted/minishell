@@ -94,3 +94,11 @@ voir pour le else write \n dans e_exec.c ligne 121 - 122
 
 voir si creation de file sans commande (>> out)     DONE
 voir pour valeur d'exit dans le HD
+
+export > file -> ne creer pas le file               
+parse quote dans le content de export               DONE
+checker si export quelque chose qui n'es pas une lettre fonctionne
+    Si le premier char est un chiffre ca marche pas sinon ca marche
+    si ya cchar special dans la variable ca march epas
+    si le prem char est # juste print
+

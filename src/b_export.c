@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/15 08:22:46 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 08:47:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_arg(t_data_p *data, char *arg, char **content, char **name)
 	int		i;
 	t_envp	*tmp;
 
-	i = 0;
+	i = -1;
 	tmp = data->envp;
 	if (arg[0] == '=')
 	{
@@ -53,14 +53,12 @@ int	check_arg(t_data_p *data, char *arg, char **content, char **name)
 			return (create_var_no_content(data, arg, content, name));
 		return (1);
 	}
-	while (arg[i] && arg[i] != '=')
-	{
+	while (arg[++i] && arg[i] != '=')
 		if (arg[i] == ' ')
 			return (1);
-		i++;
-	}
 	*name = gc_substr(&data->track, arg, 0, i);
-	*content = gc_substr(&data->track, arg, i + 1, ft_strlen(arg) - i);
+	*content = remove_quotes(data, gc_substr
+		(&data->track, arg, i + 1, ft_strlen(arg) - i));
 	return (0);
 }
 

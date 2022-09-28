@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/26 08:57:12 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 09:22:46 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,20 @@ void	insert_node_after(t_envp **envp, char *after_name,
 
 t_envp	*find_node(t_envp **envp, char *name)
 {
-	if (!*envp)
+	t_envp	*tmp;
+
+	tmp = *envp;
+	if (!tmp)
 		return (NULL);
-	while (strncmp_len((*envp)->name, name) && *envp)
+	while (strncmp_len(tmp->name, name) && tmp)
 	{
-		if ((*envp)->next)
-			*envp = (*envp)->next;
+		if (tmp->next)
+			tmp = tmp->next;
 		else
 			break ;
 	}
-	if (!strncmp_len((*envp)->name, name))
-		return (*envp);
+	if (!strncmp_len(tmp->name, name))
+		return (tmp);
 	return (NULL);
 }
 
@@ -108,9 +111,15 @@ int	b_cd(t_data_p *data, int idx)
 	{
 		if (!data->commands[idx].args_vec[1]
 			|| !strncmp_len(data->commands[idx].args_vec[1], "~"))
-			chdir(get_home_oldpwd(data, 1));
+		{
+			if(chdir(get_home_oldpwd(data, 1)) == -1)
+				perror("cd");
+		}
 		else if (!strncmp_len(data->commands[idx].args_vec[1], "-"))
-			chdir(get_home_oldpwd(data, 2));
+		{
+			if (chdir(get_home_oldpwd(data, 2)) == -1)
+				perror("cd");
+		}
 		else
 			printf("cd: %s: No such file or directory\n",
 				data->commands[idx].args_vec[1]);
