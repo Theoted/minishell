@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/27 11:37:19 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 09:14:12 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int	ft_here_doc(t_data_p *data, int idx)
 		close(pipehd[0]);
 		write(pipehd[1], data->commands[idx].here_doc,
 			ft_strlen(data->commands[idx].here_doc));
+		close(pipehd[1]);
 		exit(0);
 	}
+	waitpid(pid, NULL, 0);
 	close(pipehd[1]);
 	data->commands[idx].here_doc = get_pipe_content(pipehd[0], data);
 	close(pipehd[0]);
-	waitpid(pid, NULL, 0);
 	return (0);
 }
 

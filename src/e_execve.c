@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/09/27 14:02:28 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 09:35:47 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	dup_fd_in_pipe(t_commands *c, int i)
 	close(c[i].pfd[1]);
 	if (c[i].fd_in)
 		close(c[i].fd_in);
-	c[i + 1].fd_in = dup(c->pfd[0]);
+	if (!c[i + 1].stop)
+		c[i + 1].fd_in = dup(c->pfd[0]);
 	close(c[i].pfd[0]);
 }
 
@@ -51,7 +52,7 @@ void	check_path(t_data_p *d, t_commands *c)
 void	e_execve(t_data_p *d, t_commands *c, int idx)
 {
 	ft_exec_built_fork(d, c, idx);
-	if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
+	if (execve(c->cmd_path, c->args_vec, convert_envp(d, d->envp)) == -1)
 	{
 		write(2, c->args_vec[0],
 			ft_strlen(c->args_vec[0]));

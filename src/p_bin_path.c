@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/26 08:55:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 11:58:34 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,18 @@ int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 	return (0);
 }
 
+int	echo_arg_nb(char **args)
+{
+	int	i;
+
+	i = 0;
+	printf("ici\n");
+	while (args[++i])
+		;
+	printf("args nb = %d\n", i - 1);
+	return (i - 1);
+}
+
 // Cette fonction recupere la commande en raw et la split
 // dans la structure command pour la var arg_vec
 int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
@@ -116,6 +128,9 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 		data->commands[idx].args_vec = NULL;
 	if (remove_quotes_arg_vec(data, data->commands[idx].args_vec))
 		return (1);
+	printf("arg 142412= %s\n", data->commands[idx].args_vec[0]);
+	if (!strncmp_ncs(data->commands[idx].args_vec[0], "echo"))
+		data->commands[idx].echo_arg_nb = echo_arg_nb(data->commands[idx].args_vec);
 	while (data->commands[idx].args_vec[++i])
 		data->commands[idx].args_vec[i] = get_echo_env_var
 			(data, data->commands[idx].args_vec[i]);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/27 09:21:06 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 11:50:40 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ struct s_commands
 	char	**args_vec;
 	char	**envp;
 	char	*cmd_path;
+	int		echo_arg_nb;
 	/* fd file && pipe*/
 	int		fd_in;
 	int		fd_out;
@@ -107,7 +108,6 @@ struct s_commands
 	int		pid_heredoc;
 	/* stop */
 	int		stop;
-	
 };
 
 struct s_hd_data
@@ -213,6 +213,7 @@ int		check_solo_var(char *buffer);
 int		set_id_after_env(char *buffer, int i);
 char	*get_pipe_content(int fd, t_data_p *data);
 int		hd_loop(t_data_p *data, int idx, int del_len);
+char	**convert_envp(t_data_p *data, t_envp *envp);
 
 	// Utils
 int 	state_checker(char *str, int start, int len);
@@ -223,6 +224,7 @@ int 	get_file(char *arg, int *start, int *type);
 int 	idx_after_hd(char *arg, int *start);
 void 	fill_envp_cmd(t_data_p *data);
 int		find_char(char *arg, char c);
+int		strncmp_ncs(char *s1, char *s2);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);

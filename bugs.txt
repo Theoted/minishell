@@ -104,3 +104,20 @@ checker si export quelque chose qui n'es pas une lettre fonctionne
 
 
 GERER SHLVL
+    1. mettre la liste t_envp sous forme de double tableau qu'il faudra passer en param
+    a execve
+    2. juste creer une fonction (qui normalement existe deja) qui incremente la variable
+    SHLVL
+
+
+LEAK DANS LE SHLVL
+
+check pipe leak
+    ps
+    lsof -p process
+    leaks reparé en ajoutant une condition dans e_exec ligne 20 (a voir si c'est ok)
+
+
+< /dev/urandom ./minishell = casse le minishell
+
+<< ok << ok << ok   ctrl+c  -> doit quitter les 3 d'un coup 

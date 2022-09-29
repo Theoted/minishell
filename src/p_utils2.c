@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:30 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/26 08:55:17 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 13:29:36 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,46 @@ int	find_char(char *arg, char c)
 			return (1);
 	}
 	return (0);
+}
+
+int	env_lstsize(t_envp *lst)
+{
+	int	count;
+
+	count = 0;
+	if (lst)
+	{
+		while (lst)
+		{
+			count++;
+			lst = lst->next;
+		}
+	}
+	return (count);
+}
+
+// Fonction qui convertis le tabl envp en double tableau
+char	**convert_envp(t_data_p *data, t_envp *envp)
+{
+	t_envp	*tmp;
+	char	**envp2;
+	char	*tmp1;
+	int		i;
+
+	tmp = envp;
+	tmp1 = NULL;
+	envp2 = gc_calloc(env_lstsize(envp) + 1, sizeof(char *), &data->track);
+	i = 0;
+	if (!envp)
+		return (envp2);
+	while (envp)
+	{
+		tmp1 = gc_strjoin(&data->track,
+			gc_strjoin(&data->track, envp->name, "="), envp->content);
+		envp2[i] = gc_strdup(&data->track, tmp1);
+		i++;
+		envp = envp->next;
+	}
+	envp2[i] = NULL;
+	return (envp2);
 }

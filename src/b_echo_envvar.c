@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:27:36 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/15 10:44:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 11:29:29 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*get_echo_env_var(t_data_p *data, char *arg)
 	t_echo_env	e_d;
 
 	i = -1;
-	e_d.new = NULL;
+	e_d.new = "";
 	while (arg[++i])
 	{
 		if (arg[i] != '$')

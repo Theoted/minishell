@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/21 15:15:35 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/28 13:42:11 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ t_envp	*env_lstnew(t_data_p *data, char *name, char *content)
 // s'initialise avec les variables d'env du shell de base
 void	update_shlvl(t_data_p *data, t_envp *node)
 {
-	int	shlvl;
+	int		shlvl;
+	char	*tmp;
 
+	tmp = node->content;
 	shlvl = ft_atoi(node->content);
 	shlvl++;
-	node->content = gc_strdup(&data->track, ft_itoa(shlvl));
+	tmp = ft_itoa(shlvl);
+	node->content = gc_strdup(&data->track, tmp);
+	free(tmp);
 }
 
 void	env_lstadd_back(t_data_p *data, t_envp **alst, t_envp *new)
@@ -51,8 +55,8 @@ void	env_lstadd_back(t_data_p *data, t_envp **alst, t_envp *new)
 
 	if (!new || !alst)
 		return ;
-	// if (!strncmp_len(new->name, "SHLVL"))
-	// 	update_shlvl(data, new);
+	if (!strncmp_len(new->name, "SHLVL"))
+		update_shlvl(data, new);
 	if (!*alst)
 	{
 		*alst = new;
