@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   b_export2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:58:01 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/14 14:53:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 14:44:10 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	print_export(t_envp *envp)
+void	print_export(t_data_p *data, t_envp *envp, int idx)
 {
 	t_envp	*tmp;
+	int		i;
 
 	tmp = envp;
+	i = 0;
 	while (tmp)
 	{
 		printf("declare -x %s", tmp->name);
@@ -25,6 +27,8 @@ void	print_export(t_envp *envp)
 		printf("\n");
 		tmp = tmp->next;
 	}
+	if (data->commands[idx].fd_out != 1)
+		exit(0);
 }
 
 void	env_lst_addfront(t_envp **alst, t_envp *new)

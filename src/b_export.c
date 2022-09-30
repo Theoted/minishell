@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/28 08:47:52 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 14:16:17 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	b_export(t_data_p *data, int idx)
 
 	i = 1;
 	if (!arg_vec_len(data, idx))
-		print_export(data->envp);
+		print_export(data, data->envp, idx);
 	while (data->commands[idx].args_vec[i])
 	{
 		init_export_vars(&content, &name, &in_list);

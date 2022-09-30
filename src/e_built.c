@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/09/27 14:03:06 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 12:23:50 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,12 @@ static int	ft_strcmp(char *arg, char *built)
 	return (1);
 }
 
-int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
+int	ft_exec_built_nofork2(t_data_p *d, t_commands *c, int idx)
 {
 	char	s[1000];
 
 	if (!c->args_vec)
 		return (0);
-	if (ft_strcmp(c->args_vec[0], "cd"))
-	{
-		if (d->pipes_nb > 0)
-			return (1);
-		return (b_cd(d, idx));
-	}
-	if (ft_strcmp(c->args_vec[0], "export"))
-	{
-		if (d->pipes_nb > 0)
-			return (1);
-		return (b_export(d, idx));
-	}
 	if (ft_strcmp(c->args_vec[0], "unset"))
 	{
 		if (d->pipes_nb > 0)
@@ -57,6 +45,28 @@ int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 			return (1);
 		return (b_exit(d, idx));
 	}
+	return (0);
+}
+
+int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
+{
+	char	s[1000];
+
+	if (!c->args_vec)
+		return (0);
+	if (ft_strcmp(c->args_vec[0], "cd"))
+	{
+		if (d->pipes_nb > 0)
+			return (1);
+		return (b_cd(d, idx));
+	}
+	if (ft_strcmp(c->args_vec[0], "export") && !c->fd_out)
+	{
+		if (d->pipes_nb > 0)
+			return (1);
+		return (b_export(d, idx));
+	}
+	ft_exec_built_nofork2(d, &c[idx], idx);
 	return (0);
 }
 
@@ -73,4 +83,6 @@ void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx)
 	}
 	if (ft_strcmp(c->args_vec[0], "echo"))
 		b_echo(d, idx);
+	if (ft_strcmp(c->args_vec[0], "export") && c->fd_out)
+		b_export(d, idx);
 }

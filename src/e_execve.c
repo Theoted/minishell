@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   e_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/09/29 09:35:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 14:47:31 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+static int	ft_strcmp(char *arg, char *built)
+{
+	int	i;
+
+	i = -1;
+	if (ft_strlen(arg) != ft_strlen(built))
+		return (0);
+	while (arg[++i])
+	{
+		if (arg[i] != built[i])
+			return (0);
+	}
+	return (1);
+}
 
 void	dup_fd_in_pipe(t_commands *c, int i)
 {
@@ -49,15 +64,31 @@ void	check_path(t_data_p *d, t_commands *c)
 	}
 }
 
+int check_built(char *built, int fd_out)
+{
+	if (ft_strcmp(built, "env"))
+		return (1);
+	if (ft_strcmp(built, "pwd"))
+		return (1);
+	if (ft_strcmp(built, "echo"))
+		return (1);
+	if (ft_strcmp(built, "export") && fd_out)
+		return (1);
+	return (0);
+}
 void	e_execve(t_data_p *d, t_commands *c, int idx)
 {
-	ft_exec_built_fork(d, c, idx);
-	if (execve(c->cmd_path, c->args_vec, convert_envp(d, d->envp)) == -1)
+	if (check_built(c->args_vec[0], c->fd_out))
+		ft_exec_built_fork(d, c, idx);
+	else
 	{
-		write(2, c->args_vec[0],
-			ft_strlen(c->args_vec[0]));
-		write(2, ": command not found\n", 21);
-		exit(0);
+		if (execve(c->cmd_path, c->args_vec, convert_envp(d, d->envp)) == -1)
+		{
+			write(2, c->args_vec[0],
+				ft_strlen(c->args_vec[0]));
+			write(2, ": command not found\n", 21);
+			exit(0);
+		}
 	}
 }
 
@@ -75,7 +106,11 @@ void	e_heredoc(t_commands *c)
 /* execution de la commande dans le child */
 int	e_child(t_data_p *d, t_commands *c, int idx)
 {
-	open_files (c);
+	if (c->fd_out != 1)
+	{
+		dup2(c->fd_out, STDOUT_FILENO);
+		close(c->fd_out);
+	}
 	if (c->last_in_type == HEREDOC_TYPE)
 		e_heredoc(c);
 	if (c->last_in_type != HEREDOC_TYPE)

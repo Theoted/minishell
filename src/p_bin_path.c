@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 11:58:34 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 14:49:16 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,8 @@ int	echo_arg_nb(char **args)
 	int	i;
 
 	i = 0;
-	printf("ici\n");
 	while (args[++i])
 		;
-	printf("args nb = %d\n", i - 1);
 	return (i - 1);
 }
 
@@ -128,7 +126,6 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 		data->commands[idx].args_vec = NULL;
 	if (remove_quotes_arg_vec(data, data->commands[idx].args_vec))
 		return (1);
-	printf("arg 142412= %s\n", data->commands[idx].args_vec[0]);
 	if (!strncmp_ncs(data->commands[idx].args_vec[0], "echo"))
 		data->commands[idx].echo_arg_nb = echo_arg_nb(data->commands[idx].args_vec);
 	while (data->commands[idx].args_vec[++i])

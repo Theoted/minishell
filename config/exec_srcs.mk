@@ -6,8 +6,11 @@
 #    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 14:46:46 by tdeville          #+#    #+#              #
-#    Updated: 2022/03/28 18:08:40 by rmattheo         ###   ########lyon.fr    #
+#    Updated: 2022/09/29 13:17:19 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS +=
+SRCS +=		src/e_exec.c	\
+			src/e_execve.c	\
+			src/e_built.c	\
+			src/e_open_file.c
