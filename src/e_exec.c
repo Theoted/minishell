@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/09/29 09:39:00 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 11:40:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,13 @@ void	e_exec(t_data_p *d, t_commands *c)
 		if (!ft_exec_built_nofork(d, &c[i], i))
 		{
 			c[i].pid = fork();
-			if (!c[i].pid)
+			if (c[i].pid == -1)
+			{
+				write(2, "fork: Resource temporarily unavailable\n", 40);
+				g_status = 1;
+				return ;
+			}
+			else if (!c[i].pid)
 			{
 				sig_child();
 				signal(SIGINT, sig_handler_child);
@@ -113,8 +119,10 @@ void	e_exec(t_data_p *d, t_commands *c)
 			else
 				dup_fd_in_pipe(c, i);
 		}
-		waitpid(c[i].pid, &status, 0);
-		if (!WIFSIGNALED(status))
-			g_status = WEXITSTATUS(status);
 	}
+	i = -1;
+	while (++i < d->pipes_nb + 1)
+		waitpid(c[i].pid, &status, 0);
+	if (!WIFSIGNALED(status))
+		g_status = WEXITSTATUS(status);
 }

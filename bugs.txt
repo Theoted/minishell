@@ -18,12 +18,6 @@ check si a chaque utilisation du CD je set OLDPWD                   DONE
 Bien checker le retour de chdir pour gerer les cas d'erreur         -1 non geré mais pas besoin pour le moment
 
 
-exit gdeuwguy =
-    exit
-    exit: gdeuwguy: numeric argument required (pareil avec plus de int ou long max et renvoie un exit status de 255)
-    le exit fonctionne quand meme
-exit fait modulo 256 de l'int qui esst donné et le stocke dans la variable $?
-
 
 CHECK LEAKS
     autre term
@@ -118,6 +112,45 @@ check pipe leak
     leaks reparé en ajoutant une condition dans e_exec ligne 20 (a voir si c'est ok)
 
 
+29/09 A FAIRE
+
 < /dev/urandom ./minishell = casse le minishell
 
 << ok << ok << ok   ctrl+c  -> doit quitter les 3 d'un coup 
+
+voir les endroits ou il y a itoa car possibilité de leak
+
+sleep 2 | aaaa -> commandes doivent se lancer en meme temps (a checker ligne 118 e_exec.c)
+echo $? suite a un commande not found marche aps
+
+voir les msg d'erreur car peut faire varier les exit status
+voir dans execve si cmd not found, access dinied... et faire un exit different
+
+exit gdeuwguy =
+    exit
+    exit: gdeuwguy: numeric argument required (pareil avec plus de int ou long max et renvoie un exit status de 255)
+    le exit fonctionne quand meme
+exit fait modulo 256 de l'int qui esst donné et le stocke dans la variable $?
+
+trop de fork pas d'erreur => ls | ls | ls ....
+
+Renommer les dossier (sans espaces !!!)
+
+export ECH=ech                              DONE
+$ECH"o" salut => ne marche pas              DONE
+
+export AA=12                                DONE
+export BB=$AA => devrait etre egal a 12     DONE    
+    voir get_cmd_in_arg dans p_bin_path pour gerer ca   DONE
+
+echo $USER$^USER = marche plus
+
+Pour tester les leaks 
+    while (TRUE) do leaks minishell ; sleep 1;clear; done;
+
+voir modifications p_bin_path lignes 94 a 98
+
+voir pour minishell dans minishell sigaux se font plusieurs fois. set une variable dans une structure ?
+
+
+voir HD mettre readline et voir pour 65k+ char

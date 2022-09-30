@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 11:36:06 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:13:59 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	b_echo(t_data_p *data, int idx)
 
 	init_ed(&e_d, data, idx);
 	i = 0;
-	while (data->commands[idx].args_vec[++i])
+	while (++i < data->commands[idx].echo_arg_nb + 1)
 	{
 		if (check_n(data->commands[idx].args_vec[i]) && e_d.check == 0)
 		{
@@ -114,10 +114,10 @@ void	b_echo(t_data_p *data, int idx)
 		e_d.check = 1;
 		data->commands[idx].args_vec[i] = check_exit_status
 			(data, data->commands[idx].args_vec[i], -1);
-		data->commands[idx].args_vec[i] = get_echo_env_var
-			(data, data->commands[idx].args_vec[i]);
 		printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
-		if (e_d.av_len > 1 && i < e_d.av_len)
+		if (data->commands[idx].echo_arg_nb > 1
+			&& i < data->commands[idx].echo_arg_nb
+			&& data->commands[idx].args_vec[i])
 			printf(" ");
 	}
 	if (e_d.bn)

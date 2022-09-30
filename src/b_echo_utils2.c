@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/21 09:57:35 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 14:17:20 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*check_exit_status(t_data_p *data, char *arg, int i)
 			i++;
 		}
 		else
-			tmp = gc_substr(&data->track, arg, j, (i - j));
+			tmp = gc_substr(&data->track, arg, j, (i + 1 - j));
 		if (!tmp1)
 			tmp1 = gc_strdup(&data->track, tmp);
 		else

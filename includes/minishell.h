@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 11:50:40 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 10:12:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ int 	idx_after_hd(char *arg, int *start);
 void 	fill_envp_cmd(t_data_p *data);
 int		find_char(char *arg, char c);
 int		strncmp_ncs(char *s1, char *s2);
+char	*find_node_content(char *name, t_envp *envp);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/09/29 09:35:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/29 15:13:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	e_execve(t_data_p *d, t_commands *c, int idx)
 		write(2, c->args_vec[0],
 			ft_strlen(c->args_vec[0]));
 		write(2, ": command not found\n", 21);
-		exit(0);
+		exit(127);
 	}
 }
 
