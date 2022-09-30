@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    pars_srcs.mk                                       :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 14:45:32 by tdeville          #+#    #+#              #
-#    Updated: 2022/09/29 11:48:19 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/09/29 13:10:23 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,4 +35,5 @@ SRCS +=	src/p_bin_path.c \
 		src/b_echo_envvar.c \
 		src/b_utils.c \
 		src/e_signals.c \
+		src/e_signals2.c \
 		src/e_hd_signals.c

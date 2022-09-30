@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/30 10:12:05 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 14:54:37 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ void	sig_parent(void);
 void	sig_handler_parent(int sig);
 void	sig_handler_parent_hd(int sig);
 void	sig_handler_child(int sig);
+static int	ft_strcmp(char *arg, char *built);
 
 //		Replace line
 void	rl_replace_line (const char *text, int clear_undo);
@@ -244,7 +245,7 @@ int		b_unset(t_data_p *data, int cmd_id);
 		// EXPORT
 int		b_export(t_data_p *data, int idx);
 		// EXPORT 2
-void	print_export(t_envp *envp);
+void	print_export(t_data_p *data, t_envp *envp, int idx);
 void	env_lst_addfront(t_envp **alst, t_envp *new);
 void	env_lst_change_content(t_envp *node, char *content);
 t_envp	*check_if_exist(t_envp *alst, char *name);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/09/27 09:54:54 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/09/29 13:17:08 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,7 @@ EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
 
 # -I./readline/include -L./readline/lib -lncurses
 
-SRCS	+=	main.c			\
-			src/e_exec.c	\
-			src/e_execve.c	\
-			src/e_built.c
+SRCS	+=	main.c
 
 OBJS	= ${SRCS:.c=.o}
 
