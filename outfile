@@ -1,35 +1,0 @@
-declare -x TMPDIR="/var/folders/zz/zyxvpxvq6csfxvn_n000b7hh002sw4/T/"
-declare -x SHELL="/bin/zsh"
-declare -x HOME="/Users/rmattheo"
-declare -x SSH_AUTH_SOCK="/private/tmp/com.apple.launchd.1oEFhXspir/Listeners"
-declare -x Apple_PubSub_Socket_Render="/private/tmp/com.apple.launchd.EeeIkaGU4F/Render"
-declare -x LOGNAME="rmattheo"
-declare -x DISPLAY="/private/tmp/com.apple.launchd.YfkUeQxNgi/org.xquartz:0"
-declare -x PATH="/Users/rmattheo/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin:/Users/rmattheo/.brew/bin"
-declare -x XPC_SERVICE_NAME="0"
-declare -x COMMAND_MODE="unix2003"
-declare -x USER="rmattheo"
-declare -x SECURITYSESSIONID="186a8"
-declare -x XPC_FLAGS="0x0"
-declare -x __CF_USER_TEXT_ENCODING="0x16784:0x0:0x0"
-declare -x ORIGINAL_XDG_CURRENT_DESKTOP="undefined"
-declare -x SHLVL="2"
-declare -x PWD="/Users/rmattheo/Documents/minishoul"
-declare -x OLDPWD="/Users/rmattheo/Documents/minishoul"
-declare -x ZSH="/Users/rmattheo/.oh-my-zsh"
-declare -x PAGER="less"
-declare -x LESS="-R"
-declare -x LSCOLORS="Gxfxcxdxbxegedabagacad"
-declare -x TERM_PROGRAM="vscode"
-declare -x TERM_PROGRAM_VERSION="1.67.0"
-declare -x LANG="en_US.UTF-8"
-declare -x COLORTERM="truecolor"
-declare -x VSCODE_GIT_IPC_HANDLE="/var/folders/zz/zyxvpxvq6csfxvn_n000b7hh002sw4/T/vscode-git-6b0b95d2c3.sock"
-declare -x VSCODE_GIT_ASKPASS_NODE="/Applications/Visual Studio Code.app/Contents/MacOS/Electron"
-declare -x VSCODE_GIT_ASKPASS_EXTRA_ARGS="--ms-enable-electron-run-as-node"
-declare -x VSCODE_GIT_ASKPASS_MAIN="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js"
-declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
-declare -x TERM="xterm-256color"
-declare -x _="/Users/rmattheo/Documents/minishoul/./minishell"
-[?2004h[0;34mShellDePetiteTaille-0.0.42: [0m[?2004l[0;34mShellDePetiteTaille-0.0.42: [0m[?2004h[?2004l[0;34mShellDePetiteTaille-0.0.42: [0m[?2004h[?2004l[0;34mShellDePetiteTaille-0.0.42: [0m[?2004h[?2004l[0;34mShellDePetiteTaille-0.0.42: [0m[?2004h[?2004l[0;34mShellDePetiteTaille-0.0.42: [0m[?2004h[?2004l[0;34mShellDePetiteTaille-0.0.42: [0m[?2004hcdprintf(2, "%s\n",c[i].outfile);[K[K[KexD[K[0;34mShellDePetiteTaille-0.0.42: [0mcdprintf(2, "%s\n",c[i].outfilexD[K[0;34mShellDePetiteTaille-0.0.42: [0mcdprintf(2, "%s\n",c[i].outfilexD
-[?2004l
