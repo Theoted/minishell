@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/09/30 15:09:21 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/09/30 15:30:06 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	open_infile(t_commands *c, char *infile)
 /* Ouverture de l'outfile */
 int	open_outfile(t_commands *c, char *outfile)
 {
-	c->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0660);
+	c->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (c->fd_out == -1)
 	{
 		perror(outfile);
@@ -47,7 +47,7 @@ int	open_outfile(t_commands *c, char *outfile)
 /* Ouverture de l'outfile_hb */
 int	open_outfile_hb(t_commands *c, char *outfile_hb)
 {
-	c->fd_out = open(outfile_hb, O_WRONLY | O_CREAT | O_APPEND, 0660);
+	c->fd_out = open(outfile_hb, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (c->fd_out == -1)
 	{
 		perror(outfile_hb);
