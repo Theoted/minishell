@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/09/30 15:26:46 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 16:49:03 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 			else
 				dup_fd_in_pipe(c, i);
 		}
-		if (c->fd_out != 1)
+		if (c->fd_out != 1 && c->fd_out != 0)
 				close(c->fd_out);
 	}
 	i = -1;

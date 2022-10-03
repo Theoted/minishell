@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/09/30 15:30:02 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 16:43:49 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	e_execve(t_data_p *d, t_commands *c, int idx)
 		ft_exec_built_fork(d, c, idx);
 	else
 	{
-		if (execve(c->cmd_path, c->args_vec, convert_envp(d, d->envp)) == -1)
+		if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
 		{
 			write(2, c->args_vec[0],
 				ft_strlen(c->args_vec[0]));
