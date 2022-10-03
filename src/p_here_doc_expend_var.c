@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_expend_var.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:37:39 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/12 14:49:05 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 17:13:16 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,15 @@ char	*expend_var_in_buffer(char *buffer,
 	t_hd_data	hdd;
 
 	init_hdd_struct(&hdd, expended_vars);
+	if (!buffer)
+		return (NULL);
 	while (buffer[++hdd.i])
 	{
 		hdd.j = hdd.i;
-		while (buffer[hdd.i] != '$' && buffer[hdd.i + 1])
+		while (buffer[hdd.i] != '$' && buffer[hdd.i])
 			hdd.i++;
 		expend_env(expended_vars[hdd.k], buffer, data, &hdd);
 		fill_new_buffer(data, &hdd);
 	}
-	hdd.new_buffer = gc_strjoin(&data->track, hdd.new_buffer, "\n");
 	return (hdd.new_buffer);
 }
