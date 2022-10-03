@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 08:33:28 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/27 13:59:40 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 16:56:30 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,9 @@ int	hd_loop(t_data_p *data, int idx, int del_len)
 	char	*buffer;
 	int		longest;
 
-	write(STDOUT_FILENO, "> ", 2);
-	buffer = gc_get_next_line(&data->track, STDIN_FILENO);
-	longest = del_len;
-	if (ft_strlen(buffer) > (size_t)del_len)
-		longest = (ft_strlen(buffer) - 1);
-	if (!ft_strncmp(buffer,
-			data->hd_data.here_doc_del, longest))
+	buffer = readline("> ");
+	if (!strncmp_len(buffer,
+			data->hd_data.here_doc_del))
 		return (1);
 	here_doc_write(data, buffer, idx);
 	gc_free_malloc(&data->track, (void **)&buffer);

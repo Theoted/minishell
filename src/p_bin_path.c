@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/30 15:00:03 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 16:57:57 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,10 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else
 		data->commands[idx].args_vec = NULL;
-	while (data->commands[idx].args_vec[++i])
-		data->commands[idx].args_vec[i] = get_echo_env_var
-			(data, data->commands[idx].args_vec[i]);
+	if (data->commands[idx].args_vec)
+		while (data->commands[idx].args_vec[++i])
+			data->commands[idx].args_vec[i] = get_echo_env_var
+				(data, data->commands[idx].args_vec[i]);
 	if (remove_quotes_arg_vec(data, data->commands[idx].args_vec))
 		return (1);
 	if (!strncmp_ncs(data->commands[idx].args_vec[0], "echo"))

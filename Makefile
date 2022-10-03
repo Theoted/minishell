@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
+#    By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/03 16:49:51 by pat              ###   ########lyon.fr    #
+#    Updated: 2022/10/03 16:57:15 by theodeville      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME	= minishell
 HEADER	= includes/minishell.h libft2/include/libft2.h libft2/include/gc.h
 LIBFT	= libft2
 
-EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
+EXECINCLUDES =	-lreadline
 
 # -I./readline/include -L./readline/lib -lncurses
 
@@ -36,7 +36,7 @@ all: maker ${NAME}
 # -fsanitize=address -g3
 
 ${NAME}: ${OBJS} libft2/libft2.a
-		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a 
+		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a -fsanitize=address -g3
 
 maker:
 		${MAKE} -C ${LIBFT}

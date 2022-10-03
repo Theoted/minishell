@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/03 16:43:49 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/03 16:59:17 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	check_path(t_data_p *d, t_commands *c)
 	int	i;
 
 	i = -1;
+	if (!c->args_vec)
+		return ;
 	if (access(c->args_vec[0], X_OK)
 		&& c->args_vec[0])
 		c->cmd_path = gc_strdup(&d->track, c->args_vec[0]);
@@ -78,6 +80,8 @@ int check_built(char *built, int fd_out)
 }
 void	e_execve(t_data_p *d, t_commands *c, int idx)
 {
+	if (!c->args_vec)
+		return ;
 	if (check_built(c->args_vec[0], c->fd_out))
 		ft_exec_built_fork(d, c, idx);
 	else
