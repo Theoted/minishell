@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 06:03:26 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 14:42:37 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ void	dup_fd_in_pipe(t_commands *c, int i)
 	close(c[i].pfd[1]);
 	if (c[i].fd_in)
 	{
-		dprintf(2, "close fd_in -> parent\n");
+		// dprintf(2, "close fd_in -> parent\n");
 		close(c[i].fd_in);
 	}
 	if (!c[i + 1].stop)
 	{
-		dprintf(2, "dupe fd_in + 1 avec le pfd[0] -> parent\n");
+		// dprintf(2, "dupe fd_in + 1 avec le pfd[0] -> parent\n");
 		c[i + 1].fd_in = dup(c->pfd[0]);
 	}
 	close(c[i].pfd[0]);
@@ -90,19 +90,13 @@ int check_built(char *built, int fd_out)
 void	e_execve(t_data_p *d, t_commands *c, int idx)
 {
 	if (!c->args_vec)
-	{
-		dprintf(2, "exit si y a pas de cmd -> enfant\n");
 		exit(0);
-	}
 	if (check_built(c->args_vec[0], c->fd_out))
-	{
 		ft_exec_built_fork(d, c, idx);
-	}
 	else
 	{
 		if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
 		{
-			// dprintf(2, "si execve ne fonctionne pas-> enfant\n");
 			write(2, c->args_vec[0],
 				ft_strlen(c->args_vec[0]));
 			write(2, ": command not found\n", 21);
@@ -128,32 +122,18 @@ int	e_child(t_data_p *d, t_commands *c, int idx)
 	
 	if (c->fd_out != 1 && c->fd_out != 0)
 	{
-		dprintf(2, "dup le fd_out\n");
 		dup2(c->fd_out, STDOUT_FILENO);
 		close(c->fd_out);
 	}
 	if (c->last_in_type == HEREDOC_TYPE)
-	{
-		// dprintf(2, "heredoc enfant\n");
 		e_heredoc(c);
-	}
 	if (c->last_in_type != HEREDOC_TYPE)
-	{
-		dprintf(2, "dup le fd_in -> enfant\n");
 		dup2(c->fd_in, STDIN_FILENO);
-	}
 	if (c->fd_in)
-	{
-		dprintf(2, "close fd_in -> enfant\n");
 		close(c->fd_in);
-	}
 	close(c->pfd[0]);
 	if (c->fd_out == 0)
-	{
-		dprintf(2, "dup entre fd_out et l'entrée du pipe pfd[1] -> enfant\n");
 		dup2(c->pfd[1], STDOUT_FILENO);
-	}
-	// dprintf(2, "close l'entrée du pipe pfd[1] -> enfant\n");
 	close(c->pfd[1]);
 	check_path(d, c);
 	e_execve(d, c, idx);

@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 05:45:42 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 14:56:40 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	e_exec(t_data_p *d, t_commands *c)
 			if (!ft_exec_built_nofork(d, &c[i], i))
 			{
 				c[i].pid = fork();
-				dprintf(2, "fork %i\n", i);
 				if (c[i].pid == -1)
 				{
 					write(2, "fork: Resource temporarily unavailable\n", 40);
@@ -52,22 +51,16 @@ void	e_exec(t_data_p *d, t_commands *c)
 					sig_child();
 					signal(SIGINT, sig_handler_child);
 					if (e_child(d, &c[i], i) == -1)
-						exit(0) ;
+						return ;
 				}
 				else
-				{
-					
 					dup_fd_in_pipe(c, i);
-				}
 			}
 			if (c->fd_out != 1 && c->fd_out != 0)
-			{
-				dprintf(2, "close_fd_out \n");
 					close(c->fd_out);
-			}
 		}
 	}
 	i = -1;
 	while (c[++i].stop == 0)
-		ft_waitpid(&c[i], i);
+		ft_waitpid(c, i);
 }
