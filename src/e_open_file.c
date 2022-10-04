@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 05:45:31 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 14:28:34 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int	open_infile(t_commands *c, char *infile)
 		write(2, " : is a directory\n", 19);
 		return (0);
 	}
-	dprintf(2, "c->fd_in = %i\n", c->fd_in);
+	// dprintf(2, "c->fd_in = %i\n", c->fd_in);
 	close(c->fd_in);
 	c->fd_in = open(infile, O_RDONLY);
-	dprintf(2, "c->fd_in = %i\n", c->fd_in);
+	// dprintf(2, "c->fd_in = %i\n", c->fd_in);
 	if (c->fd_in == -1)
 	{
 		perror(infile);
@@ -69,30 +69,18 @@ int	open_files(t_commands *c)
 	{
 		if (c->files[i].type == INFILE)
 		{
-			// dprintf(2, "open infile-> parent\n");
 			if (open_infile(c, c->files[i].file) == 0)
-			{
-				// dprintf(2, "err open infile-> parent\n");
 				return (0);
-			}
 		}
 		else if (c->files[i].type == OUTFILE)
 		{
-			// dprintf(2, "open outfile -> parent\n");
 			if (open_outfile(c, c->files[i].file) == 0)
-			{
-				// dprintf(2, "err open outfile-> parent\n");
 				return (0);
-			}
 		}
 		else if (c->files[i].type == OUTFILE_HB)
 		{
-			// dprintf(2, "open outfile_hb -> parent\n");
 			if (open_outfile_hb(c, c->files[i].file) == 0)
-			{
-				// dprintf(2, "err open outfile_hb-> parent\n");
 				return (0);
-			}
 		}
 	}
 	return (1);
