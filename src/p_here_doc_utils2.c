@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 08:33:28 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/03 16:56:30 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/03 17:15:55 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	hd_loop(t_data_p *data, int idx, int del_len)
 	int		longest;
 
 	buffer = readline("> ");
+	buffer = gc_strjoin(&data->track, buffer, "\n");
 	if (!strncmp_len(buffer,
-			data->hd_data.here_doc_del))
+			gc_strjoin(&data->track, data->hd_data.here_doc_del, "\n")))
 		return (1);
 	here_doc_write(data, buffer, idx);
 	gc_free_malloc(&data->track, (void **)&buffer);
