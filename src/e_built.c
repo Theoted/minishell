@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/09/30 15:09:49 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 03:43:52 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_exec_built_nofork2(t_data_p *d, t_commands *c, int idx)
 int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 {
 	char	s[1000];
-
+	// dprintf(2, "check builtins no fork-> parent\n");
 	if (!c->args_vec)
 		return (0);
 	if (strcmp_ncs(c->args_vec[0], "cd"))
@@ -67,6 +67,7 @@ int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 		return (b_export(d, idx));
 	}
 	ft_exec_built_nofork2(d, &c[idx], idx);
+	// dprintf(2, "Pas de builtins à no fork-> parent\n");
 	return (0);
 }
 

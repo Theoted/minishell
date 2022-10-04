@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/03 16:49:03 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 05:45:42 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,37 @@ void	e_exec(t_data_p *d, t_commands *c)
 		if (c[i + 1].stop)
 			c[i].fd_out = 1;
 		pipe(c[i].pfd);
-		open_files(&c[i]);
-		if (!ft_exec_built_nofork(d, &c[i], i))
+		if (open_files(&c[i]))
 		{
-			c[i].pid = fork();
-			if (c[i].pid == -1)
+			if (!ft_exec_built_nofork(d, &c[i], i))
 			{
-				write(2, "fork: Resource temporarily unavailable\n", 40);
-				g_status = 1;
-				return ;
-			}
-			else if (!c[i].pid)
-			{
-				sig_child();
-				signal(SIGINT, sig_handler_child);
-				if (e_child(d, &c[i], i) == -1)
+				c[i].pid = fork();
+				dprintf(2, "fork %i\n", i);
+				if (c[i].pid == -1)
+				{
+					write(2, "fork: Resource temporarily unavailable\n", 40);
+					g_status = 1;
 					return ;
+				}
+				else if (!c[i].pid)
+				{
+					sig_child();
+					signal(SIGINT, sig_handler_child);
+					if (e_child(d, &c[i], i) == -1)
+						exit(0) ;
+				}
+				else
+				{
+					
+					dup_fd_in_pipe(c, i);
+				}
 			}
-			else
-				dup_fd_in_pipe(c, i);
+			if (c->fd_out != 1 && c->fd_out != 0)
+			{
+				dprintf(2, "close_fd_out \n");
+					close(c->fd_out);
+			}
 		}
-		if (c->fd_out != 1 && c->fd_out != 0)
-				close(c->fd_out);
 	}
 	i = -1;
 	while (c[++i].stop == 0)
