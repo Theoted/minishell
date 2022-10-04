@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 15:04:52 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 15:14:37 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,11 @@ void	check_path(t_data_p *d, t_commands *c)
 	i = -1;
 	if (!c->args_vec)
 		return ;
+	if (!ft_strncmp(c->args_vec[0], "./", 2))
+	{
+		c->cmd_path = gc_strdup(&d->track, c->args_vec[0]);
+		return ;
+	}
 	d->cmd_slash = gc_strjoin(&d->track, "/", c->args_vec[0]);
 	if (d->env_path)
 	{
@@ -68,9 +73,6 @@ void	check_path(t_data_p *d, t_commands *c)
 			gc_free_malloc(&d->track, (void **)&c->cmd_path);
 		}
 	}
-	if (access(c->args_vec[0], X_OK)
-		&& c->args_vec[0])
-		c->cmd_path = gc_strdup(&d->track, c->args_vec[0]);
 }
 
 int check_built(char *built, int fd_out)
