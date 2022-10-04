@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 16:05:34 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/03/16 17:25:53 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 09:43:47 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*gc_strjoin(t_track **track, char const *s1, char const *s2)
 
 	str = NULL;
 	i = 0;
-	j = 0;
+	j = -1;
 	str = gc_calloc(sizeof(char), ((ft_strlen(s1) + ft_strlen(s2)) + 2), track);
 	if (!str)
 		return (0);
@@ -30,11 +30,13 @@ char	*gc_strjoin(t_track **track, char const *s1, char const *s2)
 		str[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
+	if (s2)
 	{
-		str[i] = s2[j];
-		i++;
-		j++;
+		while (s2[++j])
+		{
+			str[i] = s2[j];
+			i++;
+		}
 	}
 	str[i] = '\0';
 	return (str);

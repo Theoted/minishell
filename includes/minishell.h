@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/30 14:54:37 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 14:20:10 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct s_envp t_envp;
 typedef struct s_echo t_echo;
 typedef struct s_echo_2 t_echo_2;
 typedef struct s_echo_env t_echo_env;
+typedef	struct s_export	t_export;
 
 // Structure qui permet le parsing des variables d'environnements
 struct s_echo_env
@@ -64,11 +65,19 @@ struct s_echo
 	int		idx;
 };
 
-struct s_envp
+struct s_export
 {
 	char	*name;
 	char	*content;
-	struct	s_envp *next;
+	int		equal;
+};
+
+struct s_envp
+{
+	char			*name;
+	char			*content;
+	int				equal;
+	struct	s_envp	*next;
 };
 
 // Type: 1 = < , 2 = > , 3 = >>
@@ -135,6 +144,7 @@ struct s_data_p
 	int			pipes_nb;
 	int			args_create;
 	char		*cmd_slash;
+	int			exp_equal;
 	
 	t_envp		*envp;
 	t_commands	*commands;
@@ -163,6 +173,7 @@ void	sig_handler_parent(int sig);
 void	sig_handler_parent_hd(int sig);
 void	sig_handler_child(int sig);
 static int	ft_strcmp(char *arg, char *built);
+int		execve_error(char *arg);
 
 //		Replace line
 void	rl_replace_line (const char *text, int clear_undo);
@@ -227,13 +238,18 @@ void 	fill_envp_cmd(t_data_p *data);
 int		find_char(char *arg, char c);
 int		strncmp_ncs(char *s1, char *s2);
 char	*find_node_content(char *name, t_envp *envp);
+int		double_arr_len(char **arg);
+int		echo_arg_nb(char **args);
+void	get_old_pwd_print(int x);
+void    remove_quote_init(t_echo *data, char *arg);
 
 	// Expend variables
 int		check_arg_vars(char *arg, t_data_p *data);
 
 	// Init
 void	env_lstadd_back(t_data_p *data, t_envp **alst, t_envp *new);
-t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
+t_envp	*env_lstnew(t_data_p *data, char *name, char *content, int equal);
+void	get_in_out_init(int *i, int *j, int *in_type);
 
 /* ------------------- BUILT-INS ------------------- */
 		// UNSET
@@ -249,9 +265,12 @@ void	print_export(t_data_p *data, t_envp *envp, int idx);
 void	env_lst_addfront(t_envp **alst, t_envp *new);
 void	env_lst_change_content(t_envp *node, char *content);
 t_envp	*check_if_exist(t_envp *alst, char *name);
+int		export_error_arg(char *arg);
+
 
 		// EXIT
 int		b_exit(t_data_p *d, int idx);
+int		exit_error_avlen(void);
 
 		// CD
 int		b_cd(t_data_p *data, int idx);
@@ -268,10 +287,9 @@ char	*check_exit_status(t_data_p *data, char *arg, int i);
 int		word_end_id(char *arg, int i);
 int		next_quote_id(char *arg, char quote, int i, t_echo *e_d);
 int		arg_vec_len(t_data_p *data, int idx);
-int		check_n(char *arg);
-
-		//Built-ins init
-t_envp	*env_lstnew(t_data_p *data, char *name, char *content);
+int		check_n(char *arg, int i);
+void	echo_env_var_doll2(t_data_p *data, t_echo_env *e_d, int *i, int j);
+int		check_num(char *arg, int i);
 
 		//Built-ins utils
 int		strncmp_len(char *s1, char *s2);

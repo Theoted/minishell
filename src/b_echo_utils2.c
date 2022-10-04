@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 14:17:20 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 13:17:06 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,20 @@ char	*check_exit_status(t_data_p *data, char *arg, int i)
 			tmp1 = gc_strjoin(&data->track, tmp1, tmp);
 	}
 	return (tmp1);
+}
+
+void	echo_env_var_doll2(t_data_p *data, t_echo_env *e_d, int *i, int j)
+{
+	if (!e_d->new)
+		e_d->new = gc_strdup(&data->track, e_d->tmp);
+	else
+		e_d->new = gc_strjoin(&data->track, e_d->new, e_d->tmp);
+	(*i) += j - 1;
+}
+
+int	check_num(char *arg, int i)
+{
+	if (arg[i + 1] >= 48 && arg[i + 1] <= 57 && state_checker(arg, 0, i) != 39)
+		return (1);
+	return (0);
 }

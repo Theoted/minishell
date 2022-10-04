@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 14:13:59 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 13:18:36 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ char	*remove_quotes(t_data_p *data, char *arg)
 	int		i;
 
 	i = -1;
-	echo_data.new = NULL;
-	echo_data.quote = 0;
-	echo_data.arg = arg;
+	remove_quote_init(&echo_data, arg);
 	if (!arg)
 		return ("");
 	while (arg[++i])
@@ -106,7 +104,7 @@ void	b_echo(t_data_p *data, int idx)
 	i = 0;
 	while (++i < data->commands[idx].echo_arg_nb + 1)
 	{
-		if (check_n(data->commands[idx].args_vec[i]) && e_d.check == 0)
+		if (check_n(data->commands[idx].args_vec[i], -1) && e_d.check == 0)
 		{
 			e_d.bn = 0;
 			continue ;

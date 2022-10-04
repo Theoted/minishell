@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/27 11:28:28 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 11:47:55 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,7 @@ int	get_in_out_files(char *arg, t_data_p *data, int idx)
 	int	len;
 	int	in_type;
 
-	i = -1;
-	j = -1;
-	in_type = 0;
+	get_in_out_init(&i, &j, &in_type);
 	data->commands[idx].files = gc_calloc(count_in_out_files(arg) + 1,
 			sizeof(t_files), &data->track);
 	data->commands[idx].files[count_in_out_files(arg) + 1].stop = 1;

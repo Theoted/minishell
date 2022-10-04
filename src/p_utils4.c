@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   e_signals.c                                        :+:      :+:    :+:   */
+/*   p_utils4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 08:29:06 by tdeville         ###   ########lyon.fr   */
+/*   Created: 2022/10/04 11:55:02 by tdeville          #+#    #+#             */
+/*   Updated: 2022/10/04 13:27:59 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,32 @@
 
 extern int	g_status;
 
-void	sig_handler_parent(int sig)
+void	remove_quote_init(t_echo *data, char *arg)
 {
-	if (sig == SIGINT)
-		g_status = 1;
-	sig_parent();
+	data->new = NULL;
+	data->quote = 0;
+	data->arg = arg;
 }
 
-void	sig_handler_child(int sig)
+int	double_arr_len(char **arg)
 {
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
+	int	i;
+
+	i = 0;
+	while (arg[i])
+		i++;
+	return (i);
 }
 
-void	sig_int(int sig)
+int	exit_error_avlen(void)
 {
-	if (sig == SIGINT)
-	{
-		write(2, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_status = 1;
-	}
+	write(2, "exit: too many arguments\n", 26);
+	g_status = 1;
+	return (-1);
+}
+
+int	export_error_arg(char *arg)
+{
+	printf("export: `%s': not a valid identifier\n", arg);
+	return (1);
 }

@@ -1,40 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   e_signals.c                                        :+:      :+:    :+:   */
+/*   e_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 08:29:06 by tdeville         ###   ########lyon.fr   */
+/*   Created: 2022/10/04 14:09:20 by tdeville          #+#    #+#             */
+/*   Updated: 2022/10/04 14:50:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
+extern int  g_status;
 
-void	sig_handler_parent(int sig)
+int execve_error(char *arg)
 {
-	if (sig == SIGINT)
-		g_status = 1;
-	sig_parent();
-}
-
-void	sig_handler_child(int sig)
-{
-	signal(SIGQUIT, SIG_DFL);
-	signal(SIGINT, SIG_DFL);
-}
-
-void	sig_int(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(2, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		g_status = 1;
-	}
+    write(2, arg,
+		ft_strlen(arg));
+    if (access(arg, F_OK) == -1)
+    {
+        write(2, ": command not found\n", 21);
+        exit(127);
+    }
+    if (access(arg, X_OK) == -1)
+    {
+        write(2, ": access denied\n", 17);
+        exit(126);
+    }
+    return (0);
 }

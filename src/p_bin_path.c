@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/03 16:57:57 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/04 11:34:33 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,26 +90,9 @@ int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 	while (arg_vec[++i])
 	{
 		if (strncmp_ncs(arg_vec[0], "echo"))
-		{	
-			// remove_export_content_quotes(data, arg_vec[i]);
-			// // if (arg_vec[i][0] == '\"' || arg_vec[i][0] == '\'')
-			// // 	while (find_char(arg_vec[i], '\"')
-			// // 		|| find_char(arg_vec[i], '\''))
-			// // 		arg_vec[i] = gc_strtrim(&data->track, arg_vec[i], "\"\'");
 			arg_vec[i] = remove_quotes(data, arg_vec[i]);
-		}
 	}
 	return (0);
-}
-
-int	echo_arg_nb(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[++i])
-		;
-	return (i - 1);
 }
 
 // Cette fonction recupere la commande en raw et la split
@@ -132,6 +115,7 @@ int	get_cmd_in_arg(char *arg, t_data_p *data, int idx)
 	if (remove_quotes_arg_vec(data, data->commands[idx].args_vec))
 		return (1);
 	if (!strncmp_ncs(data->commands[idx].args_vec[0], "echo"))
-		data->commands[idx].echo_arg_nb = echo_arg_nb(data->commands[idx].args_vec);
+		data->commands[idx].echo_arg_nb
+			= echo_arg_nb(data->commands[idx].args_vec);
 	return (0);
 }

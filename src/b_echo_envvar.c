@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:27:36 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 14:02:58 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 13:17:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ int	get_next_dollard_id(char *arg, int i)
 	return (i);
 }
 
-int	check_num(char *arg, int i)
-{
-	if (arg[i + 1] >= 48 && arg[i + 1] <= 57 && state_checker(arg, 0, i) != 39)
-		return (1);
-	return (0);
-}
-
 int	get_echo_env_var_doll(t_data_p *data, char *arg, t_echo_env *e_d, int *i)
 {
 	int	j;
@@ -69,11 +62,7 @@ int	get_echo_env_var_doll(t_data_p *data, char *arg, t_echo_env *e_d, int *i)
 			expend_echo_env_vars(data, &e_d->tmp);
 		}
 	}
-	if (!e_d->new)
-		e_d->new = gc_strdup(&data->track, e_d->tmp);
-	else
-		e_d->new = gc_strjoin(&data->track, e_d->new, e_d->tmp);
-	(*i) += j - 1;
+	echo_env_var_doll2(data, e_d, i, j);
 	return (0);
 }
 

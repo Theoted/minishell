@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_execve.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 06:03:26 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 15:02:21 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,6 @@ void	check_path(t_data_p *d, t_commands *c)
 	i = -1;
 	if (!c->args_vec)
 		return ;
-	if (access(c->args_vec[0], X_OK)
-		&& c->args_vec[0])
-		c->cmd_path = gc_strdup(&d->track, c->args_vec[0]);
 	d->cmd_slash = gc_strjoin(&d->track, "/", c->args_vec[0]);
 	if (d->env_path)
 	{
@@ -71,6 +68,9 @@ void	check_path(t_data_p *d, t_commands *c)
 			gc_free_malloc(&d->track, (void **)&c->cmd_path);
 		}
 	}
+	if (access(c->args_vec[0], X_OK)
+		&& c->args_vec[0])
+		c->cmd_path = gc_strdup(&d->track, c->args_vec[0]);
 }
 
 int check_built(char *built, int fd_out)
@@ -100,14 +100,8 @@ void	e_execve(t_data_p *d, t_commands *c, int idx)
 	}
 	else
 	{
-		if (execve(c->cmd_path, c->args_vec, c->envp) == -1)
-		{
-			// dprintf(2, "si execve ne fonctionne pas-> enfant\n");
-			write(2, c->args_vec[0],
-				ft_strlen(c->args_vec[0]));
-			write(2, ": command not found\n", 21);
-			exit(127);
-		}
+		if (execve(c->cmd_path, c->args_vec, convert_envp(d, d->envp)) == -1)
+			execve_error(c->args_vec[0]);
 	}
 }
 

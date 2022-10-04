@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:39:30 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/28 13:29:36 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 11:49:31 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	**convert_envp(t_data_p *data, t_envp *envp)
 	while (envp)
 	{
 		tmp1 = gc_strjoin(&data->track,
-			gc_strjoin(&data->track, envp->name, "="), envp->content);
+				gc_strjoin(&data->track, envp->name, "="), envp->content);
 		envp2[i] = gc_strdup(&data->track, tmp1);
 		i++;
 		envp = envp->next;

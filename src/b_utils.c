@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/28 08:39:52 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 09:19:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,13 @@ void	print_env_list(t_envp *env_list)
 	tmp = env_list;
 	while (tmp)
 	{
-		if (tmp->content)
-			printf("%s=%s\n", tmp->name, tmp->content);
+		if (tmp->name && tmp->equal == 1)
+		{
+			if (tmp->content)
+				printf("%s=%s\n", tmp->name, tmp->content);
+			else if (!tmp->content)
+				printf("%s=\n", tmp->name);
+		}
 		tmp = tmp->next;
 	}
 	exit(0);

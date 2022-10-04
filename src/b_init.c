@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/28 13:42:11 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 09:01:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_envp	*env_lstlast(t_envp *lst)
 	return (lst);
 }
 
-t_envp	*env_lstnew(t_data_p *data, char *name, char *content)
+t_envp	*env_lstnew(t_data_p *data, char *name, char *content, int equal)
 {
 	t_envp	*lstnew;
 
@@ -30,6 +30,7 @@ t_envp	*env_lstnew(t_data_p *data, char *name, char *content)
 		return (0);
 	lstnew->name = name;
 	lstnew->content = content;
+	lstnew->equal = equal;
 	lstnew->next = NULL;
 	return (lstnew);
 }
@@ -76,7 +77,8 @@ void	init_our_envp(t_data_p *data)
 	{
 		env_lstadd_back(data, &data->envp, env_lstnew(data,
 				gc_split(&data->track, data->env_vars[i], '=')[0],
-				gc_split(&data->track, data->env_vars[i], '=')[1]));
+				gc_split(&data->track, data->env_vars[i], '=')[1],
+				1));
 		i++;
 	}
 }

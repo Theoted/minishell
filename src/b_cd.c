@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/09/28 09:22:46 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 11:53:34 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	change_oldpwd(t_data_p *data, t_envp **envp, char *cwd)
 		node->content = gc_strdup(&data->track, cwd);
 	else
 	{
-		insert_node_after(envp, "PWD", env_lstnew(data, "OLDPWD", cwd), data);
+		insert_node_after(envp, "PWD",
+			env_lstnew(data, "OLDPWD", cwd, 1), data);
 		node = find_node(envp, "OLDPWD");
 		node->content = gc_strdup(&data->track, cwd);
 	}
@@ -94,10 +95,7 @@ char	*get_home_oldpwd(t_data_p *data, int x)
 			tmp = tmp->next;
 		}
 	}
-	if (x == 1)
-		printf("cd: HOME not set\n");
-	else if (x == 2)
-		printf("cd: OLDPWD not set\n");
+	get_old_pwd_print(x);
 	return (NULL);
 }
 
@@ -112,7 +110,7 @@ int	b_cd(t_data_p *data, int idx)
 		if (!data->commands[idx].args_vec[1]
 			|| !strncmp_len(data->commands[idx].args_vec[1], "~"))
 		{
-			if(chdir(get_home_oldpwd(data, 1)) == -1)
+			if (chdir(get_home_oldpwd(data, 1)) == -1)
 				perror("cd");
 		}
 		else if (!strncmp_len(data->commands[idx].args_vec[1], "-"))

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/13 13:13:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/04 13:18:32 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 // Retourne 1 si le premier char de l'argument a un tiret et un 'n' 
 // ou plus sinon retourne 0
-int	check_n(char *arg)
+int	check_n(char *arg, int i)
 {
-	int		i;
-
-	i = -1;
 	while (arg[++i] && arg[i] != '-')
 	{
 		if (arg[i] == '\'' || arg[i] == '\"')
