@@ -158,5 +158,9 @@ voir HD mettre readline et voir pour 65k+ char
 
 quand utilise export, rester bloquer dans un processus enfant
 unset not found mais fais quand meme unset
+exit avec trop d'argument = msg d'erreur puis fais un exit command not found
 
-eCho $? renvoie pas l'exit status 
+exit | exit = deux fois command not found
+
+cat puis ctrl + \ pas exactement le meme output
+

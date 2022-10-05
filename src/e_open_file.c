@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 14:28:34 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 09:40:29 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	open_outfile(t_commands *c, char *outfile)
 	c->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (c->fd_out == -1)
 	{
-		perror(outfile);
+		perror("outfile");
 		return(0);
 	}
 	return (1);
@@ -53,7 +53,7 @@ int	open_outfile_hb(t_commands *c, char *outfile_hb)
 	c->fd_out = open(outfile_hb, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (c->fd_out == -1)
 	{
-		perror(outfile_hb);
+		perror("outfile_hb");
 		return(0);
 	}
 	return (1);

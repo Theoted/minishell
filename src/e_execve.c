@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 15:14:37 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 09:11:06 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ void	check_path(t_data_p *d, t_commands *c)
 int check_built(char *built, int fd_out)
 {
 	// dprintf(2, "check builtins fork-> parent\n");
-	if (ft_strcmp(built, "env"))
+	if (!strncmp_ncs(built, "env"))
 		return (1);
-	if (ft_strcmp(built, "pwd"))
+	if (!strncmp_ncs(built, "pwd"))
 		return (1);
-	if (ft_strcmp(built, "echo"))
+	if (!strncmp_ncs(built, "echo"))
 		return (1);
-	if (ft_strcmp(built, "export") && fd_out)
+	if (!strncmp_ncs(built, "export") && fd_out)
 		return (1);
 	// dprintf(2, "Pas de builtins à fork-> parent\n");
 	return (0);
