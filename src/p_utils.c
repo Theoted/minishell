@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 11:47:55 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:13:49 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,11 +121,11 @@ int	get_in_out_files(char *arg, t_data_p *data, int idx)
 			len = get_file(arg, &i, &in_type);
 			if (len != -1)
 			{
-				data->commands[idx].files[++j].file
+				data->commands[idx].files[++j].file_name
 					= gc_substr(&data->track, arg, i, len);
 				data->commands[idx].files[j].type = in_type;
-				data->commands[idx].files[j].file
-					= remove_quotes(data, data->commands[idx].files[j].file);
+				data->commands[idx].files[j].file_name = remove_quotes(data,
+						data->commands[idx].files[j].file_name);
 			}
 		}
 	}

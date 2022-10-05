@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   e_utils.c                                          :+:      :+:    :+:   */
+/*   e_built2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 14:09:20 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/05 18:58:02 by rmattheo         ###   ########lyon.fr   */
+/*   Created: 2022/10/05 19:59:57 by rmattheo          #+#    #+#             */
+/*   Updated: 2022/10/05 20:20:38 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-extern int	g_status;
-
-int	execve_error(char *arg)
+static int	ft_strcmp(char *arg, char *built)
 {
-	write(2, arg,
-		ft_strlen(arg));
-	if (access(arg, F_OK) == -1)
+	int	i;
+
+	i = -1;
+	if (ft_strlen(arg) != ft_strlen(built))
+		return (0);
+	while (arg[++i])
 	{
-		write(2, ": command not found\n", 21);
-		exit(127);
+		if (arg[i] != built[i])
+			return (0);
 	}
-	if (access(arg, X_OK) == -1)
-	{
-		write(2, ": access denied\n", 17);
-		exit(126);
-	}
+	return (1);
+}
+
+int	check_built(char *built, int fd_out)
+{
+	if (ft_strcmp(built, "env"))
+		return (1);
+	if (ft_strcmp(built, "pwd"))
+		return (1);
+	if (ft_strcmp(built, "echo"))
+		return (1);
+	if (ft_strcmp(built, "export") && fd_out)
+		return (1);
 	return (0);
 }

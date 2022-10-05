@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/04 14:28:34 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 19:57:30 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ int	open_infile(t_commands *c, char *infile)
 		write(2, " : is a directory\n", 19);
 		return (0);
 	}
-	// dprintf(2, "c->fd_in = %i\n", c->fd_in);
 	close(c->fd_in);
 	c->fd_in = open(infile, O_RDONLY);
-	// dprintf(2, "c->fd_in = %i\n", c->fd_in);
 	if (c->fd_in == -1)
 	{
 		perror(infile);
-		return(0);
+		return (0);
 	}
 	return (1);
 }
@@ -42,7 +40,7 @@ int	open_outfile(t_commands *c, char *outfile)
 	if (c->fd_out == -1)
 	{
 		perror(outfile);
-		return(0);
+		return (0);
 	}
 	return (1);
 }
@@ -54,12 +52,13 @@ int	open_outfile_hb(t_commands *c, char *outfile_hb)
 	if (c->fd_out == -1)
 	{
 		perror(outfile_hb);
-		return(0);
+		return (0);
 	}
 	return (1);
 }
 
 /* Ouverture de tous les files dans l'ordre */
+
 int	open_files(t_commands *c)
 {
 	int	i;
@@ -69,17 +68,17 @@ int	open_files(t_commands *c)
 	{
 		if (c->files[i].type == INFILE)
 		{
-			if (open_infile(c, c->files[i].file) == 0)
+			if (open_infile(c, c->files[i].file_name) == 0)
 				return (0);
 		}
 		else if (c->files[i].type == OUTFILE)
 		{
-			if (open_outfile(c, c->files[i].file) == 0)
+			if (open_outfile(c, c->files[i].file_name) == 0)
 				return (0);
 		}
 		else if (c->files[i].type == OUTFILE_HB)
 		{
-			if (open_outfile_hb(c, c->files[i].file) == 0)
+			if (open_outfile_hb(c, c->files[i].file_name) == 0)
 				return (0);
 		}
 	}

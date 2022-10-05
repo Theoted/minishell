@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 14:20:10 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:23:34 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <signal.h>
 # include <termios.h>
 
-
 # define INFILE 1
 # define OUTFILE 2
 # define OUTFILE_HB 3
@@ -29,15 +28,15 @@
 # define HEREDOC_TYPE 2
 # define INFILE_TYPE 1
 
-typedef struct s_commands t_commands;
-typedef struct s_data_p t_data_p;
-typedef struct s_hd_data t_hd_data;
-typedef struct s_files t_files;
-typedef struct s_envp t_envp;
-typedef struct s_echo t_echo;
-typedef struct s_echo_2 t_echo_2;
-typedef struct s_echo_env t_echo_env;
-typedef	struct s_export	t_export;
+typedef struct	s_commands t_commands;
+typedef struct	s_data_p t_data_p;
+typedef struct	s_hd_data t_hd_data;
+typedef struct	s_files t_files;
+typedef struct	s_envp t_envp;
+typedef struct	s_echo t_echo;
+typedef struct	s_echo_2 t_echo_2;
+typedef struct	s_echo_env t_echo_env;
+typedef	struct	s_export	t_export;
 
 // Structure qui permet le parsing des variables d'environnements
 struct s_echo_env
@@ -83,7 +82,7 @@ struct s_envp
 // Type: 1 = < , 2 = > , 3 = >>
 struct s_files
 {
-	char	*file;
+	char	*file_name;
 	int		type;
 	int		stop;
 };
@@ -137,8 +136,8 @@ struct s_hd_data
 struct s_data_p
 {
 	char		*stdin_arg;
-	char    	*path;
-	char    	**env_path;
+	char		*path;
+	char		**env_path;
 	char		**args;
 	char		**env_vars;
 	int			pipes_nb;
@@ -278,7 +277,7 @@ int		b_cd(t_data_p *data, int idx);
 		// ECHO
 void	b_echo(t_data_p *data, int idx);
 int		expend_echo_env_vars(t_data_p *data, char **arg);
-char    *get_echo_env_var(t_data_p *data, char *arg);
+char	*get_echo_env_var(t_data_p *data, char *arg);
 char	*echo_parse_bs(char *arg, t_data_p *data);
 char	*echo_trim_bs(char *arg, int *i, t_data_p *data);
 char	*check_exit_status(t_data_p *data, char *arg, int i);
@@ -293,9 +292,10 @@ int		check_num(char *arg, int i);
 
 		//Built-ins utils
 int		strncmp_len(char *s1, char *s2);
-void 	print_env_list(t_envp *env_list);
+void	print_env_list(t_envp *env_list);
 int		arg_vec_len(t_data_p *data, int idx);
 void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx);
 int		ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx);
+int		check_built(char *built, int fd_out);
 
 #endif

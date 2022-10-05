@@ -158,5 +158,5 @@ voir HD mettre readline et voir pour 65k+ char
 
 quand utilise export, rester bloquer dans un processus enfant
 unset not found mais fais quand meme unset
+exit | exit 
 
-eCho $? renvoie pas l'exit status 

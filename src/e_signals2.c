@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/09/29 13:11:20 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 16:34:57 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ extern int	g_status;
 
 void	sig_quit_exec(int signo)
 {
-	write(1, "Quit: 3\n", 8);
 	g_status = 131;
 }
 
 void	sig_int_exec(int signo)
 {
-	write(2, "\n", 1);
 	g_status = 130;
 }
 
