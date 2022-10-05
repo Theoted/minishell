@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_free_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 19:38:45 by pat               #+#    #+#             */
-/*   Updated: 2022/03/18 16:48:29 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:56:11 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	gc_lstclear(t_track **lst, void (*del)(void*))
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		gc_lstdelone(*lst, del);
+		gc_lstdelone(lst, del);
 		*lst = temp;
 	}
 }

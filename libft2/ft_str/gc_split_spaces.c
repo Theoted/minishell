@@ -3,47 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   gc_split_spaces.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 13:51:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/18 16:46:10 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:34:40 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/libft.h"
 #include "../include/gc.h"
 #include "../../includes/minishell.h"
-
-static int	wordlen(char const *s, char c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == c && !state_checker((char *)s, 0, i))
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
-static char	*gc_strndup(t_track **track, char const *s, size_t size)
-{
-	size_t	i;
-	char	*word;
-
-	word = NULL;
-	i = 0;
-	word = gc_calloc((sizeof(char)), (size + 1), track);
-	while (i < size && s[i])
-	{
-		word[i] = s[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
-}
 
 static size_t	count_word(char const *s, char c)
 {

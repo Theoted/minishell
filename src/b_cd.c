@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/04 11:53:34 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:39:26 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	*get_home_oldpwd(t_data_p *data, int x)
 
 int	b_cd(t_data_p *data, int idx)
 {
-	char	*tmp;
 	char	cwd[1016];
 
 	getcwd(cwd, sizeof(cwd));

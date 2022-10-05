@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:31:14 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/04 13:25:31 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:39:04 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,13 @@
 
 extern int	g_status;
 
-static int	check_sign(int sign)
-{
-	if (sign < 0)
-		return (-1);
-	return (0);
-}
-
 int	check_lld(char *arg)
 {
 	int		i;
 	char	*lld;
 
 	i = -1;
+	//TODO: utiliser limits.h et utiliser constante genre LONG_MAX
 	lld = "9223372036854775807";
 	if (ft_strlen(arg) < 19)
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/05 20:23:34 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:33:50 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,6 @@ void	sig_parent(void);
 void	sig_handler_parent(int sig);
 void	sig_handler_parent_hd(int sig);
 void	sig_handler_child(int sig);
-static int	ft_strcmp(char *arg, char *built);
 int		execve_error(char *arg);
 
 //		Replace line

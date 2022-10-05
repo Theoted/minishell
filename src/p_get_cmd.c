@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_get_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:12:29 by tdeville          #+#    #+#             */
-/*   Updated: 2022/07/27 10:14:29 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:37:15 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	skip_spaces(char *arg, int *i)
 char	*get_cmd(char *arg, int i, t_data_p *data)
 {
 	int	j;
-	int	t;
 	int	check;
 
 	j = 0;

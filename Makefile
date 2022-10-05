@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/04 08:28:56 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/05 20:35:39 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS	+=	main.c
 OBJS	= ${SRCS:.c=.o}
 
 CC		= gcc
-CFLAGS	= 
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g3
 
 all: maker ${NAME}
 
@@ -36,8 +36,7 @@ all: maker ${NAME}
 # -fsanitize=address -g3
 
 ${NAME}: ${OBJS} libft2/libft2.a
-		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a -fsanitize=address -g3
-
+		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a
 maker:
 		${MAKE} -C ${LIBFT}
 

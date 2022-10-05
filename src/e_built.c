@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/05 20:21:15 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:42:46 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static int	strcmp_ncs(char *arg, char *built)
 
 int	ft_exec_built_nofork2(t_data_p *d, t_commands *c, int idx)
 {
-	char	s[1000];
-
 	if (!c->args_vec)
 		return (0);
 	if (strcmp_ncs(c->args_vec[0], "unset"))
@@ -50,8 +48,6 @@ int	ft_exec_built_nofork2(t_data_p *d, t_commands *c, int idx)
 
 int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 {
-	char	s[1000];
-
 	if (!c->args_vec)
 		return (0);
 	if (strcmp_ncs(c->args_vec[0], "cd"))

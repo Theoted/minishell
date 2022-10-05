@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:41:26 by pat               #+#    #+#             */
-/*   Updated: 2022/07/18 14:20:03 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:55:30 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct s_track
 t_track	*gc_lstnew(void **adress);
 void	gc_lstadd_front(t_track **alst, t_track *new);
 void	gc_lstclear(t_track **lst, void (*del)(void*));
-void	gc_lstdelone(t_track *lst, void (*del)(void*));
+void	gc_lstdelone(t_track **lst, void (*del)(void*));
 void	gc_add_mal(t_track **track, void **address);
 void	gc_free_all(t_track **track);
 void	gc_free_malloc(t_track **track, void **del);
