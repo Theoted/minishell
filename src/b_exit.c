@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:31:14 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/05 20:39:04 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 08:06:19 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ long long	ft_atol(const char *str)
 }
 
 // cherche si il y a autre chose qu'un num dans la string
+// return 0 si il y a que des chiffre
 int	no_numeric(char *arg)
 {
 	int	i;
@@ -84,7 +85,8 @@ int	b_exit(t_data_p *d, int idx)
 	i = -1;
 	if (!strncmp_ncs("exit", d->commands[idx].args_vec[0]))
 	{
-		if (double_arr_len(d->commands[idx].args_vec) > 2)
+		if (double_arr_len(d->commands[idx].args_vec) > 2
+			&& !no_numeric(d->commands[idx].args_vec[1]))
 			return (exit_error_avlen());
 		if (d->commands[idx].args_vec[1])
 		{

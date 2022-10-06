@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/05 20:14:53 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 08:51:55 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	e_execve(t_data_p *d, t_commands *c, int idx)
 	if (!c->args_vec)
 		exit(0);
 	if (check_built(c->args_vec[0], c->fd_out))
-		ft_exec_built_fork(d, c, idx);
+		ft_exec_built_fork(d, c[idx], idx);
 	else
 	{
 		if (execve(c->cmd_path, c->args_vec, convert_envp(d, d->envp)) == -1)
