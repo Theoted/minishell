@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:12:29 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/05 20:37:15 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 20:12:28 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*skip_in_out_hd(char *arg, t_data_p *data)
 			cmd = get_cmd(arg, i, data);
 			break ;
 		}
+		if (!arg[i])
+			break;
 	}
 	return (cmd);
 }

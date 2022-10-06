@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/06 08:59:53 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 14:47:52 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,13 @@ int	open_infile(t_commands *c, char *infile)
 	{
 		write(2, infile, ft_strlen(infile));
 		write(2, " : is a directory\n", 19);
+		// dprintf(2, "fdin = %d\n", c->fd_in);
+		close(c->fd_in);
+		close (c->pfd[1]);
+		close (c->pfd[0]);
 		return (0);
 	}
-	close(c->fd_in);
+	// close(c->fd_in);
 	c->fd_in = open(infile, O_RDONLY);
 	if (c->fd_in == -1)
 	{
@@ -39,6 +43,8 @@ int	open_outfile(t_commands *c, char *outfile)
 	c->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (c->fd_out == -1)
 	{
+		close (c->pfd[1]);
+		close (c->pfd[0]);
 		perror(outfile);
 		return (0);
 	}
@@ -51,6 +57,8 @@ int	open_outfile_hb(t_commands *c, char *outfile_hb)
 	c->fd_out = open(outfile_hb, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (c->fd_out == -1)
 	{
+		close (c->pfd[1]);
+		close (c->pfd[0]);
 		perror(outfile_hb);
 		return (0);
 	}
