@@ -167,3 +167,6 @@ cat puis ctrl + \ pas exactement le meme output
 
 Changement: 
     modification fonctions built_fork et built_not_fork, nous ne passons plus l'adresse. 
+
+Problemes de redirections et d'open
+Leak PIPE (lsof -p 'process')
