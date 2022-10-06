@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/05 20:33:50 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 08:46:18 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,8 +293,8 @@ int		check_num(char *arg, int i);
 int		strncmp_len(char *s1, char *s2);
 void	print_env_list(t_envp *env_list);
 int		arg_vec_len(t_data_p *data, int idx);
-void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx);
-int		ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx);
+void	ft_exec_built_fork(t_data_p *d, t_commands c, int idx);
+int		ft_exec_built_nofork(t_data_p *d, t_commands c, int idx);
 int		check_built(char *built, int fd_out);
 
 #endif

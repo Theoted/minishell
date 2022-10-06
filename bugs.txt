@@ -164,3 +164,6 @@ exit | exit = deux fois command not found
 
 cat puis ctrl + \ pas exactement le meme output
 
+
+Changement: 
+    modification fonctions built_fork et built_not_fork, nous ne passons plus l'adresse. 

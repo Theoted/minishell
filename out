@@ -1,0 +1,14 @@
+Makefile
+README.md
+bugs.txt
+config
+includes
+libft2
+main.c
+main.o
+minishell
+ok
+out
+readline
+src
+truc.sh

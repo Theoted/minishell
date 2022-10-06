@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/05 20:15:06 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 08:47:12 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	e_exec(t_data_p *d, t_commands *c)
 		pipe(c[i].pfd);
 		if (open_files(&c[i]))
 		{
-			if (!ft_exec_built_nofork(d, &c[i], i))
+			if (!ft_exec_built_nofork(d, c[i], i))
 				if (!ft_fork(d, c, i))
 					return ;
 			if (c->fd_out != 1 && c->fd_out != 0)
