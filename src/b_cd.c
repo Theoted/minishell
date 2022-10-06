@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/05 09:37:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 08:06:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	*get_home_oldpwd(t_data_p *data, int x)
 
 int	b_cd(t_data_p *data, int idx)
 {
-	char	*tmp;
 	char	cwd[1016];
 
 	getcwd(cwd, sizeof(cwd));

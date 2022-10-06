@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_signals.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 11:07:26 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 08:29:06 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:41:31 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	sig_handler_parent(int sig)
 
 void	sig_handler_child(int sig)
 {
+	//TODO : enlever sig des params
+	(void) sig;
 	signal(SIGQUIT, SIG_DFL);
 	signal(SIGINT, SIG_DFL);
 }

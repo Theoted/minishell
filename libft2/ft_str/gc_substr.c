@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 20:46:39 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/03/16 17:46:34 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 21:02:25 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*gc_substr(t_track **track, const char *s,
 	if (!s)
 		return (0);
 	if (size < len)
-		length = size - 1;
+		length = size;
 	str = gc_calloc(sizeof(char), length + 1, track);
 	if (!str)
 		return (0);

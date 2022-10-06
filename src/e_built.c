@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/05 09:11:50 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 08:07:01 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 
 int	ft_exec_built_nofork2(t_data_p *d, t_commands *c, int idx)
 {
-	char	s[1000];
-
 	if (!c->args_vec)
 		return (0);
 	if (!strncmp_ncs(c->args_vec[0], "unset"))
@@ -50,8 +48,6 @@ int	ft_exec_built_nofork2(t_data_p *d, t_commands *c, int idx)
 
 int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 {
-	char	s[1000];
-	// dprintf(2, "check builtins no fork-> parent\n");
 	if (!c->args_vec)
 		return (0);
 	if (!strncmp_ncs(c->args_vec[0], "cd"))
@@ -60,15 +56,13 @@ int	ft_exec_built_nofork(t_data_p *d, t_commands *c, int idx)
 			return (1);
 		return (b_cd(d, idx));
 	}
-	if (!strncmp_ncs(c->args_vec[0], "export") && !c->fd_out)
+	if (!strcmp_ncs(c->args_vec[0], "export") && c->args_vec[1])
 	{
 		if (d->pipes_nb > 0)
 			return (1);
 		return (b_export(d, idx));
 	}
-	ft_exec_built_nofork2(d, &c[idx], idx);
-	// dprintf(2, "Pas de builtins à no fork-> parent\n");
-	return (0);
+	return (ft_exec_built_nofork2(d, &c[idx], idx));
 }
 
 void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx)
@@ -84,6 +78,7 @@ void	ft_exec_built_fork(t_data_p *d, t_commands *c, int idx)
 	}
 	if (!strncmp_ncs(c->args_vec[0], "echo"))
 		b_echo(d, idx);
-	if (!strncmp_ncs(c->args_vec[0], "export") && c->fd_out)
+	if (!strcmp_ncs(c->args_vec[0], "export") && ((!c->args_vec[1])
+			|| ((c->args_vec[1]) && c->fd_out)))
 		b_export(d, idx);
 }

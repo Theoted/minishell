@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 11:34:33 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:36:56 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*expend_env_var(t_data_p *data, t_envp *envp, char *var)
 	int		i;
 	char	*env_var;
 
+	//TODO enlever data
+	(void) data;
 	i = -1;
 	while (envp)
 	{
@@ -82,7 +84,6 @@ int	remove_export_content_quotes(t_data_p *data, char *arg)
 int	remove_quotes_arg_vec(t_data_p *data, char **arg_vec)
 {
 	int		i;
-	char	*tmp;
 
 	i = -1;
 	if (!arg_vec)

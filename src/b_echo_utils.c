@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 13:18:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:40:32 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int	arg_vec_len(t_data_p *data, int idx)
 // Aucune quote
 int	next_quote_id(char *arg, char quote, int i, t_echo *e_d)
 {
+	//TODO : enlever e_d des params
+	(void) e_d;
 	i++;
 	while (arg[i])
 	{

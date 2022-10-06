@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 08:33:28 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/04 08:33:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/05 20:38:10 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ char	*get_pipe_content(int fd, t_data_p *data)
 int	hd_loop(t_data_p *data, int idx, int del_len)
 {
 	char	*buffer;
-	int		longest;
 
+	//TODO : enlever del_lenb des params
+	(void) del_len;
 	buffer = readline("> ");
 	if (!buffer)
 		return (1);
