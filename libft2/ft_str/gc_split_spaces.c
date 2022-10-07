@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_split_spaces.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 13:51:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/05 20:34:40 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/06 22:22:32 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ static size_t	count_word(char const *s, char c)
 
 static int	find_next_idx(char *s, int idx)
 {
-	int	j;
-
-	j = 0;
 	while (s[idx])
 	{
 		if (s[idx] == ' ' && !state_checker(s, 0, idx))

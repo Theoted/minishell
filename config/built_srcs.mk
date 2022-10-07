@@ -1,23 +1,23 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    exec_srcs.mk                                       :+:      :+:    :+:    #
+#    built_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/03/09 14:46:46 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/07 00:48:19 by pat              ###   ########lyon.fr    #
+#    Created: 2022/10/07 00:44:31 by pat               #+#    #+#              #
+#    Updated: 2022/10/07 00:47:17 by pat              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS +=		src/exec/e_exec.c		\
-			src/exec/e_exec2.c		\
-			src/exec/e_built.c		\
-			src/exec/e_built2.c		\
-			src/exec/e_check_path.c	\
-			src/exec/e_open_file.c	\
-			src/exec/e_utils.c		\
-			src/exec/e_hd_signals.c	\
-			src/exec/e_signals.c	\
-			src/exec/e_signals2.c	\
-			src/exec/e_signals3.c
+SRCS +=	src/built_in/b_init.c			\
+		src/built_in/b_unset.c			\
+		src/built_in/b_exit.c			\
+		src/built_in/b_export.c			\
+		src/built_in/b_export2.c		\
+		src/built_in/b_cd.c				\
+		src/built_in/b_echo.c			\
+		src/built_in/b_echo_utils.c		\
+		src/built_in/b_echo_utils2.c	\
+		src/built_in/b_echo_envvar.c	\
+		src/built_in/b_utils.c

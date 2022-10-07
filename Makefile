@@ -3,25 +3,26 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/05 20:35:39 by rmattheo         ###   ########lyon.fr    #
+#    Updated: 2022/10/07 00:45:29 by pat              ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 include config/pars_srcs.mk 
 include config/exec_srcs.mk 
+include config/built_srcs.mk 
 
 NAME	= minishell
 HEADER	= includes/minishell.h libft2/include/libft2.h libft2/include/gc.h
 LIBFT	= libft2
 
-EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
+EXECINCLUDES =	-lreadline -I./readline/include
 
 # -I./readline/include -L./readline/lib -lncurses
 
-SRCS	+=	main.c
+SRCS	+=	src/main.c
 
 OBJS	= ${SRCS:.c=.o}
 
