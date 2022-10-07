@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 13:51:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/06 22:22:32 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/07 02:07:20 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	**gc_split_spaces(t_track **track, char const *s, char c)
 	int		j;
 	int		size;
 	char	**newstring;
-	
+
 	i = 0;
 	j = -1;
 	size = (count_word(s, c));

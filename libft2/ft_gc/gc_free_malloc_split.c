@@ -3,21 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   gc_free_malloc_split.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 15:04:38 by pat               #+#    #+#             */
-/*   Updated: 2022/10/05 20:56:46 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/07 02:12:29 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/gc.h"
 #include "../include/libft.h"
 
-void	gc_free_malloc_split(t_track **track, void ***del)
+void	gc_free_malloc_split_while(t_track **track, void ***del, t_track *tmp)
 {
-	t_track	*tmp;
-
-	tmp = *track;
 	while (tmp)
 	{
 		if (tmp->address == *del)
@@ -41,4 +38,12 @@ void	gc_free_malloc_split(t_track **track, void ***del)
 		if (tmp)
 			tmp = tmp->next;
 	}
+}
+
+void	gc_free_malloc_split(t_track **track, void ***del)
+{
+	t_track	*tmp;
+
+	tmp = *track;
+	gc_free_malloc_split_while(track, del, tmp);
 }
