@@ -1,109 +1,115 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/theodeville/Documents/programmation/minishell'
+make: Entering directory `/Users/theodeville/Desktop/minishell'
 /Applications/Xcode.app/Contents/Developer/usr/bin/make -C libft2
- 
-make[1]: Entering directory `/Users/theodeville/Documents/programmation/minishell/libft2'
-gcc  -c ft_check/ft_isalpha.c -o ft_check/ft_isalpha.o
-gcc  -c ft_check/ft_isdigit.c -o ft_check/ft_isdigit.o
-gcc  -c ft_check/ft_isalnum.c -o ft_check/ft_isalnum.o
-gcc  -c ft_check/ft_isascii.c -o ft_check/ft_isascii.o
-gcc  -c ft_check/ft_isprint.c -o ft_check/ft_isprint.o
-gcc  -c ft_check/ft_toupper.c -o ft_check/ft_toupper.o
-gcc  -c ft_check/ft_tolower.c -o ft_check/ft_tolower.o
-gcc  -c ft_mem/ft_memset.c -o ft_mem/ft_memset.o
-gcc  -c ft_mem/ft_memcpy.c -o ft_mem/ft_memcpy.o
-gcc  -c ft_mem/ft_memmove.c -o ft_mem/ft_memmove.o
-gcc  -c ft_mem/ft_memchr.c -o ft_mem/ft_memchr.o
-gcc  -c ft_mem/ft_memcmp.c -o ft_mem/ft_memcmp.o
-gcc  -c ft_atoi_itoa/ft_itoa.c -o ft_atoi_itoa/ft_itoa.o
-gcc  -c ft_atoi_itoa/gc_itoa.c -o ft_atoi_itoa/gc_itoa.o
-gcc  -c ft_atoi_itoa/ft_atoi.c -o ft_atoi_itoa/ft_atoi.o
-gcc  -c ft_atoi_itoa/ft_atoi_base.c -o ft_atoi_itoa/ft_atoi_base.o
- 
-gcc  -c ft_str/ft_strlen.c -o ft_str/ft_strlen.o
-gcc  -c ft_str/ft_strchr.c -o ft_str/ft_strchr.o
-gcc  -c ft_str/ft_strncmp.c -o ft_str/ft_strncmp.o
-gcc  -c ft_str/ft_strnstr.c -o ft_str/ft_strnstr.o
- 
-gcc  -c ft_str/ft_strrchr.c -o ft_str/ft_strrchr.o
- 
-gcc  -c ft_str/ft_strlcat.c -o ft_str/ft_strlcat.o
-gcc  -c ft_str/ft_strlcpy.c -o ft_str/ft_strlcpy.o
- 
-gcc  -c ft_str/ft_strdup.c -o ft_str/ft_strdup.o
- 
-gcc  -c ft_str/ft_substr.c -o ft_str/ft_substr.o
-gcc  -c ft_str/ft_strtrim.c -o ft_str/ft_strtrim.o
-gcc  -c ft_str/ft_strmapi.c -o ft_str/ft_strmapi.o
-gcc  -c ft_str/ft_striteri.c -o ft_str/ft_striteri.o
-gcc  -c ft_str/ft_split.c -o ft_str/ft_split.o
-gcc  -c ft_str/ft_strjoin.c -o ft_str/ft_strjoin.o
-gcc  -c ft_str/ft_strlen_charset.c -o ft_str/ft_strlen_charset.o
-gcc  -c ft_str/gc_split.c -o ft_str/gc_split.o
-gcc  -c ft_str/gc_split_spaces.c -o ft_str/gc_split_spaces.o
-gcc  -c ft_str/gc_substr.c -o ft_str/gc_substr.o
- 
-gcc  -c ft_str/gc_strjoin.c -o ft_str/gc_strjoin.o
- 
-gcc  -c ft_str/gc_strdup.c -o ft_str/gc_strdup.o
-gcc  -c ft_str/gc_strtrim.c -o ft_str/gc_strtrim.o
- 
-gcc  -c ft_malloc/ft_bzero.c -o ft_malloc/ft_bzero.o
-gcc  -c ft_malloc/ft_calloc.c -o ft_malloc/ft_calloc.o
-gcc  -c ft_malloc/gc_calloc.c -o ft_malloc/gc_calloc.o
-gcc  -c ft_put/ft_putchar_fd.c -o ft_put/ft_putchar_fd.o
-gcc  -c ft_put/ft_putnbr_fd.c -o ft_put/ft_putnbr_fd.o
-gcc  -c ft_put/ft_putstr_fd.c -o ft_put/ft_putstr_fd.o
-gcc  -c ft_put/ft_putptr.c -o ft_put/ft_putptr.o
-gcc  -c ft_put/ft_putnbr_usigned_fd.c -o ft_put/ft_putnbr_usigned_fd.o
-gcc  -c ft_put/ft_putnbr_base.c -o ft_put/ft_putnbr_base.o
-gcc  -c ft_put/ft_putendl_fd.c -o ft_put/ft_putendl_fd.o
-gcc  -c ft_gnl/get_next_line.c -o ft_gnl/get_next_line.o
-gcc  -c ft_gnl/gc_get_next_line.c -o ft_gnl/gc_get_next_line.o
-gcc  -c ft_maths/ft_round.c -o ft_maths/ft_round.o
-gcc  -c ft_maths/ft_colinterpolate.c -o ft_maths/ft_colinterpolate.o
-gcc  -c ft_lst/ft_lstnew.c -o ft_lst/ft_lstnew.o
-gcc  -c ft_lst/ft_lstadd_front.c -o ft_lst/ft_lstadd_front.o
-gcc  -c ft_lst/ft_lstlast.c -o ft_lst/ft_lstlast.o
-gcc  -c ft_lst/ft_lstadd_back.c -o ft_lst/ft_lstadd_back.o
- 
-gcc  -c ft_lst/ft_lstdelone.c -o ft_lst/ft_lstdelone.o
-gcc  -c ft_lst/ft_lstclear.c -o ft_lst/ft_lstclear.o
-gcc  -c ft_lst/ft_lstiter.c -o ft_lst/ft_lstiter.o
-gcc  -c ft_lst/ft_lstmap.c -o ft_lst/ft_lstmap.o
-gcc  -c ft_lst/ft_lstsize.c -o ft_lst/ft_lstsize.o
-gcc  -c ft_gc/gc_add_mal.c -o ft_gc/gc_add_mal.o
-gcc  -c ft_gc/gc_lstadd_front.c -o ft_gc/gc_lstadd_front.o
-gcc  -c ft_gc/gc_lstnew.c -o ft_gc/gc_lstnew.o
-gcc  -c ft_gc/gc_free_all.c -o ft_gc/gc_free_all.o
-gcc  -c ft_gc/gc_free_malloc.c -o ft_gc/gc_free_malloc.o
-gcc  -c ft_gc/gc_free_malloc_split.c -o ft_gc/gc_free_malloc_split.o
-gcc  -c ft_gc/gc_lstdelone.c -o ft_gc/gc_lstdelone.o
-ar -rcs libft2.a ft_check/ft_isalpha.o ft_check/ft_isdigit.o ft_check/ft_isalnum.o ft_check/ft_isascii.o ft_check/ft_isprint.o ft_check/ft_toupper.o ft_check/ft_tolower.o ft_mem/ft_memset.o ft_mem/ft_memcpy.o ft_mem/ft_memmove.o ft_mem/ft_memchr.o ft_mem/ft_memcmp.o ft_atoi_itoa/ft_itoa.o ft_atoi_itoa/gc_itoa.o ft_atoi_itoa/ft_atoi.o ft_atoi_itoa/ft_atoi_base.o ft_str/ft_strlen.o ft_str/ft_strchr.o ft_str/ft_strncmp.o ft_str/ft_strnstr.o ft_str/ft_strrchr.o ft_str/ft_strlcat.o ft_str/ft_strlcpy.o ft_str/ft_strdup.o ft_str/ft_substr.o ft_str/ft_strtrim.o ft_str/ft_strmapi.o ft_str/ft_strmapi.o ft_str/ft_striteri.o ft_str/ft_split.o ft_str/ft_strjoin.o ft_str/ft_strlen_charset.o ft_str/gc_split.o ft_str/gc_split_spaces.o ft_str/gc_substr.o ft_str/gc_strjoin.o ft_str/gc_strdup.o ft_str/gc_strtrim.o ft_malloc/ft_bzero.o ft_malloc/ft_calloc.o ft_malloc/gc_calloc.o ft_put/ft_putchar_fd.o ft_put/ft_putnbr_fd.o ft_put/ft_putstr_fd.o ft_put/ft_putptr.o ft_put/ft_putnbr_usigned_fd.o ft_put/ft_putnbr_base.o ft_put/ft_putendl_fd.o ft_gnl/get_next_line.o ft_gnl/gc_get_next_line.o ft_maths/ft_round.o ft_maths/ft_colinterpolate.o ft_lst/ft_lstnew.o ft_lst/ft_lstadd_front.o ft_lst/ft_lstlast.o ft_lst/ft_lstadd_back.o ft_lst/ft_lstdelone.o ft_lst/ft_lstclear.o ft_lst/ft_lstiter.o ft_lst/ft_lstmap.o ft_lst/ft_lstsize.o ft_gc/gc_add_mal.o ft_gc/gc_lstadd_front.o ft_gc/gc_lstnew.o ft_gc/gc_free_all.o ft_gc/gc_free_malloc.o ft_gc/gc_free_malloc_split.o ft_gc/gc_lstdelone.o
-make[1]: Leaving directory `/Users/theodeville/Documents/programmation/minishell/libft2'
- 
-gcc    -c -o src/p_bin_path.o src/p_bin_path.c
-gcc    -c -o src/p_utils.o src/p_utils.c
-gcc    -c -o src/p_lexer.o src/p_lexer.c
-gcc    -c -o src/p_here_doc.o src/p_here_doc.c
-gcc    -c -o src/p_here_doc_utils.o src/p_here_doc_utils.c
-gcc    -c -o src/p_expend_vars.o src/p_expend_vars.c
-gcc    -c -o src/p_clear_hd.o src/p_clear_hd.c
-gcc    -c -o src/b_init.o src/b_init.c
-gcc    -c -o src/b_unset.o src/b_unset.c
-gcc    -c -o src/b_exit.o src/b_exit.c
-gcc    -c -o src/b_export.o src/b_export.c
-gcc    -c -o src/b_cd.o src/b_cd.c
- 
-gcc    -c -o src/b_echo.o src/b_echo.c
-gcc    -c -o src/b_echo_envvar.o src/b_echo_envvar.c
-gcc    -c -o src/b_exec_built_ins.o src/b_exec_built_ins.c
-gcc    -c -o src/b_utils.o src/b_utils.c
- 
-gcc    -c -o main.o main.c
-gcc    -c -o src/e_exec.o src/e_exec.c
-gcc    -c -o src/e_execve.o src/e_execve.c
-make: Leaving directory `/Users/theodeville/Documents/programmation/minishell'
+make[1]: Entering directory `/Users/theodeville/Desktop/minishell/libft2'
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_isalpha.c -o ft_check/ft_isalpha.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_isdigit.c -o ft_check/ft_isdigit.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_isalnum.c -o ft_check/ft_isalnum.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_isascii.c -o ft_check/ft_isascii.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_isprint.c -o ft_check/ft_isprint.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_toupper.c -o ft_check/ft_toupper.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_check/ft_tolower.c -o ft_check/ft_tolower.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_mem/ft_memset.c -o ft_mem/ft_memset.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_mem/ft_memcpy.c -o ft_mem/ft_memcpy.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_mem/ft_memmove.c -o ft_mem/ft_memmove.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_mem/ft_memchr.c -o ft_mem/ft_memchr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_mem/ft_memcmp.c -o ft_mem/ft_memcmp.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_atoi_itoa/ft_itoa.c -o ft_atoi_itoa/ft_itoa.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_atoi_itoa/gc_itoa.c -o ft_atoi_itoa/gc_itoa.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_atoi_itoa/ft_atoi.c -o ft_atoi_itoa/ft_atoi.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_atoi_itoa/ft_atoi_base.c -o ft_atoi_itoa/ft_atoi_base.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strlen.c -o ft_str/ft_strlen.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strchr.c -o ft_str/ft_strchr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strncmp.c -o ft_str/ft_strncmp.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strnstr.c -o ft_str/ft_strnstr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strrchr.c -o ft_str/ft_strrchr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strlcat.c -o ft_str/ft_strlcat.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strlcpy.c -o ft_str/ft_strlcpy.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strdup.c -o ft_str/ft_strdup.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_substr.c -o ft_str/ft_substr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strtrim.c -o ft_str/ft_strtrim.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strmapi.c -o ft_str/ft_strmapi.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_striteri.c -o ft_str/ft_striteri.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_split.c -o ft_str/ft_split.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strjoin.c -o ft_str/ft_strjoin.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/ft_strlen_charset.c -o ft_str/ft_strlen_charset.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/gc_split.c -o ft_str/gc_split.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/gc_split_spaces.c -o ft_str/gc_split_spaces.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/gc_substr.c -o ft_str/gc_substr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/gc_strjoin.c -o ft_str/gc_strjoin.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/gc_strdup.c -o ft_str/gc_strdup.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_str/gc_strtrim.c -o ft_str/gc_strtrim.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_malloc/ft_bzero.c -o ft_malloc/ft_bzero.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_malloc/ft_calloc.c -o ft_malloc/ft_calloc.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_malloc/gc_calloc.c -o ft_malloc/gc_calloc.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putchar_fd.c -o ft_put/ft_putchar_fd.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putnbr_fd.c -o ft_put/ft_putnbr_fd.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putstr_fd.c -o ft_put/ft_putstr_fd.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putptr.c -o ft_put/ft_putptr.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putnbr_usigned_fd.c -o ft_put/ft_putnbr_usigned_fd.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putnbr_base.c -o ft_put/ft_putnbr_base.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_put/ft_putendl_fd.c -o ft_put/ft_putendl_fd.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gnl/get_next_line.c -o ft_gnl/get_next_line.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gnl/gc_get_next_line.c -o ft_gnl/gc_get_next_line.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_maths/ft_round.c -o ft_maths/ft_round.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_maths/ft_colinterpolate.c -o ft_maths/ft_colinterpolate.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstnew.c -o ft_lst/ft_lstnew.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstadd_front.c -o ft_lst/ft_lstadd_front.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstlast.c -o ft_lst/ft_lstlast.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstadd_back.c -o ft_lst/ft_lstadd_back.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstdelone.c -o ft_lst/ft_lstdelone.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstclear.c -o ft_lst/ft_lstclear.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstiter.c -o ft_lst/ft_lstiter.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstmap.c -o ft_lst/ft_lstmap.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_lst/ft_lstsize.c -o ft_lst/ft_lstsize.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_add_mal.c -o ft_gc/gc_add_mal.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_lstadd_front.c -o ft_gc/gc_lstadd_front.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_lstnew.c -o ft_gc/gc_lstnew.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_free_all.c -o ft_gc/gc_free_all.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_free_malloc.c -o ft_gc/gc_free_malloc.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_free_malloc_split.c -o ft_gc/gc_free_malloc_split.o
+gcc -Wall -Wextra -Werror -fsanitize=address -g3 -c ft_gc/gc_lstdelone.c -o ft_gc/gc_lstdelone.o
+ar -rcs libft2.a ft_check/ft_isalpha.o ft_check/ft_isdigit.o ft_check/ft_isalnum.o ft_check/ft_isascii.o ft_check/ft_isprint.o ft_check/ft_toupper.o ft_check/ft_tolower.o ft_mem/ft_memset.o ft_mem/ft_memcpy.o ft_mem/ft_memmove.o ft_mem/ft_memchr.o ft_mem/ft_memcmp.o ft_atoi_itoa/ft_itoa.o ft_atoi_itoa/gc_itoa.o ft_atoi_itoa/ft_atoi.o ft_atoi_itoa/ft_atoi_base.o ft_str/ft_strlen.o ft_str/ft_strchr.o ft_str/ft_strncmp.o ft_str/ft_strnstr.o ft_str/ft_strrchr.o ft_str/ft_strlcat.o ft_str/ft_strlcpy.o ft_str/ft_strdup.o ft_str/ft_substr.o ft_str/ft_strtrim.o ft_str/ft_strmapi.o ft_str/ft_strmapi.o ft_str/ft_striteri.o ft_str/ft_split.o ft_str/ft_strjoin.o ft_str/ft_strlen_charset.o ft_str/gc_split.o ft_str/gc_split_spaces.o ft_str/gc_substr.o ft_str/gc_strjoin.o ft_str/gc_strdup.o ft_str/gc_strtrim.o ft_malloc/ft_bzero.o ft_malloc/ft_calloc.o ft_malloc/gc_calloc.o ft_put/ft_putchar_fd.o ft_put/ft_putnbr_fd.o ft_put/ft_putstr_fd.o ft_put/ft_putptr.o ft_put/ft_putnbr_usigned_fd.o ft_put/ft_putnbr_base.o ft_put/ft_pu 
+tendl_fd.o ft_gnl/get_next_line.o ft_gnl/gc_get_next_line.o ft_maths/ft_round.o ft_maths/ft_colinterpolate.o ft_lst/ft_lstnew.o ft_lst/ft_lstadd_front.o ft_lst/ft_lstlast.o ft_lst/ft_lstadd_back.o ft_lst/ft_lstdelone.o ft_lst/ft_lstclear.o ft_lst/ft_lstiter.o ft_lst/ft_lstmap.o ft_lst/ft_lstsize.o ft_gc/gc_add_mal.o ft_gc/gc_lstadd_front.o ft_gc/gc_lstnew.o ft_gc/gc_free_all.o ft_gc/gc_free_malloc.o ft_gc/gc_free_malloc_split.o ft_gc/gc_lstdelone.o
+make[1]: Leaving directory `/Users/theodeville/Desktop/minishell/libft2'
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_bin_path.o src/parsing/p_bin_path.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_get_cmd.o src/parsing/p_get_cmd.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_utils.o src/parsing/p_utils.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_utils2.o src/parsing/p_utils2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_utils3.o src/parsing/p_utils3.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_utils4.o src/parsing/p_utils4.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_lexer.o src/parsing/p_lexer.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_here_doc_check.o src/parsing/p_here_doc_check.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_here_doc_expend_var.o src/parsing/p_here_doc_expend_var.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_here_doc.o src/parsing/p_here_doc.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_here_doc_utils.o src/parsing/p_here_doc_utils.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_here_doc_utils2.o src/parsing/p_here_doc_utils2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_synthax_checker.o src/parsing/p_synthax_checker.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/parsing/p_synthax_checker2.o src/parsing/p_synthax_checker2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_exec.o src/exec/e_exec.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_exec2.o src/exec/e_exec2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_built.o src/exec/e_built.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_built2.o src/exec/e_built2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_check_path.o src/exec/e_check_path.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_open_file.o src/exec/e_open_file.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_utils.o src/exec/e_utils.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_hd_signals.o src/exec/e_hd_signals.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_signals.o src/exec/e_signals.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_signals2.o src/exec/e_signals2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/exec/e_signals3.o src/exec/e_signals3.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_init.o src/built_in/b_init.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_unset.o src/built_in/b_unset.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_exit.o src/built_in/b_exit.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_export.o src/built_in/b_export.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_export2.o src/built_in/b_export2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_cd.o src/built_in/b_cd.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_echo.o src/built_in/b_echo.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_echo_utils.o src/built_in/b_echo_utils.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_echo_utils2.o src/built_in/b_echo_utils2.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_echo_envvar.o src/built_in/b_echo_envvar.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/built_in/b_utils.o src/built_in/b_utils.c
+gcc -Wall -Werror -Wextra -fsanitize=address -g3   -c -o src/main.o src/main.c
+make: Leaving directory `/Users/theodeville/Desktop/minishell'
  
 make: *** No rule to make target `libft2/libft2.a', needed by `minishell'.
 

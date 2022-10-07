@@ -1,0 +1,3 @@
+quelques PIPE qui leaks
+
+ctrl_d ecrit ^D 
