@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:42:35 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/06 23:31:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 14:42:51 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	strncmp_ncs(char *s1, char *s2)
 		len = ft_strlen(s2);
 	else
 		len = ft_strlen(s1);
-	while (len > i && s1[i]
+	while (len > i && s1[i] && s2[i]
 		&& (s1[i] == s2[i] || s1[i] == s2[i] + 32 || s1[i] == s2[i] - 32))
 		i++;
 	if (s1[i] == s2[i])

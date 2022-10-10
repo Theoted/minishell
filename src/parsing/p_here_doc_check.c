@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:38:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:56 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 14:08:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	check_heredoc(char *arg, t_data *data, int idx)
 	i = 0;
 	while (arg[i])
 	{
-		if (arg[i] == '<' && arg[i + 1] == '<')
+		if (arg[i] == '<' && arg[i + 1] == '<'
+			&& !state_checker(arg, 0, i))
 		{
 			if (check_heredoc2(arg, i + 2))
 				return (1);
