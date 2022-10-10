@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/10 11:41:44 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 14:16:21 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 	return (0);
 }
 
-void	init_export_vars(t_export *exp_str, t_envp **in_list)
+// void	init_export_vars(t_export *exp_str, t_envp **in_list)
+void	init_export_vars(t_export *exp_str)
 {
 	exp_str->content = NULL;
 	exp_str->name = NULL;
 	exp_str->equal = 0;
-	in_list = NULL;
 }
 
 int	b_export(t_data *data, int idx)
@@ -81,7 +81,7 @@ int	b_export(t_data *data, int idx)
 		print_export(data, data->envp, idx);
 	while (data->commands[idx].args_vec[i])
 	{
-		init_export_vars(&exp_str, &in_list);
+		init_export_vars(&exp_str);
 		check_arg(data, data->commands[idx].args_vec[i], &exp_str);
 		if (exp_str.name)
 		{
