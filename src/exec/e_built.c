@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/10 11:17:18 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 14:34:02 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,8 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 		b_echo(data, idx);
 	if (!strncmp_ncs(token.args_vec[0], "export") && ((!token.args_vec[1])
 			|| ((token.args_vec[1]) && token.fd_out)))
+	{
 		b_export(data, idx);
+		exit(0);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/07 01:26:47 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 14:38:21 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	open_infile(t_tokens *token, char *infile)
 		write(2, infile, ft_strlen(infile));
 		write(2, " : is a directory\n", 19);
 		close(token->fd_in);
-		close (token->pfd[1]);
-		close (token->pfd[0]);
+		// close (token->pfd[1]);
+		// close (token->pfd[0]);
 		return (0);
 	}
 	token->fd_in = open(infile, O_RDONLY);
@@ -40,8 +40,8 @@ int	open_outfile(t_tokens *token, char *outfile)
 	token->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (token->fd_out == -1)
 	{
-		close (token->pfd[1]);
-		close (token->pfd[0]);
+		// close (token->pfd[1]);
+		// close (token->pfd[0]);
 		perror(outfile);
 		return (0);
 	}
@@ -54,8 +54,8 @@ int	open_outfile_hb(t_tokens *token, char *outfile_hb)
 	token->fd_out = open(outfile_hb, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (token->fd_out == -1)
 	{
-		close (token->pfd[1]);
-		close (token->pfd[0]);
+		// close (token->pfd[1]);
+		// close (token->pfd[0]);
 		perror(outfile_hb);
 		return (0);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/10 11:46:32 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 14:42:51 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	e_exec(t_data *data, t_tokens *token)
 			if (!ft_exec_built_nofork(data, token[i], i))
 				if (!ft_fork(data, token, i))
 					return ;
-			if (token->fd_out != 1 && token->fd_out != 0)
-				close(token->fd_out);
+			if (token[i].fd_out != 1 && token[i].fd_out != 0)
+				close(token[i].fd_out);
 		}
 	}
 	i = -1;
