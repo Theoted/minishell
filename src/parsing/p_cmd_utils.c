@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:50:02 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 14:45:46 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 15:40:41 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ int	parse_space(t_data *data, char **args, int idx)
 			new = new_args_vec(data,
 					gc_split_spaces(&data->track, args[i], ' '), idx, i);
 	}
-	i = -1;
 	if (new)
 		data->commands[idx].args_vec = new;
 	return (0);

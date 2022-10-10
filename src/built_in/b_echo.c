@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 14:39:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 15:44:23 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	b_echo(t_data *data, int idx)
 
 	init_ed(&e_d, data, idx);
 	i = 0;
-	while (++i < data->commands[idx].echo_arg_nb + 1)
+	while (++i < e_d.av_len + 1)
 	{
+		printf("arg = %s\n", data->commands[idx].args_vec[i]);
 		if (check_n(data->commands[idx].args_vec[i], -1) && e_d.check == 0)
 		{
 			e_d.bn = 0;

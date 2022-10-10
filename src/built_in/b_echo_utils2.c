@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:55:20 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 15:42:15 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*check_exit_status(t_data *data, char *arg, int i)
 		j = i;
 		while (arg[i] && arg[i] != '$')
 			i++;
-		if (arg[i] == '$' && arg[i + 1] == '?')
+		if (arg[i] && arg[i] == '$' && arg[i + 1] == '?')
 		{
 			tmp = gc_strjoin(&data->track, gc_substr
 					(&data->track, arg, j, (i - j)), ft_itoa(g_status));
@@ -39,6 +39,8 @@ char	*check_exit_status(t_data *data, char *arg, int i)
 			tmp1 = gc_strdup(&data->track, tmp);
 		else
 			tmp1 = gc_strjoin(&data->track, tmp1, tmp);
+		if (!arg[i])
+			break ;
 	}
 	return (tmp1);
 }
