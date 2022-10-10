@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 02:20:19 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 13:13:47 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,7 @@ void	skip_out(char *arg, int *i);
 void	skip_spaces(char *arg, int *i);
 char	*get_cmd(char *arg, int i, t_data *data);
 char	*remove_quotes(t_data *data, char *arg);
+int		parse_space(t_data *data, char **args, int idx);
 
 //		Here_doc
 int		check_heredoc(char *arg, t_data *data, int idx);
@@ -255,6 +256,7 @@ int		echo_arg_nb(char **args);
 void	get_old_pwd_print(int x);
 void	remove_quote_init(t_echo *data, char *arg);
 void	free_all(char **arg);
+int		check_spaces(char *arg);
 
 //		Expend variables
 int		check_arg_vars(char *arg, t_data *data);
@@ -263,6 +265,7 @@ int		check_arg_vars(char *arg, t_data *data);
 void	env_lstadd_back(t_data *data, t_envp **alst, t_envp *new);
 t_envp	*env_lstnew(t_data *data, char *name, char *content, int equal);
 void	get_in_out_init(int *i, int *j, int *in_type);
+void	env_i_init(t_data *data);
 
 /* ------------------- BUILT-INS ------------------- */
 //		UNSET
@@ -276,7 +279,7 @@ int		b_export(t_data *data, int idx);
 //		EXPORT 2
 void	print_export(t_data *data, t_envp *envp, int idx);
 void	env_lst_addfront(t_envp **alst, t_envp *new);
-void	env_lst_change_content(t_envp *node, char *content);
+void	env_lst_change_content(t_envp *node, char *content, int equal);
 t_envp	*check_if_exist(t_envp *alst, char *name);
 int		export_error_arg(char *arg);
 

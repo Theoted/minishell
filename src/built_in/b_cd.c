@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 10:59:00 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,35 @@ t_envp	*find_node(t_envp **envp, char *name)
 	return (NULL);
 }
 
-void	change_oldpwd(t_data *data, t_envp **envp, char *cwd)
+void	change_oldpwd(t_data *data, t_envp **envp, char *cwd, int x)
 {
 	t_envp	*node;
 
-	node = find_node(envp, "OLDPWD");
-	if (node)
-		node->content = gc_strdup(&data->track, cwd);
-	else
+	if (x == 1)
 	{
-		insert_node_after(envp, "PWD",
-			env_lstnew(data, "OLDPWD", cwd, 1), data);
 		node = find_node(envp, "OLDPWD");
-		node->content = gc_strdup(&data->track, cwd);
+		if (node)
+			node->content = gc_strdup(&data->track, cwd);
+		else
+		{
+			insert_node_after(envp, "PWD",
+				env_lstnew(data, "OLDPWD", cwd, 1), data);
+			node = find_node(envp, "OLDPWD");
+			node->content = gc_strdup(&data->track, cwd);
+		}
+	}
+	else if (x == 0)
+	{
+		node = find_node(envp, "PWD");
+		if (node)
+			node->content = gc_strdup(&data->track, cwd);
+		else
+		{
+			insert_node_after(envp, "SHLVL",
+				env_lstnew(data, "PWD", cwd, 1), data);
+			node = find_node(envp, "PWD");
+			node->content = gc_strdup(&data->track, cwd);
+		}
 	}
 }
 
@@ -104,23 +120,25 @@ int	b_cd(t_data *data, int idx)
 	char	cwd[1016];
 
 	getcwd(cwd, sizeof(cwd));
+	if (!(*cwd) && !strncmp_len(data->commands[idx].args_vec[1], ".."))
+	{
+		perror("cd: error retrieving current directory: getcwd: cannot access parent directories");
+		change_oldpwd(data, &data->envp, cwd, 1);
+		chdir(get_home_oldpwd(data, 1));
+		getcwd(cwd, sizeof(cwd));
+		change_oldpwd(data, &data->envp, cwd, 0);
+		return (1);
+	}
 	if (chdir(data->commands[idx].args_vec[1]) == -1)
 	{
-		if (!data->commands[idx].args_vec[1]
-			|| !strncmp_len(data->commands[idx].args_vec[1], "~"))
-		{
-			if (chdir(get_home_oldpwd(data, 1)) == -1)
-				perror("cd");
-		}
-		else if (!strncmp_len(data->commands[idx].args_vec[1], "-"))
-		{
-			if (chdir(get_home_oldpwd(data, 2)) == -1)
-				perror("cd");
-		}
+		if (!data->commands[idx].args_vec[1])
+			chdir(get_home_oldpwd(data, 1));
 		else
 			printf("cd: %s: No such file or directory\n",
 				data->commands[idx].args_vec[1]);
 	}
-	change_oldpwd(data, &data->envp, cwd);
+	change_oldpwd(data, &data->envp, cwd, 1);
+	getcwd(cwd, sizeof(cwd));
+	change_oldpwd(data, &data->envp, cwd, 0);
 	return (1);
 }
