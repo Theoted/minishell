@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:58:01 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 11:40:28 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	print_export(t_data *data, t_envp *envp, int idx)
 		printf("declare -x %s", tmp->name);
 		if (tmp->content)
 			printf("=\"%s\"", tmp->content);
+		else if (tmp->equal)
+			printf("=\"\"");
 		printf("\n");
 		tmp = tmp->next;
 	}
@@ -37,11 +39,12 @@ void	env_lst_addfront(t_envp **alst, t_envp *new)
 	*alst = new;
 }
 
-void	env_lst_change_content(t_envp *node, char *content)
+void	env_lst_change_content(t_envp *node, char *content, int equal)
 {
 	if (!node)
 		return ;
 	node->content = content;
+	node->equal = equal;
 }
 
 t_envp	*check_if_exist(t_envp *alst, char *name)

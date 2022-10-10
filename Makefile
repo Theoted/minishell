@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+         #
+#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/07 00:45:29 by pat              ###   ########lyon.fr    #
+#    Updated: 2022/10/10 11:19:47 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ NAME	= minishell
 HEADER	= includes/minishell.h libft2/include/libft2.h libft2/include/gc.h
 LIBFT	= libft2
 
-EXECINCLUDES =	-lreadline -I./readline/include
+EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
 
 # -I./readline/include -L./readline/lib -lncurses
 

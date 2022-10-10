@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 11:41:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ int	contains_equal(char *arg)
 
 // Creer une variable d'environnement avec un contenu qui pointe sur NULL
 int	create_var_no_content(t_data *data, char *arg,
-	char **content, char **name)
+	t_export *expstr)
 {
-	*name = gc_strdup(&data->track, arg);
-	*content = NULL;
+	expstr->name = gc_strdup(&data->track, arg);
+	expstr->content = NULL;
 	return (1);
 }
 
@@ -49,7 +49,7 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 	{
 		if (!check_if_exist(tmp, arg))
 			return (create_var_no_content
-				(data, arg, &expstr->name, &expstr->content));
+				(data, arg, expstr));
 		return (1);
 	}
 	while (arg[++i] && arg[i] != '=')
@@ -64,7 +64,6 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 
 void	init_export_vars(t_export *exp_str, t_envp **in_list)
 {
-	(void)in_list;
 	exp_str->content = NULL;
 	exp_str->name = NULL;
 	exp_str->equal = 0;
@@ -88,7 +87,7 @@ int	b_export(t_data *data, int idx)
 		{
 			in_list = check_if_exist(data->envp, exp_str.name);
 			if (in_list)
-				env_lst_change_content(in_list, exp_str.content);
+				env_lst_change_content(in_list, exp_str.content, exp_str.equal);
 			else
 				env_lst_addfront(&data->envp,
 					env_lstnew

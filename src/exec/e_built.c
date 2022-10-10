@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/07 01:28:09 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 11:17:18 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,20 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 {
 	char	s[1000];
+	char	*err;
 
+	err = NULL;
 	if (!strncmp_ncs(token.args_vec[0], "env"))
 		print_env_list(data->envp);
 	if (!strncmp_ncs(token.args_vec[0], "pwd"))
 	{
-		printf("%s\n", getcwd(s, 100));
+		if (!(*s))
+		{
+			err = find_node_content("PWD", data->envp);
+			printf("%s\n", err);
+		}
+		else
+			printf("%s\n", getcwd(s, 100));
 		exit(0);
 	}
 	if (!strncmp_ncs(token.args_vec[0], "echo"))

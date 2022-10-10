@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/10 11:49:07 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,5 +112,6 @@ int	get_cmd_in_arg(char *arg, t_data *data, int idx)
 	if (!strncmp_ncs(data->commands[idx].args_vec[0], "echo"))
 		data->commands[idx].echo_arg_nb
 			= echo_arg_nb(data->commands[idx].args_vec);
+	printf("arg = %s\n", data->commands[idx].args_vec[0]);
 	return (0);
 }

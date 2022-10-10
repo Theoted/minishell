@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:24:48 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/07 09:50:55 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,11 @@ static int	ft_while_main(t_data *data)
 		signo();
 		data->stdin_arg
 			= readline("\033[0;34mShellDePetiteTaille-0.0.42: \033[0m");
-		sig_parent();
-		add_history(data->stdin_arg);
 		if (ft_ctrl_d(data))
 			return (0);
+		sig_parent();
+		if (check_spaces(data->stdin_arg))
+			add_history(data->stdin_arg);
 		if (!check_spaces(data->stdin_arg))
 		{
 			free(data->stdin_arg);

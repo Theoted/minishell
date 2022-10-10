@@ -1,0 +1,7 @@
+quelques PIPE qui leaks
+env -i ./minishell + cd ~ = segfault            OK
+si enormement de commandes = ressources unvailable mais casse tout "l'ordi"
+voir export test=           OK
+export test="echo user is :$USER" -> $test marche pas
+export -> ne close pas le processus
+env -i -> mettre les 3 variables de bases OK
