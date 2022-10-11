@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:42:35 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 14:42:51 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/11 08:36:21 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ char	*find_node_content(char *name, t_envp *envp)
 		}
 	}
 	return (NULL);
-}
-
-int	echo_arg_nb(char **args)
-{
-	int	i;
-
-	i = 0;
-	while (args[++i])
-		;
-	return (i - 1);
 }
 
 void	get_in_out_init(int *i, int *j, int *in_type)

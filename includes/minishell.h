@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 13:13:47 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/11 08:36:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,6 @@ struct s_tokens
 	char	**args_vec;
 	char	**envp;
 	char	*cmd_path;
-	int		echo_arg_nb;
 	/* fd file && pipe*/
 	int		fd_in;
 	int		fd_out;
@@ -252,7 +251,6 @@ int		find_char(char *arg, char c);
 int		strncmp_ncs(char *s1, char *s2);
 char	*find_node_content(char *name, t_envp *envp);
 int		double_arr_len(char **arg);
-int		echo_arg_nb(char **args);
 void	get_old_pwd_print(int x);
 void	remove_quote_init(t_echo *data, char *arg);
 void	free_all(char **arg);

@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 14:38:16 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/11 08:34:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,6 @@ int	get_cmd_in_arg(char *arg, t_data *data, int idx)
 				(data, data->commands[idx].args_vec[i]);
 	if (remove_quotes_arg_vec(data, data->commands[idx].args_vec))
 		return (1);
-	if (!strncmp_ncs(data->commands[idx].args_vec[0], "echo"))
-		data->commands[idx].echo_arg_nb
-			= echo_arg_nb(data->commands[idx].args_vec);
 	parse_space(data, data->commands[idx].args_vec, idx);
 	return (0);
 }
