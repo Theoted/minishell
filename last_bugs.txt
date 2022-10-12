@@ -15,4 +15,6 @@ toujours pipe qui leaks
 
 < cat Makefile > out | < out cat -e | grep $ > out3 > out4 > out 5 = reste bloqué
 
+< Makefile cat > out | < out cat -e | grep $ > out1 > out 2 > out3 = pas de msg d'erreur
+
 CHECKER LE MAKEFILE
