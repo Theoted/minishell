@@ -7,3 +7,12 @@ export -> ne close pas le processus     ok
 env -i -> mettre les 3 variables de bases OK
 
 export A="echo user is :$USER" = print mais sans espaces
+
+Pas de code erreur sur le here_doc
+exit | exit 123 njnjn 123 = pas de message d'erreur
+cat ctrl+C = pas de ^C
+toujours pipe qui leaks
+
+< cat Makefile > out | < out cat -e | grep $ > out3 > out4 > out 5 = reste bloqué
+
+CHECKER LE MAKEFILE
