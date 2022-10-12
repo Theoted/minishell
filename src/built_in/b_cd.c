@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/10 10:59:00 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 18:00:35 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,11 @@ int	b_cd(t_data *data, int idx)
 		if (!data->commands[idx].args_vec[1])
 			chdir(get_home_oldpwd(data, 1));
 		else
+		{
+			g_status = 1;
 			printf("cd: %s: No such file or directory\n",
 				data->commands[idx].args_vec[1]);
+		}
 	}
 	change_oldpwd(data, &data->envp, cwd, 1);
 	getcwd(cwd, sizeof(cwd));

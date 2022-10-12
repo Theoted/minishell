@@ -55,8 +55,20 @@ si cat <fff avec fff un repertoire, le $? = 255, il devrait etre de 1
 
 
 EN PRIORITÉ:
-    - env-i ./minishell puis /bin/ls ne fait rien, et lance un autre minsihell dedans
     - les erreurs des bluildtin pqs retourner dqns le $?
     - heredoc + ctrl c => $? = 0 alors que devrait etre 1
     - crtl + \ dqns heredoc quitte => devrait rien faire
     - echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg
+    -<< 
+
+
+ShellDePetiteTaille-0.0.42: << <
+=================================================================
+==56353==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x602000005895 at pc 0x00010ee08800 bp 0x7ffee0dfb170 sp 0x7ffee0dfb168
+READ of size 1 at 0x602000005895 thread T0
+    #0 0x10ee087ff in get_in_out_files p_utils.c:117
+    #1 0x10ee0b9dc in lexer p_lexer.c:106
+    #2 0x10ee21b28 in ft_core_parsing_exec main.c:34
+    #3 0x10ee2208d in ft_while_main main.c:59
+    #4 0x10ee21db8 in main main.c:77
+    #5 0x7fff6e9f33d4 in start (libdyld.dylib:x86_64+0x163d4)

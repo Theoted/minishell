@@ -2,6 +2,7 @@
     "makefile.extensionOutputFolder": "./.vscode",
     "files.associations": {
         "complex": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "ostream": "c"
     }
 }

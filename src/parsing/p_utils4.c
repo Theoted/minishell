@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:55:02 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:21:46 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 20:50:17 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ int	exit_error_avlen(void)
 
 int	export_error_arg(char *arg)
 {
-	printf("export: `%s': not a valid identifier\n", arg);
+	write(2, "export: '", 10);
+	write(2, arg, ft_strlen(arg));
+	write(2, "': not a valid identifier\n", 27);
+	g_status = 1;
 	return (1);
 }

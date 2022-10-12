@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/10 14:16:21 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 20:49:26 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,39 @@ int	contains_equal(char *arg)
 	while (arg[i])
 	{
 		if (arg[i] == '=')
+		{
 			return (1);
+		}
 		i++;
 	}
 	return (0);
 }
+
+int check_name(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (contains_equal(arg))
+	{
+		if (arg[i] == '_' || ft_isalpha(arg[i]))
+		{
+			i++;
+			while (arg[++i])
+			{
+				if (!ft_isalnum((int)arg[i]) || arg[i] != '_')
+				{
+					return (0);
+				}
+				if (arg[i] == '=')
+					return (1);
+			}
+		}
+		return (0);
+	}
+	return (1);
+}
+
 
 // Creer une variable d'environnement avec un contenu qui pointe sur NULL
 int	create_var_no_content(t_data *data, char *arg,
@@ -44,7 +72,10 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 	tmp = data->envp;
 	data->exp_equal = 0;
 	if (arg[0] == '=')
+	{
+		g_status = 1;
 		return (export_error_arg(arg));
+	}
 	if (!contains_equal(arg))
 	{
 		if (!check_if_exist(tmp, arg))
@@ -52,6 +83,8 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 				(data, arg, expstr));
 		return (1);
 	}
+	else if (contains_equal(arg) == -1)
+		return (-1);
 	while (arg[++i] && arg[i] != '=')
 		if (arg[i] == ' ')
 			return (1);
@@ -77,12 +110,27 @@ int	b_export(t_data *data, int idx)
 	t_export	exp_str;
 
 	i = 1;
+	// int j = -1;
+
 	if (!arg_vec_len(data, idx))
 		print_export(data, data->envp, idx);
 	while (data->commands[idx].args_vec[i])
 	{
+		printf("idx = %d\n", idx);
 		init_export_vars(&exp_str);
-		check_arg(data, data->commands[idx].args_vec[i], &exp_str);
+		if (i == 1)
+		{
+			if (!check_name(data->commands[idx].args_vec[i]))
+			{
+				
+				write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
+				write(2, ": not a valid identifier\n", 26);
+				g_status = 1;
+				return (-1);
+			}
+		}
+		if (check_arg(data, data->commands[idx].args_vec[i], &exp_str) == -1)
+			return (0);
 		if (exp_str.name)
 		{
 			in_list = check_if_exist(data->envp, exp_str.name);

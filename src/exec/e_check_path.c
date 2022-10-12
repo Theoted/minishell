@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_check_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 19:58:55 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/10/07 01:11:23 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 17:54:56 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,14 @@ void	check_path(t_data *data, t_tokens *token)
 {
 	if (!token->args_vec)
 		return ;
-	if (!ft_strncmp(token->args_vec[0], "./", 2))
+	if (!access(token->args_vec[0], X_OK) && !access(token->args_vec[0], F_OK))
 	{
+		if (open(token->args_vec[0], O_DIRECTORY) > 0)
+		{
+			write (2, token->args_vec[0], ft_strlen(token->args_vec[0]));
+			write (2, ": Is a directory\n", 18);
+			exit (0);
+		}
 		token->cmd_path = gc_strdup(&data->track, token->args_vec[0]);
 		return ;
 	}

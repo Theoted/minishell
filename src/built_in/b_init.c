@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_init.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 15:58:40 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/10 11:02:57 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 17:10:38 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

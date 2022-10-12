@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/10 14:57:58 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 20:53:35 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,21 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 			return (1);
 		return (b_cd(data, idx));
 	}
-	if (!strncmp_ncs(token.args_vec[0], "export") && token.args_vec[1])
+	if (!strncmp_ncs(token.args_vec[0], "export"))
 	{
 		if (data->pipes_nb > 0)
+			return (0);
+		if(b_export(data, idx))
 			return (1);
-		return (b_export(data, idx));
+		if(b_export(data, idx) == -1)
+		{
+			write(2, "export :", 9);
+			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
+			write(2, ": not a valid identifier\n", 26);
+			exit(0);
+		}
+		else
+			write (2, "pas bn\n", 8);
 	}
 	return (ft_exec_built_nofork2(data, token, idx));
 }
@@ -63,18 +73,22 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 		if (!(*s))
 		{
 			err = find_node_content("PWD", data->envp);
-			printf("%s\n", err);
+			dprintf(2, "%s\n", err);
 		}
 		else
-			printf("%s\n", getcwd(s, 100));
+			dprintf(2, "%s\n", getcwd(s, 100));
 		exit(0);
 	}
 	if (!strncmp_ncs(token.args_vec[0], "echo"))
 		b_echo(data, idx);
-	if (!strncmp_ncs(token.args_vec[0], "export") && ((!token.args_vec[1])
-			|| ((token.args_vec[1]) && token.fd_out)))
+	if (!strncmp_ncs(token.args_vec[0], "export"))
 	{
-		b_export(data, idx);
-		exit(0);
+		if(b_export(data, idx) == -1)
+		{
+			write(2, "export :", 9);
+			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
+			write(2, ": not a valid identifier\n", 26);
+			exit(0);
+		}
 	}
 }
