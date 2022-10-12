@@ -1,7 +1,7 @@
 quelques PIPE qui leaks
 env -i ./minishell + cd ~ = segfault            OK
 si enormement de commandes = ressources unvailable mais casse tout "l'ordi"
-voir export test=           OK
+voir export test=                               OK
 export test="echo user is :$USER" -> $test marche pas
 export -> ne close pas le processus     ok
 env -i -> mettre les 3 variables de bases OK
@@ -18,3 +18,45 @@ toujours pipe qui leaks
 < Makefile cat > out | < out cat -e | grep $ > out1 > out 2 > out3 = pas de msg d'erreur
 
 CHECKER LE MAKEFILE
+
+
+
+
+
+
+
+export
+pqs de check valid pu non genre var = ¢ffff devrait pas etre valid
+devrait etre 
+premiere char, soit une lettre min, maj soit _
+ensuite, peut etre lettre, chiffre, _ 
+
+
+export fff="'ech     o"
+
+env-i ./minishell puis /bin/ls ne fait rien, et lance un autre minsihell dedans 
+
+variable avec > ou < genre echo >$USER : crer un ficher $USER et non un fichier tdeville
+
+les erreurs des bluildtin pqs retourner dqns le $?
+
+heredoc + ctrl c => $? = 0 alors que devrait etre 1
+
+signaux :
+crtl + \ dqns heredoc quitte => devrait rien faire
+
+echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg
+alors que cat>in < out marche bien 
+
+leaks de fd entre les commandes
+
+
+si cat <fff avec fff un repertoire, le $? = 255, il devrait etre de 1
+
+
+EN PRIORITÉ:
+    - env-i ./minishell puis /bin/ls ne fait rien, et lance un autre minsihell dedans
+    - les erreurs des bluildtin pqs retourner dqns le $?
+    - heredoc + ctrl c => $? = 0 alors que devrait etre 1
+    - crtl + \ dqns heredoc quitte => devrait rien faire
+    - echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg

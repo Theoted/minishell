@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/05 16:45:37 by rmattheo          #+#    #+#              #
-#    Updated: 2022/10/10 11:19:50 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/12 14:31:45 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ OBJS    = ${SRCS:.c=.o}
 
 CC        = gcc
 
- CFLAGS    = -Wall -Wextra -Werror -fsanitize=address -g3
+ CFLAGS    = -Wall -Wextra -Werror #-fsanitize=address -g3
 
 %o : %c ${HEADER} Makefile
 		${CC} ${CFLAGS} -c $< -o $@

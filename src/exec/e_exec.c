@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/12 13:41:35 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 14:49:00 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_fork(t_data *data, t_tokens *token, int i)
 	token[i].pid = fork();
 	if (token[i].pid == -1)
 	{
+		dprintf(2, "i=%d", i);
 		write(2, "fork: Resource temporarily unavailable\n", 40);
 		g_status = 1;
 		return (0);
