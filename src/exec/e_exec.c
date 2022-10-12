@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/10 14:42:51 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/12 13:41:35 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 
 extern int	g_status;
 
-int	ft_fork(t_data *data, t_tokens *c, int i)
+int	ft_fork(t_data *data, t_tokens *token, int i)
 {
-	c[i].pid = fork();
-	if (c[i].pid == -1)
+	token[i].pid = fork();
+	if (token[i].pid == -1)
 	{
 		write(2, "fork: Resource temporarily unavailable\n", 40);
 		g_status = 1;
 		return (0);
 	}
-	else if (!c[i].pid)
+	else if (!token[i].pid)
 	{
 		sig_child();
-		if (e_child(data, &c[i], i) == -1)
+		if (e_child(data, &token[i], i) == -1)
 			return (0);
 	}
 	else
-		dup_fd_in_pipe(c, i);
+		dup_fd_in_pipe(token, i);
 	return (1);
 }
 
-void	ft_waitpid(t_tokens *c, int i)
+void	ft_waitpid(t_tokens *token, int i)
 {
 	int	status;
 
-	waitpid(c[i].pid, &status, 0);
+	waitpid(token[i].pid, &status, 0);
 	if (!WIFSIGNALED(status))
 		g_status = WEXITSTATUS(status);
 	else if (g_status == 131)
@@ -71,6 +71,8 @@ void	e_exec(t_data *data, t_tokens *token)
 			if (token[i].fd_out != 1 && token[i].fd_out != 0)
 				close(token[i].fd_out);
 		}
+		else
+			dup_fd_in_pipe(token, i);
 	}
 	i = -1;
 	while (token[++i].stop == 0)
