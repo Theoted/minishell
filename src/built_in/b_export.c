@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/13 02:11:18 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 12:06:01 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,8 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 	i = -1;
 	tmp = data->envp;
 	data->exp_equal = 0;
-	if (arg[0] == '=')
-	{
-		g_status = 1;
-		return (export_error_arg(arg));
-	}
+	if (export_check_idtf(arg))
+		return (1);
 	if (!contains_equal(arg))
 	{
 		if (!check_if_exist(tmp, arg))

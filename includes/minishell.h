@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 02:23:02 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 12:05:17 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,7 @@ void	env_lst_addfront(t_envp **alst, t_envp *new);
 void	env_lst_change_content(t_envp *node, char *content, int equal);
 t_envp	*check_if_exist(t_envp *alst, char *name);
 int		export_error_arg(char *arg);
+int		export_check_idtf(char *arg);
 
 
 //		EXIT

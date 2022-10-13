@@ -53,8 +53,8 @@ si cat <fff avec fff un repertoire, le $? = 255, il devrait etre de 1
 
 
 EN PRIORITÉ:
-    MOI - heredoc + ctrl c => $? = 0 alors que devrait etre 1
+    MOI - heredoc + ctrl c => $? = 0 alors que devrait etre 1   A faire
     MOI- les erreurs des bluildtin pqs retourner dqns le $?
-    MOI - crtl + \ dqns heredoc quitte => devrait rien faire
-    MOI - echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg
-    MOI - virer tous les prinfs et les dprintfs
+    MOI - crtl + \ dqns heredoc quitte => devrait rien faire    A faire
+    MOI - echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg   A faire
+    MOI - virer tous les prinfs et les dprintfs de tests
