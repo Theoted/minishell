@@ -58,3 +58,4 @@ EN PRIORITÉ:
     MOI - crtl + \ dqns heredoc quitte => devrait rien faire    A faire
     MOI - echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg   A faire
     MOI - virer tous les prinfs et les dprintfs de tests
+    MOI - export > out 
