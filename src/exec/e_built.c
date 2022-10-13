@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/12 20:53:35 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:23:17 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,18 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 	}
 	if (!strncmp_ncs(token.args_vec[0], "export"))
 	{
+		int err;
 		if (data->pipes_nb > 0)
 			return (0);
-		if(b_export(data, idx))
+		err = b_export(data, idx);
+		if(err)
 			return (1);
-		if(b_export(data, idx) == -1)
+		if(err == -1)
 		{
 			write(2, "export :", 9);
 			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
 			write(2, ": not a valid identifier\n", 26);
+			g_status = 1;
 			exit(0);
 		}
 		else
@@ -67,7 +70,7 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 
 	err = NULL;
 	if (!strncmp_ncs(token.args_vec[0], "env"))
-		print_env_list(data->envp);
+		print_env_list(data, data->envp, idx);
 	if (!strncmp_ncs(token.args_vec[0], "pwd"))
 	{
 		if (!(*s))
@@ -88,6 +91,7 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 			write(2, "export :", 9);
 			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
 			write(2, ": not a valid identifier\n", 26);
+			g_status = 1;
 			exit(0);
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/11 08:34:02 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:08:14 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	b_echo(t_data *data, int idx)
 		e_d.check = 1;
 		data->commands[idx].args_vec[i] = check_exit_status
 			(data, data->commands[idx].args_vec[i], -1);
-		printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
+		dprintf(data->commands[idx].fd_out, "%s", remove_quotes(data, data->commands[idx].args_vec[i]));
 		if (e_d.av_len > 1
 			&& i < e_d.av_len
 			&& data->commands[idx].args_vec[i])
-			printf(" ");
+			dprintf(data->commands[idx].fd_out, " ");
 	}
 	if (e_d.bn)
-		printf("\n");
+		dprintf(data->commands[idx].fd_out, "\n");
 	exit(0);
 }

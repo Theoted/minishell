@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/12 20:45:56 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:42:59 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	e_heredoc(t_tokens *token)
 /* execution de la commande dans le child */
 int	e_child(t_data *data, t_tokens *token, int idx)
 {
+	// (void)idx;
 	if (token->fd_out != 1 && token->fd_out != 0)
 	{
 		dup2(token->fd_out, STDOUT_FILENO);
@@ -65,6 +66,7 @@ int	e_child(t_data *data, t_tokens *token, int idx)
 	if (token->fd_out == 0)
 		dup2(token->pfd[1], STDOUT_FILENO);
 	close(token->pfd[1]);
+	printf("asdfasdf\n");
 	check_path(data, token);
 	e_execve(data, token, idx);
 	return (1);

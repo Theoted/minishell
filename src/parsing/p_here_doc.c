@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:56 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:55:48 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_here_doc(t_data *data, int idx)
 {
 	int		pid;
 	int		pipehd[2];
+	int status;
 
 	pipe(pipehd);
 	signal(SIGINT, sig_handler_parent_hd);
@@ -34,9 +35,11 @@ int	ft_here_doc(t_data *data, int idx)
 		write(pipehd[1], data->commands[idx].here_doc,
 			ft_strlen(data->commands[idx].here_doc));
 		close(pipehd[1]);
-		exit(0);
+		exit(1);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	if (!WIFSIGNALED(status))
+		g_status = WEXITSTATUS(status);
 	close(pipehd[1]);
 	data->commands[idx].here_doc = get_pipe_content(pipehd[0], data);
 	close(pipehd[0]);

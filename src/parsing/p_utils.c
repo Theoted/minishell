@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:11:23 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 01:16:01 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,12 @@ int	get_in_out_files(char *arg, t_data *data, int idx)
 				data->commands[idx].files[j].type = in_type;
 				data->commands[idx].files[j].file_name = remove_quotes(data,
 						data->commands[idx].files[j].file_name);
+				if (!data->commands[idx].files[j].file_name)
+					return (-1);
 			}
 		}
+		if (!arg[i])
+			return(0);
 	}
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/12 20:49:26 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:11:18 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,21 @@ int check_name(char *arg)
 		if (arg[i] == '_' || ft_isalpha(arg[i]))
 		{
 			i++;
-			while (arg[++i])
+			while (arg[i])
 			{
-				if (!ft_isalnum((int)arg[i]) || arg[i] != '_')
+				if (arg[i] == '=')
+				{
+					return (1);
+				}
+				i++;
+				if (!ft_isalnum((int)arg[i]) || arg[i] != '_' || ft_isalpha(arg[i]))
 				{
 					return (0);
 				}
-				if (arg[i] == '=')
-					return (1);
 			}
 		}
-		return (0);
+		else
+			return (0);
 	}
 	return (1);
 }
@@ -116,18 +120,14 @@ int	b_export(t_data *data, int idx)
 		print_export(data, data->envp, idx);
 	while (data->commands[idx].args_vec[i])
 	{
-		printf("idx = %d\n", idx);
 		init_export_vars(&exp_str);
-		if (i == 1)
+		if (!check_name(data->commands[idx].args_vec[i]))
 		{
-			if (!check_name(data->commands[idx].args_vec[i]))
-			{
-				
-				write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
-				write(2, ": not a valid identifier\n", 26);
-				g_status = 1;
-				return (-1);
-			}
+			
+			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
+			write(2, ": not a valid identifier\n", 26);
+			g_status = 1;
+			return (-1);
 		}
 		if (check_arg(data, data->commands[idx].args_vec[i], &exp_str) == -1)
 			return (0);

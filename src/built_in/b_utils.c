@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/10 11:38:09 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:35:50 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int	strncmp_len(char *s1, char *s2)
 	return (ft_strncmp(s1, s2, len));
 }
 
-void	print_env_list(t_envp *env_list)
+void	print_env_list(t_data *data, t_envp *env_list, int idx)
 {
 	t_envp	*tmp;
 
+	(void)idx;
+	(void)data;
 	tmp = env_list;
 	while (tmp)
 	{
@@ -40,7 +42,7 @@ void	print_env_list(t_envp *env_list)
 			if (tmp->content)
 				printf("%s=%s\n", tmp->name, tmp->content);
 			else if (!tmp->content)
-				printf("%s=\n", tmp->name);
+				printf( "%s=\n", tmp->name);
 		}
 		tmp = tmp->next;
 	}

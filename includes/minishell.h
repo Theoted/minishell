@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/12 13:40:44 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:23:02 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,7 +269,7 @@ void	env_i_init(t_data *data);
 //		UNSET
 void	init_our_envp(t_data *data);
 void    delete_env_node(t_envp **env_lst, char *name);
-void	print_env_list(t_envp *env_list);
+void	print_env_list(t_data *data, t_envp *env_list, int idx);
 int		b_unset(t_data *data, int cmd_id);
 
 //		EXPORT
@@ -310,7 +310,6 @@ void	ft_while_remove_quotes(t_data *data, char *arg, t_echo *echo_data);
 
 //		Built-ins utils
 int		strncmp_len(char *s1, char *s2);
-void	print_env_list(t_envp *env_list);
 int		arg_vec_len(t_data *data, int idx);
 void	ft_exec_built_fork(t_data *data, t_tokens token, int idx);
 int		ft_exec_built_nofork(t_data *data, t_tokens token, int idx);

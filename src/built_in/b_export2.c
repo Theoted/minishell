@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:58:01 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 11:40:28 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:41:27 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void	print_export(t_data *data, t_envp *envp, int idx)
 		printf("\n");
 		tmp = tmp->next;
 	}
-	if (data->commands[idx].fd_out != 1)
+	dprintf(6, "=\"\"");
+	if (!data->commands[idx + 1].stop && data->pipes_nb > 0)
 		exit(0);
 }
 

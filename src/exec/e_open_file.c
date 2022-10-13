@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/10 15:11:41 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/13 02:13:10 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ extern int	g_status;
 
 int	open_infile(t_tokens *token, char *infile)
 {
-	token->fd_in = open(infile, O_DIRECTORY);
 	if (token->fd_in != 0 && token->fd_in != -1)
 	{
 		write(2, infile, ft_strlen(infile));
