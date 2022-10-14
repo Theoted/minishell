@@ -8,11 +8,7 @@ exit | exit 123 njnjn 123 = pas de message d'erreur
 cat ctrl+C = pas de ^C
 toujours pipe qui leaks
 
-< cat Makefile > out | < out cat -e | grep $ > out3 > out4 > out 5 = reste bloqué
-
 < Makefile cat > out | < out cat -e | grep "$" > out1 > out 2 > out3 = pas de msg d'erreur
-
-< Makefile cat > out | < out cat -e | dsadfas
 
 CHECKER LE MAKEFILE
 
