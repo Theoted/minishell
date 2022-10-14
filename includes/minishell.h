@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 12:05:17 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 01:20:00 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,8 +274,8 @@ int		b_unset(t_data *data, int cmd_id);
 
 //		EXPORT
 int		b_export(t_data *data, int idx);
-//		EXPORT 2
 void	print_export(t_data *data, t_envp *envp, int idx);
+void	print_export_fd_out(t_data *data, t_envp *envp, int idx);
 void	env_lst_addfront(t_envp **alst, t_envp *new);
 void	env_lst_change_content(t_envp *node, char *content, int equal);
 t_envp	*check_if_exist(t_envp *alst, char *name);

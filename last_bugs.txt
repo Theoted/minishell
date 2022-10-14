@@ -36,7 +36,6 @@ export fff="'ech     o"
 
 variable avec > ou < genre echo >$USER : crer un ficher $USER et non un fichier tdeville
 
-les erreurs des bluildtin pqs retourner dqns le $?
 
 heredoc + ctrl c => $? = 0 alors que devrait etre 1
 
@@ -54,8 +53,5 @@ si cat <fff avec fff un repertoire, le $? = 255, il devrait etre de 1
 
 EN PRIORITÉ:
     MOI - heredoc + ctrl c => $? = 0 alors que devrait etre 1   A faire
-    MOI- les erreurs des bluildtin pqs retourner dqns le $?
-    MOI - crtl + \ dqns heredoc quitte => devrait rien faire    A faire
-    MOI - echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg   A faire
-    MOI - virer tous les prinfs et les dprintfs de tests
-    MOI - export > out 
+    A rechecker j'ai peut etre oublié de faire des tests- les erreurs des bluildtin pqs retourner dqns le $?
+    MOI - crtl + \ dqns heredoc quitte => devrait rien faire

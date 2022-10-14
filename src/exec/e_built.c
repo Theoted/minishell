@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/13 02:23:17 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 04:34:55 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 			return (1);
 		if(err == -1)
 		{
+	
 			write(2, "export :", 9);
 			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
 			write(2, ": not a valid identifier\n", 26);

@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 02:08:14 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 05:09:40 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void	b_echo(t_data *data, int idx)
 		e_d.check = 1;
 		data->commands[idx].args_vec[i] = check_exit_status
 			(data, data->commands[idx].args_vec[i], -1);
-		dprintf(data->commands[idx].fd_out, "%s", remove_quotes(data, data->commands[idx].args_vec[i]));
+		printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
 		if (e_d.av_len > 1
 			&& i < e_d.av_len
 			&& data->commands[idx].args_vec[i])
-			dprintf(data->commands[idx].fd_out, " ");
+			printf(" ");
 	}
 	if (e_d.bn)
-		dprintf(data->commands[idx].fd_out, "\n");
+		printf("\n");
 	exit(0);
 }

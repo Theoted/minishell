@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/13 12:06:01 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 04:55:58 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ int check_name(char *arg)
 			{
 				if (arg[i] == '=')
 				{
+				dprintf(2, "wefwfwe\n");
 					return (1);
 				}
 				i++;
-				if (!ft_isalnum((int)arg[i]) || arg[i] != '_' || ft_isalpha(arg[i]))
+				if (!ft_isalnum((int)arg[i]) && arg[i] != '_')
 				{
 					return (0);
 				}
@@ -75,8 +76,9 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 	i = -1;
 	tmp = data->envp;
 	data->exp_equal = 0;
-	if (export_check_idtf(arg))
-		return (1);
+	if (contains_equal(arg))
+		if(export_check_idtf(arg))
+			return(1);
 	if (!contains_equal(arg))
 	{
 		if (!check_if_exist(tmp, arg))
@@ -84,8 +86,6 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 				(data, arg, expstr));
 		return (1);
 	}
-	else if (contains_equal(arg) == -1)
-		return (-1);
 	while (arg[++i] && arg[i] != '=')
 		if (arg[i] == ' ')
 			return (1);
@@ -111,21 +111,15 @@ int	b_export(t_data *data, int idx)
 	t_export	exp_str;
 
 	i = 1;
-	// int j = -1;
-
-	if (!arg_vec_len(data, idx))
+	if (!arg_vec_len(data, idx) && data->pipes_nb > 0 && !data->commands[idx + 1].stop)
+		print_export(data, data->envp, idx);
+	else if (!arg_vec_len(data, idx) && data->commands[idx].fd_out && !data->pipes_nb)
+		print_export_fd_out(data, data->envp, idx);
+	else if (!arg_vec_len(data, idx) && data->commands[idx].fd_out && data->pipes_nb)
 		print_export(data, data->envp, idx);
 	while (data->commands[idx].args_vec[i])
 	{
 		init_export_vars(&exp_str);
-		if (!check_name(data->commands[idx].args_vec[i]))
-		{
-			
-			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
-			write(2, ": not a valid identifier\n", 26);
-			g_status = 1;
-			return (-1);
-		}
 		if (check_arg(data, data->commands[idx].args_vec[i], &exp_str) == -1)
 			return (0);
 		if (exp_str.name)
@@ -141,5 +135,7 @@ int	b_export(t_data *data, int idx)
 		i++;
 	}
 	find_env_path(data->envp, data);
+	if (data->pipes_nb > 0)
+		exit(0);
 	return (1);
 }
