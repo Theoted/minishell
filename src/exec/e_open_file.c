@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 14:11:16 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 18:20:09 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	open_infile(t_tokens *token, char *infile)
 	{
 		write(2, infile, ft_strlen(infile));
 		write(2, " : is a directory\n", 19);
+		g_status = 1;
 		close(token->fd_in);
 		return (0);
 	}
