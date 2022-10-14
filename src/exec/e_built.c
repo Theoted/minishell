@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 04:34:55 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 15:32:45 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 			g_status = 1;
 			exit(0);
 		}
-		else
-			write (2, "pas bn\n", 8);
 	}
 	return (ft_exec_built_nofork2(data, token, idx));
 }

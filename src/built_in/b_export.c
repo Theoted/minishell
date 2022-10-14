@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/14 04:55:58 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 13:36:23 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ int	check_arg(t_data *data, char *arg, t_export *expstr)
 			return(1);
 	if (!contains_equal(arg))
 	{
+		if(export_check_idtf(arg))
+			return (1);
 		if (!check_if_exist(tmp, arg))
 			return (create_var_no_content
 				(data, arg, expstr));

@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 05:09:40 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 17:05:09 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*remove_quotes(t_data *data, char *arg)
 void	b_echo(t_data *data, int idx)
 {
 	int			i;
+	char		*content;
 	t_echo_2	e_d;
 
 	init_ed(&e_d, data, idx);
@@ -72,7 +73,8 @@ void	b_echo(t_data *data, int idx)
 		e_d.check = 1;
 		data->commands[idx].args_vec[i] = check_exit_status
 			(data, data->commands[idx].args_vec[i], -1);
-		printf("%s", remove_quotes(data, data->commands[idx].args_vec[i]));
+		content = remove_quotes(data, data->commands[idx].args_vec[i]);
+		printf("%s", content);
 		if (e_d.av_len > 1
 			&& i < e_d.av_len
 			&& data->commands[idx].args_vec[i])

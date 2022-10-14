@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/13 02:13:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 14:53:37 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,11 @@ void	e_exec(t_data *data, t_tokens *token)
 		if (open_files(&token[i]))
 		{
 			if (!ft_exec_built_nofork(data, token[i], i))
+			{
 				if (!ft_fork(data, token, i))
 					return ;
-			if (token[i].fd_out != 1 && token[i].fd_out != 0)
+			}
+			else if (token[i].fd_out != 1 && token[i].fd_out != 0)
 				close(token[i].fd_out);
 		}
 		else

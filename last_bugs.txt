@@ -1,13 +1,8 @@
 quelques PIPE qui leaks
-env -i ./minishell + cd ~ = segfault            OK
 si enormement de commandes = ressources unvailable mais casse tout "l'ordi"
-voir export test=                               OK
-export test="echo user is :$USER" -> $test marche pas
 export -> ne close pas le processus     ok
-env -i -> mettre les 3 variables de bases OK
 
 export A="echo user is :$USER" = print mais sans espaces
-
 Pas de code erreur sur le here_doc
 exit | exit 123 njnjn 123 = pas de message d'erreur
 cat ctrl+C = pas de ^C
@@ -15,21 +10,11 @@ toujours pipe qui leaks
 
 < cat Makefile > out | < out cat -e | grep $ > out3 > out4 > out 5 = reste bloqué
 
-< Makefile cat > out | < out cat -e | grep $ > out1 > out 2 > out3 = pas de msg d'erreur
+< Makefile cat > out | < out cat -e | grep "$" > out1 > out 2 > out3 = pas de msg d'erreur
+
+< Makefile cat > out | < out cat -e | dsadfas
 
 CHECKER LE MAKEFILE
-
-
-
-
-
-
-
-export
-pqs de check valid pu non genre var = ¢ffff devrait pas etre valid
-devrait etre 
-premiere char, soit une lettre min, maj soit _
-ensuite, peut etre lettre, chiffre, _ 
 
 
 export fff="'ech     o"
@@ -55,3 +40,4 @@ EN PRIORITÉ:
     MOI - heredoc + ctrl c => $? = 0 alors que devrait etre 1   A faire
     A rechecker j'ai peut etre oublié de faire des tests- les erreurs des bluildtin pqs retourner dqns le $?
     MOI - crtl + \ dqns heredoc quitte => devrait rien faire
+    MOI - Exit | exit err;

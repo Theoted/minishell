@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 17:04:56 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	arg_vec_len(t_data *data, int idx)
 	i = 0;
 	j = 0;
 	while (data->commands[idx].args_vec[++i])
+	{
 		j++;
+	}
 	return (j);
 }
 
