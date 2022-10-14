@@ -6,7 +6,7 @@
 /*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 17:10:18 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/14 18:07:19 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	get_cmd_in_arg(char *arg, t_data *data, int idx)
 
 	i = -1;
 	cmd = skip_in_out_hd(arg, data);
-	printf("cmd = %s\n", cmd);
 	if (cmd)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else
