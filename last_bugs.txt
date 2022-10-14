@@ -23,9 +23,6 @@ heredoc + ctrl c => $? = 0 alors que devrait etre 1
 signaux :
 crtl + \ dqns heredoc quitte => devrait rien faire
 
-echo>in< out gggggg ne met rien dans in alors que devrait mettre gggggg
-alors que cat>in < out marche bien 
-
 leaks de fd entre les commandes
 
 EN PRIORITÉ:
