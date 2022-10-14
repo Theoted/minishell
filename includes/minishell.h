@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 01:20:00 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 18:06:03 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,6 @@ int		get_cmd_in_arg(char *arg, t_data *data, int idx);
 char 	*skip_in_out_hd(char *arg, t_data *data);
 void	skip_in_hd(char *arg, int *i);
 void	skip_out(char *arg, int *i);
-void	skip_spaces(char *arg, int *i);
 char	*get_cmd(char *arg, int i, t_data *data);
 char	*remove_quotes(t_data *data, char *arg);
 int		parse_space(t_data *data, char **args, int idx);

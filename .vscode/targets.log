@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-/Applications/Xcode.app/Contents/Developer/usr/bin/make -C libft2
+/Applications/Xcode.app/Contents/Developer/usr/bin/make CFLAGS="-Wall -Werror -Wextra -fsanitize=address -g3" -C libft2
  
 # GNU Make 3.81
 # Copyright (C) 2006  Free Software Foundation, Inc.
@@ -18,15 +18,15 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Fri Oct  7 09:14:43 2022
+# Make data base, printed on Fri Oct 14 17:07:38 2022
 
 # Variables
 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+ 
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
@@ -46,9 +46,9 @@ SHELL = /bin/sh
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-_ = /usr/bin/make
-# makefile (from `Makefile', line 93)
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+_ = /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# command line
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # environment
@@ -93,6 +93,8 @@ VSCODE_CODE_CACHE_PATH = /Users/theodeville/Library/Application Support/Code/Cac
 LOGNAME = theodeville
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
++F = $(notdir $+)
 # environment
 ZSH = /Users/theodeville/.oh-my-zsh
 # environment
@@ -110,9 +112,11 @@ LC_TERMINAL = iTerm2
 # makefile (from `Makefile', line 19)
 SRCS = ft_check/ft_isalpha.c ft_check/ft_isdigit.c ft_check/ft_isalnum.c ft_check/ft_isascii.c ft_check/ft_isprint.c ft_check/ft_toupper.c ft_check/ft_tolower.c ft_mem/ft_memset.c ft_mem/ft_memcpy.c ft_mem/ft_memmove.c ft_mem/ft_memchr.c ft_mem/ft_memcmp.c ft_atoi_itoa/ft_itoa.c ft_atoi_itoa/gc_itoa.c ft_atoi_itoa/ft_atoi.c ft_atoi_itoa/ft_atoi_base.c ft_str/ft_strlen.c ft_str/ft_strchr.c ft_str/ft_strncmp.c ft_str/ft_strnstr.c ft_str/ft_strrchr.c ft_str/ft_strlcat.c ft_str/ft_strlcpy.c ft_str/ft_strdup.c ft_str/ft_substr.c ft_str/ft_strtrim.c ft_str/ft_strmapi.c ft_str/ft_strmapi.c ft_str/ft_striteri.c ft_str/ft_split.c ft_str/ft_strjoin.c ft_str/ft_strlen_charset.c ft_str/gc_split.c ft_str/gc_split_spaces.c ft_str/gc_substr.c ft_str/gc_strjoin.c ft_str/gc_strdup.c ft_str/gc_strtrim.c ft_malloc/ft_bzero.c ft_malloc/ft_calloc.c ft_malloc/gc_calloc.c ft_put/ft_putchar_fd.c ft_put/ft_putnbr_fd.c ft_put/ft_putstr_fd.c ft_put/ft_putptr.c ft_put/ft_putnbr_usigned_fd.c ft_put/ft_putnbr_base.c ft_put/ft_putendl_fd.c ft_gnl/get_next_line.c ft_gnl/gc_get_next_line.c ft_maths/ft_round.c ft_maths/ft_colinterpolate.c ft_lst/ft_lstnew.c ft_lst/ft_lstadd_front.c ft_lst/ft_lstlast.c ft_lst/ft_lstadd_back.c ft_lst/ft_lstdelone.c ft_lst/ft_lstclear.c ft_lst/ft_lstiter.c ft_lst/ft_lstmap.c ft_lst/ft_lstsize.c ft_gc/gc_add_mal.c ft_gc/gc_lstadd_front.c ft_gc/gc_lstnew.c ft_gc/gc_free_all.c ft_gc/gc_free_malloc.c ft_gc/gc_free_malloc_split.c ft_gc/gc_lstdelone.c
 # environment
-SHLVL = 3
+SHLVL = 4
 # makefile (from `Makefile', line 91)
 CC = gcc
+# environment
+MAKEOVERRIDES = ${-*-command-variables-*-}
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -131,7 +135,6 @@ LESS = -R
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # environment
 TERM_PROGRAM = iTerm.app
- 
 # default
 .VARIABLES := 
 # environment
@@ -143,7 +146,7 @@ VSCODE_IPC_HOOK = /Users/theodeville/Library/Application Support/Code/1.70.2-mai
 # environment
 MallocNanoZone = 0
 # makefile
-MAKEFLAGS = Rrqp
+MAKEFLAGS = Rrqp -- $(MAKEOVERRIDES)
 # environment
 MFLAGS = -Rrqp
 # automatic
@@ -151,7 +154,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 3.4.15
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.13606145.13606151.85E767E0-B32F-43B2-A61E-24F60AD09F87
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.13606145.13606151.F6E4B108-8657-47D4-87B3-8FD2099D33EC
 # environment
 LC_TERMINAL_VERSION = 3.4.15
 # environment
@@ -159,7 +162,7 @@ HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
-+F = $(notdir $+)
+-*-command-variables-*- := CFLAGS=-Wall\ -Werror\ -Wextra\ -fsanitize=address\ -g3
 # environment
 ITERM_SESSION_ID = w0t0p0:E1807D4C-BC4E-4358-8153-F930BD7F92B0
 # environment
@@ -195,7 +198,7 @@ TERM = xterm-256color
 # environment
 VSCODE_PID = 9477
 # variable set hash-table stats:
-# Load=85/1024=8%, Rehash=0, Collisions=6/119=5%
+# Load=87/1024=8%, Rehash=0, Collisions=8/122=7%
 
 # Pattern-specific Variable Values
 
@@ -203,11 +206,11 @@ VSCODE_PID = 9477
 
 # Directories
 
-# include (device 16777229, inode 15550711): 4 files, no impossibilities so far.
-# . (device 16777229, inode 15550622): 15 files, no impossibilities.
-# ft_check (device 16777229, inode 15550631): 8 files, no impossibilities so far.
+# include (device 16777229, inode 15675253): 4 files, no impossibilities so far.
+# . (device 16777229, inode 15675174): 14 files, no impossibilities.
+# ft_check (device 16777229, inode 15675181): 7 files, no impossibilities so far.
 
-# 27 files, no impossibilities in 3 directories.
+# 25 files, no impossibilities in 3 directories.
 
 # Implicit Rules
 
@@ -286,6 +289,7 @@ ft_lst/ft_lstadd_back.o:
 #  File has not been updated.
 
 # Not a target:
+ 
 ft_check/ft_isdigit.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -360,7 +364,7 @@ ft_str/ft_strchr.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -419,7 +423,6 @@ ft_put/ft_putnbr_fd.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
 # Not a target:
 ft_str/ft_strtrim.o:
@@ -430,7 +433,7 @@ ft_str/ft_strtrim.o:
 # Not a target:
 include/gc.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -529,6 +532,7 @@ re: fclean all
 
 # Not a target:
 ft_mem/ft_memmove.o:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -596,8 +600,7 @@ ft_gc/gc_lstnew.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-libft2.a: ft_check/ft_isalpha.o ft_check/ft_isdigit.o ft_check/ft_isalnum.o ft_check/ft_isascii.o ft_check/ft_isprint.o ft_check/ft_toupper.o ft_check/ft_tolower.o ft_mem/ft_memset.o ft_mem/ft_memcpy.o ft_mem/ft_memmove.o ft_mem/ft_memchr.o ft_mem/ft_memcmp.o ft_atoi_itoa/ft_itoa.o ft_atoi_itoa/gc_itoa.o ft_atoi_itoa/ft_atoi.o ft_atoi_itoa/ft_atoi_base.o ft_str/ft_strlen.o ft_str/ft_strchr.o ft_str/ft_strncmp.o ft_str/ft_strnstr.o ft_str/ft_strrchr.o ft_str/ft_strlcat.o ft_str/ft_strlcpy.o ft_str/ft_strdup.o ft_str/ft_substr.o ft_str/ft_strtrim.o ft_str/ft_strmapi.o ft_str/ft_strmapi.o ft_str/ft_striteri.o ft_str/ft_split.o ft_str/ft_strjoin.o ft_str/ft_strlen_charset.o ft_str/gc_split.o ft_str/gc_split_spaces.o ft_str/gc_substr.o ft_str/gc_strjoin.o ft_str/gc_strdup.o ft_str/gc_strtrim.o ft_malloc/ft_bzero.o ft_malloc/ft_calloc.o ft_malloc/gc_calloc.o ft_put/ft_putchar_fd.o ft_put/ft_putnbr_fd.o ft_put/ft_putstr_fd.o ft_put/ft_putptr.o ft_put/ft_putnbr_usigned_fd.o ft_put/ft_putnbr_base.o ft_put/ft_putendl_f 
-d.o ft_gnl/get_next_line.o ft_gnl/gc_get_next_line.o ft_maths/ft_round.o ft_maths/ft_colinterpolate.o ft_lst/ft_lstnew.o ft_lst/ft_lstadd_front.o ft_lst/ft_lstlast.o ft_lst/ft_lstadd_back.o ft_lst/ft_lstdelone.o ft_lst/ft_lstclear.o ft_lst/ft_lstiter.o ft_lst/ft_lstmap.o ft_lst/ft_lstsize.o ft_gc/gc_add_mal.o ft_gc/gc_lstadd_front.o ft_gc/gc_lstnew.o ft_gc/gc_free_all.o ft_gc/gc_free_malloc.o ft_gc/gc_free_malloc_split.o ft_gc/gc_lstdelone.o
+libft2.a: ft_check/ft_isalpha.o ft_check/ft_isdigit.o ft_check/ft_isalnum.o ft_check/ft_isascii.o ft_check/ft_isprint.o ft_check/ft_toupper.o ft_check/ft_tolower.o ft_mem/ft_memset.o ft_mem/ft_memcpy.o ft_mem/ft_memmove.o ft_mem/ft_memchr.o ft_mem/ft_memcmp.o ft_atoi_itoa/ft_itoa.o ft_atoi_itoa/gc_itoa.o ft_atoi_itoa/ft_atoi.o ft_atoi_itoa/ft_atoi_base.o ft_str/ft_strlen.o ft_str/ft_strchr.o ft_str/ft_strncmp.o ft_str/ft_strnstr.o ft_str/ft_strrchr.o ft_str/ft_strlcat.o ft_str/ft_strlcpy.o ft_str/ft_strdup.o ft_str/ft_substr.o ft_str/ft_strtrim.o ft_str/ft_strmapi.o ft_str/ft_strmapi.o ft_str/ft_striteri.o ft_str/ft_split.o ft_str/ft_strjoin.o ft_str/ft_strlen_charset.o ft_str/gc_split.o ft_str/gc_split_spaces.o ft_str/gc_substr.o ft_str/gc_strjoin.o ft_str/gc_strdup.o ft_str/gc_strtrim.o ft_malloc/ft_bzero.o ft_malloc/ft_calloc.o ft_malloc/gc_calloc.o ft_put/ft_putchar_fd.o ft_put/ft_putnbr_fd.o ft_put/ft_putstr_fd.o ft_put/ft_putptr.o ft_put/ft_putnbr_usigned_fd.o ft_put/ft_putnbr_base.o ft_put/ft_putendl_fd.o ft_gnl/get_next_line.o ft_gnl/gc_get_next_line.o ft_maths/ft_round.o ft_maths/ft_colinterpolate.o ft_lst/ft_lstnew.o ft_lst/ft_lstadd_front.o ft_lst/ft_lstlast.o ft_lst/ft_lstadd_back.o ft_lst/ft_lstdelone.o ft_lst/ft_lstclear.o ft_lst/ft_lstiter.o ft_lst/ft_lstmap.o ft_lst/ft_lstsize.o ft_gc/gc_add_mal.o ft_gc/gc_lstadd_front.o ft_gc/gc_lstnew.o ft_gc/gc_free_all.o ft_gc/gc_free_malloc.o ft_gc/gc_free_malloc_split.o ft_gc/gc_lstdelone.o
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
@@ -617,7 +620,7 @@ ft_str/ft_strlcat.o:
 # Not a target:
 ft_check/ft_isalpha.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -698,7 +701,7 @@ ft_atoi_itoa/ft_atoi_base.o:
 # Not a target:
 include/libft.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -753,26 +756,26 @@ ft_mem/ft_memcpy.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Oct  7 09:14:43 2022
+# Finished Make data base on Fri Oct 14 17:07:38 2022
 
  
 make: *** [maker] Error 1
 
 
-# Make data base, printed on Fri Oct  7 09:14:43 2022
+# Make data base, printed on Fri Oct 14 17:07:38 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
- 
 ?F = $(notdir $?)
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 LC_CTYPE = UTF-8
 # automatic
+ 
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -787,7 +790,7 @@ VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupp
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 21)
-EXECINCLUDES = -lreadline -I./readline/include
+EXECINCLUDES = -lreadline -I./readline/include 
 # makefile (from `config/built_srcs.mk', line 1)
 MAKEFILE_LIST :=  Makefile config/pars_srcs.mk config/exec_srcs.mk config/built_srcs.mk
 # environment
@@ -849,7 +852,7 @@ MAKE = $(MAKE_COMMAND)
 # environment
 LC_TERMINAL = iTerm2
 # makefile (from `Makefile', line 25)
-SRCS = src/parsing/p_bin_path.c src/parsing/p_get_cmd.c src/parsing/p_utils.c src/parsing/p_utils2.c src/parsing/p_utils3.c src/parsing/p_utils4.c src/parsing/p_lexer.c src/parsing/p_here_doc_check.c src/parsing/p_here_doc_expend_var.c src/parsing/p_here_doc.c src/parsing/p_here_doc_utils.c src/parsing/p_here_doc_utils2.c src/parsing/p_synthax_checker.c src/parsing/p_synthax_checker2.c src/exec/e_exec.c src/exec/e_exec2.c src/exec/e_built.c src/exec/e_built2.c src/exec/e_check_path.c src/exec/e_open_file.c src/exec/e_utils.c src/exec/e_hd_signals.c src/exec/e_signals.c src/exec/e_signals2.c src/exec/e_signals3.c src/built_in/b_init.c src/built_in/b_unset.c src/built_in/b_exit.c src/built_in/b_export.c src/built_in/b_export2.c src/built_in/b_cd.c src/built_in/b_echo.c src/built_in/b_echo_utils.c src/built_in/b_echo_utils2.c src/built_in/b_echo_envvar.c src/built_in/b_utils.c src/main.c
+SRCS = src/parsing/p_bin_path.c src/parsing/p_get_cmd.c src/parsing/p_utils.c src/parsing/p_utils2.c src/parsing/p_utils3.c src/parsing/p_utils4.c src/parsing/p_lexer.c src/parsing/p_here_doc_check.c src/parsing/p_here_doc_expend_var.c src/parsing/p_here_doc.c src/parsing/p_here_doc_utils.c src/parsing/p_here_doc_utils2.c src/parsing/p_synthax_checker.c src/parsing/p_synthax_checker2.c src/parsing/p_init_envp.c src/parsing/p_cmd_utils.c  src/exec/e_exec.c src/exec/e_exec2.c src/exec/e_built.c src/exec/e_built2.c src/exec/e_check_path.c src/exec/e_open_file.c src/exec/e_utils.c src/exec/e_hd_signals.c src/exec/e_signals.c src/exec/e_signals2.c src/exec/e_signals3.c src/built_in/b_init.c src/built_in/b_unset.c src/built_in/b_exit.c src/built_in/b_export.c src/built_in/b_export2.c src/built_in/b_cd.c src/built_in/b_echo.c src/built_in/b_echo_utils.c src/built_in/b_echo_utils2.c src/built_in/b_echo_envvar.c src/built_in/b_utils.c src/built_in/b_export_check.c 	 src/main.c
 # environment
 SHLVL = 3
 # makefile (from `Makefile', line 19)
@@ -865,7 +868,6 @@ USER = theodeville
 # default
 MAKECMDGOALS := all
 # environment
- 
 TERM_SESSION_ID = w0t0p0:E1807D4C-BC4E-4358-8153-F930BD7F92B0
 # makefile (from `Makefile', line 17)
 NAME = minishell
@@ -885,6 +887,7 @@ TMPDIR = /var/folders/km/mpxk8j2s0plbsdvtskk_jsh80000gn/T/
 *F = $(notdir $*)
 # environment
 VSCODE_IPC_HOOK = /Users/theodeville/Library/Application Support/Code/1.70.2-main.sock
+ 
 # environment
 MallocNanoZone = 0
 # makefile
@@ -896,7 +899,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 3.4.15
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.13606145.13606151.85E767E0-B32F-43B2-A61E-24F60AD09F87
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.13606145.13606151.F6E4B108-8657-47D4-87B3-8FD2099D33EC
 # environment
 LC_TERMINAL_VERSION = 3.4.15
 # environment
@@ -940,7 +943,7 @@ TERM = xterm-256color
 # environment
 VSCODE_PID = 9477
 # variable set hash-table stats:
-# Load=87/1024=8%, Rehash=0, Collisions=9/133=7%
+# Load=87/1024=8%, Rehash=0, Collisions=10/134=7%
 
 # Pattern-specific Variable Values
 
@@ -948,7 +951,7 @@ VSCODE_PID = 9477
 
 # Directories
 
-# . (device 16777229, inode 15550540): 12 files, no impossibilities.
+# . (device 16777229, inode 15675093): 12 files, no impossibilities.
 
 # 12 files, no impossibilities in 1 directories.
 
@@ -981,6 +984,7 @@ maker:
 #  Implicit/static pattern stem: `'
 #  File does not exist.
 #  File has been updated.
+ 
 #  Failed to be updated.
 # automatic
 # @ := maker
@@ -999,16 +1003,15 @@ maker:
 # automatic
 # ? := 
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/13=15%
+# Load=8/32=25%, Rehash=0, Collisions=2/14=14%
 #  commands to execute (from `Makefile', line 42):
-	${MAKE} -C ${LIBFT}
+	${MAKE} CFLAGS="$(CFLAGS)" -C ${LIBFT}
 	
 
 # Not a target:
 src/built_in/b_echo.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 # Not a target:
@@ -1024,7 +1027,7 @@ all: maker minishell
 #  File does not exist.
 #  File has not been updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
 
 # Not a target:
 src/built_in/b_export.o:
@@ -1064,7 +1067,7 @@ src/built_in/b_utils.o:
 # Not a target:
 config/exec_srcs.mk:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1091,7 +1094,7 @@ src/exec/e_built2.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1116,7 +1119,19 @@ src/parsing/p_bin_path.o:
 #  File has not been updated.
 
 # Not a target:
+src/parsing/p_cmd_utils.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 src/parsing/p_utils2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/parsing/p_init_envp.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -1124,7 +1139,7 @@ src/parsing/p_utils2.o:
 # Not a target:
 config/built_srcs.mk:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1135,7 +1150,6 @@ src/parsing/p_get_cmd.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 
 # Not a target:
 src/parsing/p_synthax_checker2.o:
@@ -1149,7 +1163,7 @@ src/built_in/b_exit.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: src/parsing/p_bin_path.o src/parsing/p_get_cmd.o src/parsing/p_utils.o src/parsing/p_utils2.o src/parsing/p_utils3.o src/parsing/p_utils4.o src/parsing/p_lexer.o src/parsing/p_here_doc_check.o src/parsing/p_here_doc_expend_var.o src/parsing/p_here_doc.o src/parsing/p_here_doc_utils.o src/parsing/p_here_doc_utils2.o src/parsing/p_synthax_checker.o src/parsing/p_synthax_checker2.o src/exec/e_exec.o src/exec/e_exec2.o src/exec/e_built.o src/exec/e_built2.o src/exec/e_check_path.o src/exec/e_open_file.o src/exec/e_utils.o src/exec/e_hd_signals.o src/exec/e_signals.o src/exec/e_signals2.o src/exec/e_signals3.o src/built_in/b_init.o src/built_in/b_unset.o src/built_in/b_exit.o src/built_in/b_export.o src/built_in/b_export2.o src/built_in/b_cd.o src/built_in/b_echo.o src/built_in/b_echo_utils.o src/built_in/b_echo_utils2.o src/built_in/b_echo_envvar.o src/built_in/b_utils.o src/main.o libft2/libft2.a
+minishell: src/parsing/p_bin_path.o src/parsing/p_get_cmd.o src/parsing/p_utils.o src/parsing/p_utils2.o src/parsing/p_utils3.o src/parsing/p_utils4.o src/parsing/p_lexer.o src/parsing/p_here_doc_check.o src/parsing/p_here_doc_expend_var.o src/parsing/p_here_doc.o src/parsing/p_here_doc_utils.o src/parsing/p_here_doc_utils2.o src/parsing/p_synthax_checker.o src/parsing/p_synthax_checker2.o src/parsing/p_init_envp.o src/parsing/p_cmd_utils.o src/exec/e_exec.o src/exec/e_exec2.o src/exec/e_built.o src/exec/e_built2.o src/exec/e_check_path.o src/exec/e_open_file.o src/exec/e_utils.o src/exec/e_hd_signals.o src/exec/e_signals.o src/exec/e_signals2.o src/exec/e_signals3.o src/built_in/b_init.o src/built_in/b_unset.o src/built_in/b_exit.o src/built_in/b_export.o src/built_in/b_export2.o src/built_in/b_cd.o src/built_in/b_echo.o src/built_in/b_echo_utils.o src/built_in/b_echo_utils2.o src/built_in/b_echo_envvar.o src/built_in/b_utils.o src/built_in/b_export_check.o src/main.o libft2/libft2.a
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -1170,7 +1184,7 @@ fclean: clean
 # Not a target:
 config/pars_srcs.mk:
 #  Implicit rule search has been done.
-#  Last modified 2022-10-07 09:14:36
+#  Last modified 2022-10-14 17:07:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -1211,9 +1225,16 @@ src/parsing/p_here_doc.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 
 # Not a target:
 src/exec/e_signals.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/built_in/b_export_check.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -1264,7 +1285,6 @@ src/parsing/p_utils4.o:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 # Not a target:
 src/exec/e_built.o:
 #  Implicit rule search has not been done.
@@ -1320,7 +1340,7 @@ src/exec/e_hd_signals.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=51/1024=5%, Rehash=0, Collisions=2/117=2%
+# Load=54/1024=5%, Rehash=0, Collisions=2/123=2%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -1332,6 +1352,6 @@ src/exec/e_hd_signals.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4026 / max = 4026 / min = 4026 / avg = 4026
 
-# Finished Make data base on Fri Oct  7 09:14:43 2022
+# Finished Make data base on Fri Oct 14 17:07:38 2022
 
  
