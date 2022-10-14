@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 20:22:25 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 21:03:45 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,6 +280,7 @@ void	env_lst_change_content(t_envp *node, char *content, int equal);
 t_envp	*check_if_exist(t_envp *alst, char *name);
 int		export_error_arg(char *arg);
 int		export_check_idtf(char *arg);
+int		contains_equal(char *arg);
 
 
 //		EXIT

@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:57:10 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 05:04:47 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 20:24:25 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	next_equal(char *arg)
+{
+	int	i;
+
+	i = 0;
+	while (arg[i])
+	{
+		if (arg[i] == '=')
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 int	export_check_idtf(char *arg)
 {
@@ -20,19 +34,17 @@ int	export_check_idtf(char *arg)
 	if (arg[i] == '_' || ft_isalpha(arg[i]))
 	{
 		while ((ft_isalnum(arg[i]) || arg[i] == '_') && arg[i])
+			i++;
+		if (contains_equal(arg))
 		{
-			i++;
+			if (i < next_equal(arg))
+				return(export_error_arg(arg));
 		}
-		if (!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=' && arg[i])
-			return(export_error_arg(arg));
-		if (arg[i] == '=')
-			i++;
-		while (ft_isalnum(arg[i]) || arg[i] == '_' || arg[i] == '=')
+		else
 		{
-			i++;
+			if ((size_t)i < ft_strlen(arg))
+				return(export_error_arg(arg));
 		}
-		if (!ft_isalnum(arg[i]) && arg[i] != '_' && arg[i] != '=' && arg[i])
-			return(export_error_arg(arg));
 	}
 	else
 		return(export_error_arg(arg));

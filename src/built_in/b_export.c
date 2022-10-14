@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 12:29:36 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/14 13:36:23 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 20:25:25 by theodeville      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,6 @@ int	contains_equal(char *arg)
 	}
 	return (0);
 }
-
-int check_name(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if (contains_equal(arg))
-	{
-		if (arg[i] == '_' || ft_isalpha(arg[i]))
-		{
-			i++;
-			while (arg[i])
-			{
-				if (arg[i] == '=')
-				{
-				dprintf(2, "wefwfwe\n");
-					return (1);
-				}
-				i++;
-				if (!ft_isalnum((int)arg[i]) && arg[i] != '_')
-				{
-					return (0);
-				}
-			}
-		}
-		else
-			return (0);
-	}
-	return (1);
-}
-
 
 // Creer une variable d'environnement avec un contenu qui pointe sur NULL
 int	create_var_no_content(t_data *data, char *arg,
