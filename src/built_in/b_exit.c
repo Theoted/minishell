@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:31:14 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:56 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 20:50:15 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,13 @@ int	b_exit(t_data *d, int idx)
 				g_status = 255;
 			}
 			else
+			{
+				dprintf(2, "%d\n", g_status);
 				g_status = ft_atol(d->commands[idx].args_vec[1]);
+			}
 		}
 		write(1, "exit\n", 5);
 		exit(g_status);
 	}
-	return (0);
+	exit(g_status);
 }

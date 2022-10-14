@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 14:53:37 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/14 20:45:34 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ extern int	g_status;
 
 int	ft_fork(t_data *data, t_tokens *token, int i)
 {
+	if (!token->args_vec)
+	{
+		return (1);
+	}
 	token[i].pid = fork();
 	if (token[i].pid == -1)
 	{
@@ -77,6 +81,6 @@ void	e_exec(t_data *data, t_tokens *token)
 			dup_fd_in_pipe(token, i);
 	}
 	i = -1;
-	while (token[++i].stop == 0)
+	while (token[++i].pid)
 		ft_waitpid(token, i);
 }

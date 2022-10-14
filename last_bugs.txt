@@ -29,7 +29,5 @@ alors que cat>in < out marche bien
 leaks de fd entre les commandes
 
 EN PRIORITÉ:
-    MOI - heredoc + ctrl c => $? = 0 alors que devrait etre 1   A faire
-    A rechecker j'ai peut etre oublié de faire des tests- les erreurs des bluildtin pqs retourner dqns le $?
     MOI - crtl + \ dqns heredoc quitte => devrait rien faire
     MOI - Exit | exit err;

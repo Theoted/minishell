@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 18:06:03 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/14 20:22:25 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,5 +314,6 @@ int		arg_vec_len(t_data *data, int idx);
 void	ft_exec_built_fork(t_data *data, t_tokens token, int idx);
 int		ft_exec_built_nofork(t_data *data, t_tokens token, int idx);
 int		check_built(char *built, int fd_out);
+int		check_built_no_fork(char *built);
 
 #endif
