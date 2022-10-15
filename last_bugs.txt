@@ -1,30 +1,15 @@
-quelques PIPE qui leaks
-si enormement de commandes = ressources unvailable mais casse tout "l'ordi"
-export -> ne close pas le processus     ok
+1 - PIPE LEAKS
+2 - FD LEAKS ENTRE COMMANDES
+3 - si enormement de commandes = ressources unvailable mais casse tout "l'ordi"
+4 - CHECKER LE MAKEFILE
 
-export A="echo user is :$USER" = print mais sans espaces
-Pas de code erreur sur le here_doc
-exit | exit 123 njnjn 123 = pas de message d'erreur
-cat ctrl+C = pas de ^C
-toujours pipe qui leaks
+-------> si on veut se faire vraiment chier faire export fff="'ech     o"
 
-< Makefile cat > out | < out cat -e | grep "$" > out1 > out 2 > out3 = pas de msg d'erreur
-
-CHECKER LE MAKEFILE
+-------> et ce truc aussi mais la c pour le plaisir de la ride variable avec > ou < genre echo >$USER : crer un ficher $USER et non un fichier tdeville
 
 
-export fff="'ech     o"
-
-variable avec > ou < genre echo >$USER : crer un ficher $USER et non un fichier tdeville
-
-
-heredoc + ctrl c => $? = 0 alors que devrait etre 1
-
-signaux :
-crtl + \ dqns heredoc quitte => devrait rien faire
-
-leaks de fd entre les commandes
 
 EN PRIORITÉ:
-    MOI - crtl + \ dqns heredoc quitte => devrait rien faire
-    MOI - Exit | exit err;
+    MOI - affice les signaux quand il faut pas ctrl + \ dans le heredoc
+    MOI - ctrl + c doit etre ignorer quand on est dans le prompt sans commandes
+    MOI - G_STATUS faire quelques checks;

@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 15:32:45 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/15 01:22:30 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	ft_exec_built_nofork2(t_data *data, t_tokens token, int idx)
 {
-	if (!token.args_vec)
-		return (0);
 	if (!strncmp_ncs(token.args_vec[0], "unset"))
 	{
 		if (data->pipes_nb > 0)
@@ -24,8 +22,6 @@ int	ft_exec_built_nofork2(t_data *data, t_tokens token, int idx)
 	}
 	if (!strncmp_ncs(token.args_vec[0], "exit"))
 	{
-		if (data->pipes_nb > 0)
-			return (1);
 		return (b_exit(data, idx));
 	}
 	return (0);

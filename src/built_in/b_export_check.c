@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:57:10 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 20:24:25 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/15 01:47:23 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	next_equal(char *arg)
 int	export_check_idtf(char *arg)
 {
 	int	i;
+	int egal;
+	egal = contains_equal(arg);
 
 	i = 0;
 	if (arg[i] == '_' || ft_isalpha(arg[i]))
 	{
 		while ((ft_isalnum(arg[i]) || arg[i] == '_') && arg[i])
 			i++;
-		if (contains_equal(arg))
+		if (egal)
 		{
 			if (i < next_equal(arg))
 				return(export_error_arg(arg));

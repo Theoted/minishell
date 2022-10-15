@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 20:16:50 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/15 00:21:09 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	ft_here_doc(t_data *data, int idx)
 	if (pid == 0)
 	{
 		sig_child();
+		signal(SIGQUIT, SIG_IGN);
 		data->commands[idx].here_doc = NULL;
 		while (1)
 			if (hd_loop(data, idx))

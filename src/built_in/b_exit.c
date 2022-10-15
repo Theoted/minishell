@@ -6,7 +6,7 @@
 /*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:31:14 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/14 20:50:15 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/15 01:28:00 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	no_numeric(char *arg)
 
 int	b_exit(t_data *d, int idx)
 {
+	g_status = 0;
+
 	if (!strncmp_ncs("exit", d->commands[idx].args_vec[0]))
 	{
 		if (double_arr_len(d->commands[idx].args_vec) > 2
@@ -95,12 +97,13 @@ int	b_exit(t_data *d, int idx)
 			}
 			else
 			{
-				dprintf(2, "%d\n", g_status);
 				g_status = ft_atol(d->commands[idx].args_vec[1]);
 			}
 		}
-		write(1, "exit\n", 5);
-		exit(g_status);
+		if (d->pipes_nb == 0)
+			write(1, "exit\n", 5);
 	}
-	exit(g_status);
+	if (d->pipes_nb == 0)
+		exit(g_status);
+	return(1);
 }

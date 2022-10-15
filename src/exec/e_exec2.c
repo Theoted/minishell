@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 18:17:50 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/15 01:22:40 by pat              ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int	e_child(t_data *data, t_tokens *token, int idx)
 	// (void)idx;
 	if (token->fd_out != 1 && token->fd_out != 0)
 	{
-		dprintf(2, "dup2 fd out\n");
 		dup2(token->fd_out, STDOUT_FILENO);
 		close(token->fd_out);
 	}
