@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 18:20:09 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/17 14:10:38 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ extern int	g_status;
 
 int	open_infile(t_tokens *token, char *infile)
 {
+	if(token->fd_in)
+		close(token->fd_in);
 	token->fd_in = open(infile, O_DIRECTORY);
 	if (token->fd_in != 0 && token->fd_in != -1)
 	{
@@ -38,6 +40,8 @@ int	open_infile(t_tokens *token, char *infile)
 
 int	open_outfile(t_tokens *token, char *outfile)
 {
+	if (token->fd_out && token->fd_out != 1)
+		close(token->fd_out);
 	token->fd_out = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	if (token->fd_out == -1)
 	{
@@ -50,6 +54,8 @@ int	open_outfile(t_tokens *token, char *outfile)
 /* Ouverture de l'outfile_hb */
 int	open_outfile_hb(t_tokens *token, char *outfile_hb)
 {
+	if (token->fd_out && token->fd_out != 1)
+		close(token->fd_out);
 	token->fd_out = open(outfile_hb, O_WRONLY | O_CREAT | O_APPEND, 0666);
 	if (token->fd_out == -1)
 	{
