@@ -6,19 +6,11 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:46:56 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:34:20 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	while_check_exit_status(t_data *data, char *tmp, char *tmp1)
-{
-	if (!tmp1)
-		tmp1 = gc_strdup(&data->track, tmp);
-	else
-		tmp1 = gc_strjoin(&data->track, tmp1, tmp);
-}
 
 int	check_n(char *arg, int i)
 {
