@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:54:42 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:08:17 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,9 +295,17 @@ int		exit_error_avlen(void);
 
 //		CD
 int		b_cd(t_data *data, int idx);
+void	add_node_oldpwd(t_data *data, t_envp **envp, char *cwd, t_envp* node);
+int		cd_error(t_data *data, char *cwd);
+t_envp	*find_node(t_envp **envp, char *name);
+void	insert_node_after(t_envp **envp, char *after_name,
+		t_envp *new, t_data *data);
+void	change_oldpwd(t_data *data, t_envp **envp, char *cwd, int x);
+char	*get_home_oldpwd(t_data *data, int x);
 
 //		ECHO
 void	b_echo(t_data *data, int idx);
+void	while_check_exit_status(t_data *data, char *tmp, char *tmp1);
 int		expend_echo_env_vars(t_data *data, char **arg);
 char	*get_echo_env_var(t_data *data, char *arg);
 char	*echo_parse_bs(char *arg, t_data *data);

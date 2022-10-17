@@ -3,16 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 14:52:10 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:01:41 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 extern int	g_status;
+
+void	ft_waitpid(t_tokens *token, int i)
+{
+	int	status;
+
+	waitpid(token[i].pid, &status, 0);
+	if (!WIFSIGNALED(status))
+		g_status = WEXITSTATUS(status);
+	else if (g_status == 131)
+	{
+		write(1, "Quit: 3\n", 8);
+	}
+	else if (g_status == 130)
+	{
+		write(1, "\n", 1);
+	}
+}
+
+void	waitpid_close(t_data *data, t_tokens *token)
+{
+	int	i;
+
+	i = -1;
+	while (!token[++i].stop)
+	{
+		if (token[i].pfd[0])
+			close(token[i].pfd[0]);
+		if (token[i].pfd[1])
+			close(token[i].pfd[1]);
+	}
+	i = -1;
+	while (token[++i].pid)
+		ft_waitpid(token, i);
+	if (data->fork_error == 1)
+	{
+		g_status = 1;
+		close(token[0].pfd[0]);
+		close(token[0].pfd[1]);
+	}
+}
 
 int	ft_fork(t_data *data, t_tokens *token, int i)
 {
@@ -42,25 +82,6 @@ int	ft_fork(t_data *data, t_tokens *token, int i)
 	return (1);
 }
 
-void	ft_waitpid(t_tokens *token, int i)
-{
-	int	status;
-
-	waitpid(token[i].pid, &status, 0);
-	if (!WIFSIGNALED(status))
-		g_status = WEXITSTATUS(status);
-	else if (g_status == 131)
-	{
-		write(1, "Quit: 3\n", 8);
-	}
-	else if (g_status == 130)
-	{
-		write(1, "\n", 1);
-	}
-}
-
-/* Parcours le tableau de commande et fork 
-	apres chaque commandes pour l'executer et creation du pipe */
 void	e_exec(t_data *data, t_tokens *token)
 {
 	int	i;
@@ -84,21 +105,5 @@ void	e_exec(t_data *data, t_tokens *token)
 		if (token[i].fd_out != 1 && token[i].fd_out != 0)
 			close(token[i].fd_out);
 	}
-	i = -1;
-	while (!token[++i].stop)
-	{
-		if (token[i].pfd[0])
-			close(token[i].pfd[0]);
-		if (token[i].pfd[1])
-			close(token[i].pfd[1]);
-	}
-	i = -1;
-	while (token[++i].pid)
-		ft_waitpid(token, i);
-	if (data->fork_error == 1)
-	{
-		g_status = 1;
-		close(token[0].pfd[0]);
-		close(token[0].pfd[1]);
-	}
+	waitpid_close(data, token);
 }

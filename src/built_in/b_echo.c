@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 09:56:07 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 17:05:09 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:08:39 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,7 @@ void	b_echo(t_data *data, int idx)
 			(data, data->commands[idx].args_vec[i], -1);
 		content = remove_quotes(data, data->commands[idx].args_vec[i]);
 		printf("%s", content);
-		if (e_d.av_len > 1
-			&& i < e_d.av_len
+		if (e_d.av_len > 1 && i < e_d.av_len
 			&& data->commands[idx].args_vec[i])
 			printf(" ");
 	}

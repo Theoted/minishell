@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_envvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:27:36 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 02:04:17 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:36:17 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	get_echo_env_var_doll(t_data *data, char *arg, t_echo_env *e_d, int *i)
 			j++;
 		if (j == 1)
 			e_d->tmp = gc_strdup(&data->track, "$");
-		// arg[(*i) - 1] avant a voir si ca pose problem
 		else if (arg[(*i)] && state_checker(arg, 0, *i) == 39)
 			e_d->tmp = gc_substr(&data->track, arg, (*i), j);
 		else
