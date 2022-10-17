@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 13:51:07 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 14:52:10 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,19 @@ void	e_exec(t_data *data, t_tokens *token)
 				if (!ft_fork(data, token, i))
 					return ;
 			}
-			else if (token[i].fd_out != 1 && token[i].fd_out != 0)
-				close(token[i].fd_out);
 		}
 		else
 			dup_fd_in_pipe(token, i);
+		if (token[i].fd_out != 1 && token[i].fd_out != 0)
+			close(token[i].fd_out);
+	}
+	i = -1;
+	while (!token[++i].stop)
+	{
+		if (token[i].pfd[0])
+			close(token[i].pfd[0]);
+		if (token[i].pfd[1])
+			close(token[i].pfd[1]);
 	}
 	i = -1;
 	while (token[++i].pid)
