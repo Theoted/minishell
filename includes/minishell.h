@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 21:03:45 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 13:32:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ struct s_data
 	int			args_create;
 	char		*cmd_slash;
 	int			exp_equal;
+	int			fork_error;
 	
 	t_envp		*envp;
 	t_tokens	*commands;

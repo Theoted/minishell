@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_lexer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 01:18:32 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 13:33:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	lexer(char *arg, t_data *data)
 	data->commands = gc_calloc(sizeof(t_tokens),
 			(data->pipes_nb + 2), &data->track);
 	data->commands[data->pipes_nb + 1].stop = 1;
+	data->fork_error = 0;
 	fill_envp_cmd(data);
 	if (synthax_checker(arg))
 		return (1);

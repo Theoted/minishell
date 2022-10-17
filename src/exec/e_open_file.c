@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/14 18:20:09 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/17 12:45:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	open_infile(t_tokens *token, char *infile)
 	if (token->fd_in == -1)
 	{
 		perror(infile);
+		g_status = 1;
 		return (0);
 	}
 	return (1);
@@ -42,6 +43,7 @@ int	open_outfile(t_tokens *token, char *outfile)
 	if (token->fd_out == -1)
 	{
 		perror(outfile);
+		g_status = 1;
 		return (0);
 	}
 	return (1);
@@ -56,6 +58,7 @@ int	open_outfile_hb(t_tokens *token, char *outfile_hb)
 		close (token->pfd[1]);
 		close (token->pfd[0]);
 		perror(outfile_hb);
+		g_status = 1;
 		return (0);
 	}
 	return (1);

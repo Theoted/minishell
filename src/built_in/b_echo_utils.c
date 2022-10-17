@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 17:04:56 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 12:50:51 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	check_n(char *arg, int i)
 		}
 	}
 	if (arg[i] == '-')
-	{	
+	{
+		if (arg[i + 1] != 'n')
+			return (0);
 		while (arg[++i])
 			if (arg[i] != 'n' && arg[i] != '\'' && arg[i] != '\"')
 				return (0);

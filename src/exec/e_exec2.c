@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/15 01:22:40 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 14:51:18 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	e_child(t_data *data, t_tokens *token, int idx)
 		dup2(token->pfd[1], STDOUT_FILENO);
 	close(token->pfd[1]);
 	check_path(data, token);
-	
 	e_execve(data, token, idx);
 	return (1);
 }
