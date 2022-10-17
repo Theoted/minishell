@@ -18,10 +18,8 @@ EN PRIORITÉ:
     Leaks de pipe sur heredoc
     close tous les files sur les redirections
 
-echo n'affiche rien
 doit faire: CTRL+C dans un heredoc, exit l'excution (pas d'ouverture des autres redirs et heredocs)
 CTRL+C dans une commande doit afficher ^C\n => Soit gerer termios, soit juste afficher 
 CTRL+\ dans une commande doit afficher ^\Quit:3\n
 syntax error doit mettre le exitstatus a 258
 $? ne marche pas (il doit marcher comme une variable d'env)
-il faut gérer le status du waitpid seulement pour la derniere commande

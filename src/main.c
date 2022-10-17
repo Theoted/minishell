@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/15 01:32:20 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:21:45 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,16 @@ static int	ft_while_main(t_data *data)
 			add_history(data->stdin_arg);
 		if (!check_spaces(data->stdin_arg))
 		{
+			change_termios(RESET);
 			free(data->stdin_arg);
-			continue ;
 		}
-		ft_core_parsing_exec(data);
-		change_termios(RESET);
-		if (data->stdin_arg)
-			free(data->stdin_arg);
+		else
+		{
+			ft_core_parsing_exec(data);
+			change_termios(RESET);
+			if (data->stdin_arg)
+				free(data->stdin_arg);
+		}
 	}
 	return (1);
 }
