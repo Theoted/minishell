@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/17 16:02:25 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:18:47 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	b_cd(t_data *data, int idx)
 
 	getcwd(cwd, sizeof(cwd));
 	if (!(*cwd) && !strncmp_len(data->commands[idx].args_vec[1], ".."))
-		return (cd_error(data, idx, cwd));
+		return (cd_error(data, cwd));
 	if (chdir(data->commands[idx].args_vec[1]) == -1)
 	{
 		if (!data->commands[idx].args_vec[1])

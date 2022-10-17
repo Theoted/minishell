@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:46:45 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:34:17 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ char	*check_exit_status(t_data *data, char *arg, int i)
 		}
 		else
 			tmp = gc_substr(&data->track, arg, j, (i + 1 - j));
-		while_check_exit_status(data, tmp, tmp1);
+		if (!tmp1)
+			tmp1 = gc_strdup(&data->track, tmp);
+		else
+			tmp1 = gc_strjoin(&data->track, tmp1, tmp);
 		if (!arg[i])
 			break ;
 	}
