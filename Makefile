@@ -6,7 +6,7 @@
 #    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/17 17:27:37 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/17 18:01:10 by tdeville         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,6 @@ LIBFT	= libft2
 
 EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
 
-# -I./readline/include -L./readline/lib -lncurses
-
 SRCS	+=	src/main.c
 
 OBJS	= ${SRCS:.c=.o}
@@ -31,13 +29,12 @@ CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address -g3
 
 all: maker ${NAME}
 
-%.o : %.c	${HEADER}
-		${CC} ${CFLAGS} -c $< -o $@
+%.o : %.c	${HEADER} Makefile
+			${CC} ${CFLAGS} -c $< -o $@
 
-# -fsanitize=address -g3
-
-${NAME}: ${OBJS} libft2/libft2.a
-		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a
+${NAME}:	${OBJS} libft2/libft2.a 
+			${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a
+		
 maker:
 		${MAKE} CFLAGS="$(CFLAGS)" -C ${LIBFT}
 

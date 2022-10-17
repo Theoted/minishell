@@ -19,4 +19,4 @@ EN PRIORITÉ:
     close tous les files sur les redirections
 
 doit faire: CTRL+C dans un heredoc, exit l'excution (pas d'ouverture des autres redirs et heredocs)
-$? ne marche pas (il doit marcher comme une variable d'env)
+

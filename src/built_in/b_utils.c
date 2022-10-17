@@ -6,15 +6,21 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/17 17:18:38 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:40:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// Cette fonction permet d'executer un strncmp avec
-// comme longueur la string la plus grande
-// Renvoie 0 si les strings sont les memes
+char	*check_exit_status2(t_data *data, char *tmp1, char *tmp)
+{
+	if (!tmp1)
+			tmp1 = gc_strdup(&data->track, tmp);
+	else
+		tmp1 = gc_strjoin(&data->track, tmp1, tmp);
+	return (tmp1);
+}
+
 int	strncmp_len(char *s1, char *s2)
 {
 	int	len;
