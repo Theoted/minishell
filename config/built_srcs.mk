@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    built_srcs.mk                                      :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/07 00:44:31 by pat               #+#    #+#              #
-#    Updated: 2022/10/13 12:06:59 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/17 15:29:26 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS +=	src/built_in/b_init.c			\
 		src/built_in/b_export.c			\
 		src/built_in/b_export2.c		\
 		src/built_in/b_cd.c				\
+		src/built_in/b_cd2.c				\
 		src/built_in/b_echo.c			\
 		src/built_in/b_echo_utils.c		\
 		src/built_in/b_echo_utils2.c	\

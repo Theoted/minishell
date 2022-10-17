@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_open_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 14:52:13 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:20:48 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern int	g_status;
 
 int	open_infile(t_tokens *token, char *infile)
 {
-	if(token->fd_in)
+	if (token->fd_in)
 		close(token->fd_in);
 	token->fd_in = open(infile, O_DIRECTORY);
 	if (token->fd_in != 0 && token->fd_in != -1)

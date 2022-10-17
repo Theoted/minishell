@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/01 13:08:33 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 14:51:18 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:20:25 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	e_heredoc(t_tokens *token)
 /* execution de la commande dans le child */
 int	e_child(t_data *data, t_tokens *token, int idx)
 {
-	// (void)idx;
 	if (token->fd_out != 1 && token->fd_out != 0)
 	{
 		dup2(token->fd_out, STDOUT_FILENO);

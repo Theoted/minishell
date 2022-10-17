@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 19:59:57 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/10/15 01:22:37 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:13:07 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	check_built_no_fork(char *built)
 		return (1);
 	return (0);
 }
-
 
 int	check_built(char *built, int fd_out)
 {

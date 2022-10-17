@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 12:50:51 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:46:56 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// Retourne 1 si le premier char de l'argument a un tiret et un 'n' 
-// ou plus sinon retourne 0
+void	while_check_exit_status(t_data *data, char *tmp, char *tmp1)
+{
+	if (!tmp1)
+		tmp1 = gc_strdup(&data->track, tmp);
+	else
+		tmp1 = gc_strjoin(&data->track, tmp1, tmp);
+}
+
 int	check_n(char *arg, int i)
 {
 	while (arg[++i] && arg[i] != '-')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/13 09:18:37 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 15:42:15 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:46:45 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ char	*check_exit_status(t_data *data, char *arg, int i)
 		}
 		else
 			tmp = gc_substr(&data->track, arg, j, (i + 1 - j));
-		if (!tmp1)
-			tmp1 = gc_strdup(&data->track, tmp);
-		else
-			tmp1 = gc_strjoin(&data->track, tmp1, tmp);
+		while_check_exit_status(data, tmp, tmp1);
 		if (!arg[i])
 			break ;
 	}

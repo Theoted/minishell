@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/15 01:22:30 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:12:35 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	ft_error_export(t_data *data, int idx)
+{
+	write(2, "export :", 9);
+	write(2, data->commands[idx].args_vec[1],
+		strlen(data->commands[idx].args_vec[1]));
+	write(2, ": not a valid identifier\n", 26);
+	g_status = 1;
+	exit(0);
+}
 
 int	ft_exec_built_nofork2(t_data *data, t_tokens token, int idx)
 {
@@ -29,6 +39,8 @@ int	ft_exec_built_nofork2(t_data *data, t_tokens token, int idx)
 
 int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 {
+	int	err;
+
 	if (!token.args_vec)
 		return (0);
 	if (!strncmp_ncs(token.args_vec[0], "cd"))
@@ -39,21 +51,13 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 	}
 	if (!strncmp_ncs(token.args_vec[0], "export"))
 	{
-		int err;
 		if (data->pipes_nb > 0)
 			return (0);
 		err = b_export(data, idx);
-		if(err)
+		if (err)
 			return (1);
-		if(err == -1)
-		{
-	
-			write(2, "export :", 9);
-			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
-			write(2, ": not a valid identifier\n", 26);
-			g_status = 1;
-			exit(0);
-		}
+		if (err == -1)
+			ft_error_export(data, idx);
 	}
 	return (ft_exec_built_nofork2(data, token, idx));
 }
@@ -81,13 +85,7 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 		b_echo(data, idx);
 	if (!strncmp_ncs(token.args_vec[0], "export"))
 	{
-		if(b_export(data, idx) == -1)
-		{
-			write(2, "export :", 9);
-			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
-			write(2, ": not a valid identifier\n", 26);
-			g_status = 1;
-			exit(0);
-		}
+		if (b_export(data, idx) == -1)
+			ft_error_export(data, idx);
 	}
 }

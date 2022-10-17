@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/12 18:00:35 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 16:02:25 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,10 @@ t_envp	*find_node(t_envp **envp, char *name)
 void	change_oldpwd(t_data *data, t_envp **envp, char *cwd, int x)
 {
 	t_envp	*node;
-
+	
+	node = NULL;
 	if (x == 1)
-	{
-		node = find_node(envp, "OLDPWD");
-		if (node)
-			node->content = gc_strdup(&data->track, cwd);
-		else
-		{
-			insert_node_after(envp, "PWD",
-				env_lstnew(data, "OLDPWD", cwd, 1), data);
-			node = find_node(envp, "OLDPWD");
-			node->content = gc_strdup(&data->track, cwd);
-		}
-	}
+		add_node_oldpwd(data, envp, cwd, node);
 	else if (x == 0)
 	{
 		node = find_node(envp, "PWD");
@@ -121,14 +111,7 @@ int	b_cd(t_data *data, int idx)
 
 	getcwd(cwd, sizeof(cwd));
 	if (!(*cwd) && !strncmp_len(data->commands[idx].args_vec[1], ".."))
-	{
-		perror("cd: error retrieving current directory: getcwd: cannot access parent directories");
-		change_oldpwd(data, &data->envp, cwd, 1);
-		chdir(get_home_oldpwd(data, 1));
-		getcwd(cwd, sizeof(cwd));
-		change_oldpwd(data, &data->envp, cwd, 0);
-		return (1);
-	}
+		return (cd_error(data, idx, cwd));
 	if (chdir(data->commands[idx].args_vec[1]) == -1)
 	{
 		if (!data->commands[idx].args_vec[1])
