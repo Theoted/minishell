@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 14:52:23 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:07:39 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_here_doc(t_data *data, int idx)
 {
 	int		pid;
 	int		pipehd[2];
-	int status;
+	int		status;
 
 	pipe(pipehd);
 	signal(SIGINT, sig_handler_parent_hd);
@@ -32,10 +32,7 @@ int	ft_here_doc(t_data *data, int idx)
 		while (1)
 			if (hd_loop(data, idx))
 				break ;
-		close(pipehd[0]);
-		write(pipehd[1], data->commands[idx].here_doc,
-			ft_strlen(data->commands[idx].here_doc));
-		close(pipehd[1]);
+		hd_write_close(data, pipehd, idx);
 		exit(1);
 	}
 	waitpid(pid, &status, 0);

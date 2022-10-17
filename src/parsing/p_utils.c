@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 15:52:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 01:16:01 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:41:04 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,17 +103,16 @@ void	fill_envp_cmd(t_data *data)
 
 // Cette fonction est celle qui va remplire le tabl de structure t_files
 // qui se trouve dans chaque t_tokens
+// la variable df = data files
 int	get_in_out_files(char *arg, t_data *data, int idx)
 {
-	int	i;
-	int	j;
-	int	len;
-	int	in_type;
+	int			i;
+	int			j;
+	int			len;
+	int			in_type;
 
 	get_in_out_init(&i, &j, &in_type);
-	data->commands[idx].files = gc_calloc(count_in_out_files(arg) + 1,
-			sizeof(t_files), &data->track);
-	data->commands[idx].files[count_in_out_files(arg)].stop = 1;
+	get_in_out_init2(data, arg, idx);
 	while (arg[++i])
 	{
 		if ((arg[i] == '<' || arg[i] == '>') && !state_checker(arg, 0, i))
@@ -123,15 +122,13 @@ int	get_in_out_files(char *arg, t_data *data, int idx)
 			{
 				data->commands[idx].files[++j].file_name
 					= gc_substr(&data->track, arg, i, len);
-				data->commands[idx].files[j].type = in_type;
-				data->commands[idx].files[j].file_name = remove_quotes(data,
-						data->commands[idx].files[j].file_name);
+				redir_files_utils(data, idx, j, in_type);
 				if (!data->commands[idx].files[j].file_name)
 					return (-1);
 			}
 		}
 		if (!arg[i])
-			return(0);
+			return (0);
 	}
 	return (0);
 }

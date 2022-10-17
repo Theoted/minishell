@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/10 11:50:02 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/10 15:40:41 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:42:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,11 @@ int	parse_space(t_data *data, char **args, int idx)
 	if (new)
 		data->commands[idx].args_vec = new;
 	return (0);
+}
+
+void	redir_files_utils(t_data *data, int idx, int j, int in_type)
+{
+	data->commands[idx].files[j].type = in_type;
+	data->commands[idx].files[j].file_name = remove_quotes(data,
+			data->commands[idx].files[j].file_name);
 }

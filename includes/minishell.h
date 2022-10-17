@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 13:32:39 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:54:42 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@
 
 int	g_status;
 
-typedef struct	s_tokens t_tokens;
-typedef struct	s_data t_data;
-typedef struct	s_hd_data t_hd_data;
-typedef struct	s_files t_files;
-typedef struct	s_envp t_envp;
-typedef struct	s_echo t_echo;
-typedef struct	s_echo_2 t_echo_2;
-typedef struct	s_echo_env t_echo_env;
+typedef struct	s_tokens 	t_tokens;
+typedef struct	s_data 		t_data;
+typedef struct	s_hd_data 	t_hd_data;
+typedef struct	s_files 	t_files;
+typedef struct	s_envp 		t_envp;
+typedef struct	s_echo 		t_echo;
+typedef struct	s_echo_2 	t_echo_2;
+typedef struct	s_echo_env 	t_echo_env;
 typedef	struct	s_export	t_export;
 
 // Structure qui permet le parsing des variables d'environnements
@@ -210,7 +210,7 @@ int		check_heredoc2(char *arg, int i);
 
 //		Get cmd
 int		get_cmd_in_arg(char *arg, t_data *data, int idx);
-char 	*skip_in_out_hd(char *arg, t_data *data);
+char 	*skip_in_out_hd(char *arg, t_data *data, int i);
 void	skip_in_hd(char *arg, int *i);
 void	skip_out(char *arg, int *i);
 char	*get_cmd(char *arg, int i, t_data *data);
@@ -238,6 +238,7 @@ int		set_id_after_env(char *buffer, int i);
 char	*get_pipe_content(int fd, t_data *data);
 int		hd_loop(t_data *data, int idx);
 char	**convert_envp(t_data *data, t_envp *envp);
+void	hd_write_close(t_data *data, int pipehd[2], int idx);
 
 //		Utils
 int 	state_checker(char *str, int start, int len);
@@ -255,6 +256,8 @@ void	get_old_pwd_print(int x);
 void	remove_quote_init(t_echo *data, char *arg);
 void	free_all(char **arg);
 int		check_spaces(char *arg);
+int		count_in_out_files(char *arg);
+void	redir_files_utils(t_data *data, int idx, int j, int in_type);
 
 //		Expend variables
 int		check_arg_vars(char *arg, t_data *data);
@@ -263,6 +266,7 @@ int		check_arg_vars(char *arg, t_data *data);
 void	env_lstadd_back(t_data *data, t_envp **alst, t_envp *new);
 t_envp	*env_lstnew(t_data *data, char *name, char *content, int equal);
 void	get_in_out_init(int *i, int *j, int *in_type);
+void	get_in_out_init2(t_data *data, char *arg, int idx);
 void	env_i_init(t_data *data);
 
 /* ------------------- BUILT-INS ------------------- */
@@ -273,7 +277,7 @@ void	print_env_list(t_data *data, t_envp *env_list, int idx);
 int		b_unset(t_data *data, int cmd_id);
 
 //		EXPORT
-int		b_export(t_data *data, int idx);
+int		b_export(t_data *data, int idx, int i);
 void	print_export(t_data *data, t_envp *envp, int idx);
 void	print_export_fd_out(t_data *data, t_envp *envp, int idx);
 void	env_lst_addfront(t_envp **alst, t_envp *new);
@@ -282,6 +286,7 @@ t_envp	*check_if_exist(t_envp *alst, char *name);
 int		export_error_arg(char *arg);
 int		export_check_idtf(char *arg);
 int		contains_equal(char *arg);
+void	export_conditions(t_data *data, int idx);
 
 
 //		EXIT

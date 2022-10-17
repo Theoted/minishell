@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_export_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:57:10 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/15 01:47:23 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:50:59 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	next_equal(char *arg)
 int	export_check_idtf(char *arg)
 {
 	int	i;
-	int egal;
-	egal = contains_equal(arg);
+	int	egal;
 
+	egal = contains_equal(arg);
 	i = 0;
 	if (arg[i] == '_' || ft_isalpha(arg[i]))
 	{
@@ -40,15 +40,15 @@ int	export_check_idtf(char *arg)
 		if (egal)
 		{
 			if (i < next_equal(arg))
-				return(export_error_arg(arg));
+				return (export_error_arg(arg));
 		}
 		else
 		{
 			if ((size_t)i < ft_strlen(arg))
-				return(export_error_arg(arg));
+				return (export_error_arg(arg));
 		}
 	}
 	else
-		return(export_error_arg(arg));
+		return (export_error_arg(arg));
 	return (0);
 }

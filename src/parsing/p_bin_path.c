@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_bin_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 14:28:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 18:25:34 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/17 15:03:16 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	get_cmd_in_arg(char *arg, t_data *data, int idx)
 	int		i;
 
 	i = -1;
-	cmd = skip_in_out_hd(arg, data);
+	cmd = skip_in_out_hd(arg, data, -1);
 	if (cmd)
 		data->commands[idx].args_vec = gc_split_spaces(&data->track, cmd, ' ');
 	else

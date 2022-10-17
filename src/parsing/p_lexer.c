@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 13:33:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:10:41 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,8 @@ int	split_args(char *arg, t_data *data)
 	return (0);
 }
 
-int	lexer(char *arg, t_data *data)
+void	lexer_init(char *arg, t_data *data)
 {
-	int	i;
-
-	i = 0;
 	data->pipes_nb = count_pipes(arg);
 	data->args_create = 0;
 	data->args = gc_calloc(sizeof(char *), (data->pipes_nb + 2), &data->track);
@@ -96,6 +93,14 @@ int	lexer(char *arg, t_data *data)
 			(data->pipes_nb + 2), &data->track);
 	data->commands[data->pipes_nb + 1].stop = 1;
 	data->fork_error = 0;
+}
+
+int	lexer(char *arg, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	lexer_init(arg, data);
 	fill_envp_cmd(data);
 	if (synthax_checker(arg))
 		return (1);
@@ -104,7 +109,7 @@ int	lexer(char *arg, t_data *data)
 	while (data->args[i])
 	{
 		data->commands[i].last_in_type = last_in_redir(data->args[i]);
-		if(get_in_out_files(data->args[i], data, i) == -1)
+		if (get_in_out_files(data->args[i], data, i) == -1)
 		{
 			write(2, "Syntax Error\n", 14);
 			return (1);

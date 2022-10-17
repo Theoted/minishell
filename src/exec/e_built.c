@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/15 01:22:30 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:54:52 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 		int err;
 		if (data->pipes_nb > 0)
 			return (0);
-		err = b_export(data, idx);
+		err = b_export(data, idx, 0);
 		if(err)
 			return (1);
 		if(err == -1)
@@ -81,7 +81,7 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 		b_echo(data, idx);
 	if (!strncmp_ncs(token.args_vec[0], "export"))
 	{
-		if(b_export(data, idx) == -1)
+		if(b_export(data, idx, 0) == -1)
 		{
 			write(2, "export :", 9);
 			write(2, data->commands[idx].args_vec[1], strlen(data->commands[idx].args_vec[1]));
