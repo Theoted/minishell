@@ -20,4 +20,3 @@ EN PRIORITÉ:
 
 doit faire: CTRL+C dans un heredoc, exit l'excution (pas d'ouverture des autres redirs et heredocs)
 $? ne marche pas (il doit marcher comme une variable d'env)
-return dans le prompt nique les termios (apres le CTRL+C dans le cat ne marche plus correctement)
