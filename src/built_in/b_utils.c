@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_utils.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:25:46 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/13 02:35:50 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:18:38 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_env_list(t_data *data, t_envp *env_list, int idx)
 			if (tmp->content)
 				printf("%s=%s\n", tmp->name, tmp->content);
 			else if (!tmp->content)
-				printf( "%s=\n", tmp->name);
+				printf("%s=\n", tmp->name);
 		}
 		tmp = tmp->next;
 	}

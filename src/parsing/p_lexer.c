@@ -6,11 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:10:41 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:02:43 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_status;
 
 int	count_pipes(char *str)
 {
@@ -112,6 +114,7 @@ int	lexer(char *arg, t_data *data)
 		if (get_in_out_files(data->args[i], data, i) == -1)
 		{
 			write(2, "Syntax Error\n", 14);
+			g_status = 258;
 			return (1);
 		}
 		if (check_heredoc(data->args[i], data, i))

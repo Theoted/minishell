@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 16:08:17 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:25:45 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,8 @@ int		execve_error(char *arg);
 int		e_child(t_data *data, t_tokens *token, int idx);
 void	check_path(t_data *data, t_tokens *token);
 void	dup_fd_in_pipe(t_tokens *token, int i);
+void	check_fork_error(t_data *data, t_tokens *token);
+
 //		OPEN
 int		open_infile(t_tokens *token, char *infile);
 int		open_outfile(t_tokens *token, char *outfile);
@@ -258,6 +260,7 @@ void	free_all(char **arg);
 int		check_spaces(char *arg);
 int		count_in_out_files(char *arg);
 void	redir_files_utils(t_data *data, int idx, int j, int in_type);
+int		quote_check_return(char quote);
 
 //		Expend variables
 int		check_arg_vars(char *arg, t_data *data);
@@ -322,6 +325,7 @@ int		check_n(char *arg, int i);
 void	echo_env_var_doll2(t_data *data, t_echo_env *e_d, int *i, int j);
 int		check_num(char *arg, int i);
 void	ft_while_remove_quotes(t_data *data, char *arg, t_echo *echo_data);
+int		check_dol_int(char *arg, int *i);
 
 //		Built-ins utils
 int		strncmp_len(char *s1, char *s2);

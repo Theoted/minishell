@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_check.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:38:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 02:50:24 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:20:54 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_status;
 
 // ----------------------- CHECK HERE DOC AND GET DEL -----------------------
 int	check_heredoc(char *arg, t_data *data, int idx)
@@ -27,7 +29,8 @@ int	check_heredoc(char *arg, t_data *data, int idx)
 				return (1);
 			if (arg[i + 2] == '<')
 			{
-				printf("Chevrons: Synthax error\n");
+				printf("Chevrons: Syntax error\n");
+				g_status = 258;
 				gc_free_all(&data->track);
 				return (1);
 			}

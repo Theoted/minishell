@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 16:25:03 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:26:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,10 @@ void	waitpid_close(t_data *data, t_tokens *token)
 	if (!WIFSIGNALED(status))
 		g_status = WEXITSTATUS(status);
 	else if (g_status == 131)
-	{
 		write(1, "Quit: 3\n", 8);
-	}
 	else if (g_status == 130)
-	{
 		write(1, "\n", 1);
-	}
-	if (data->fork_error == 1)
-	{
-		g_status = 1;
-		close(token[0].pfd[0]);
-		close(token[0].pfd[1]);
-	}
+	check_fork_error(data, token);
 }
 
 int	ft_fork(t_data *data, t_tokens *token, int i)

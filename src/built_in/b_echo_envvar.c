@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_envvar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:27:36 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:36:17 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:15:53 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_status;
 
 // Return 1 si il y a un $ sinon return 0
 int	check_if_env(char *arg)
@@ -42,7 +44,9 @@ int	get_echo_env_var_doll(t_data *data, char *arg, t_echo_env *e_d, int *i)
 	int	j;
 
 	j = 1;
-	if (check_num(arg, *i))
+	if (check_dol_int(arg, i))
+		e_d->tmp = gc_strdup(&data->track, gc_itoa(&data->track, g_status));
+	else if (check_num(arg, *i))
 		e_d->tmp = gc_strdup(&data->track, "") + (j++ *0);
 	else
 	{		
