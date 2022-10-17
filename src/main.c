@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 17:21:45 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:30:32 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,12 @@ static int	ft_while_main(t_data *data)
 		{
 			change_termios(RESET);
 			free(data->stdin_arg);
+			continue;
 		}
-		else
-		{
-			ft_core_parsing_exec(data);
-			change_termios(RESET);
-			if (data->stdin_arg)
-				free(data->stdin_arg);
-		}
+		ft_core_parsing_exec(data);
+		change_termios(RESET);
+		if (data->stdin_arg)
+			free(data->stdin_arg);
 	}
 	return (1);
 }
