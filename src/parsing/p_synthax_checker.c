@@ -6,11 +6,13 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:09:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:12:49 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:23:38 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+extern int	g_status;
 
 int	pipe_check(char *arg, int i)
 {
@@ -60,7 +62,8 @@ int	check_chevrons(char *arg, int *i)
 {
 	if (arg[*i + 1] == '>' && arg[*i + 2] == '>')
 	{
-		printf("Chevrons: Synthax error\n");
+		printf("Chevrons: Syntax error\n");
+		g_status = 1;
 		return (1);
 	}
 	if (arg[*i + 1] == '>' && arg[*i + 2] != '>')
@@ -79,7 +82,8 @@ int	check_content_after_pipe(char *arg, int i)
 			|| (arg[i] >= 125 && arg[i] <= 126))
 			return (0);
 	}
-	printf("Pipe: Synthax error\n");
+	printf("Pipe: Syntax error\n");
+	g_status = 258;
 	return (1);
 }
 
@@ -107,7 +111,5 @@ int	synthax_checker(char *arg)
 			if (check_chevrons(arg, &i))
 				return (1);
 	}
-	if (quote)
-		return (printf("Quotes: Synthax error\n"));
-	return (0);
+	return (quote_check_return(quote));
 }

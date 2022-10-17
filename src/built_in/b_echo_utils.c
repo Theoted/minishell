@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   b_echo_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 09:42:47 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 16:34:20 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:17:05 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,14 @@ int	word_end_id(char *arg, int i)
 		i++;
 	}
 	return (i);
+}
+
+int	check_dol_int(char *arg, int *i)
+{
+	if (arg[*i] == '$' && arg[(*i) + 1] && arg[(*i) + 1] == '?')
+	{
+		(*i)++;
+		return (1);
+	}
+	return (0);
 }

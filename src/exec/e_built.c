@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 16:08:53 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:19:48 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	ft_exec_built_nofork(t_data *data, t_tokens token, int idx)
 		if (data->pipes_nb > 0)
 			return (0);
 		err = b_export(data, idx, 0);
-		if(err)
+		if (err)
 			return (1);
 		if (err == -1)
 			ft_error_export(data, idx);

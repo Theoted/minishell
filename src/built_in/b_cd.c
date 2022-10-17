@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 13:51:37 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/17 16:40:46 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 17:16:44 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_envp	*find_node(t_envp **envp, char *name)
 void	change_oldpwd(t_data *data, t_envp **envp, char *cwd, int x)
 {
 	t_envp	*node;
-	
+
 	node = NULL;
 	if (x == 1)
 		add_node_oldpwd(data, envp, cwd, node);
