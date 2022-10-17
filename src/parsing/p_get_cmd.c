@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_get_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: theodeville <theodeville@student.42.fr>    +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:12:29 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/14 18:05:59 by theodeville      ###   ########.fr       */
+/*   Updated: 2022/10/17 15:04:15 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 // Cette fonction est la fonction principale de parsing de l'argument,
 // pour trouver la commande outre les <, <<, >, >> 
-char	*skip_in_out_hd(char *arg, t_data *data)
+char	*skip_in_out_hd(char *arg, t_data *data, int i)
 {
-	int		i;
 	char	*cmd;
 
-	i = -1;
 	cmd = NULL;
 	while (arg[++i])
 	{
@@ -35,7 +33,7 @@ char	*skip_in_out_hd(char *arg, t_data *data)
 				cmd = get_cmd(arg, i, data);
 			else if (cmd)
 				cmd = gc_strjoin(&data->track,
-					gc_strjoin(&data->track, cmd, " "),
+						gc_strjoin(&data->track, cmd, " "),
 						get_cmd(arg, i, data));
 			i += ft_strlen(get_cmd(arg, i, data)) - 1;
 		}
@@ -53,7 +51,7 @@ void	skip_in_hd(char *arg, int *i)
 		(*i)++;
 	while (arg[*i] == ' ')
 		(*i)++;
-	while (arg[*i] != ' ' && arg[*i] != '>' && arg[*i] != '<' && arg[*i])	
+	while (arg[*i] != ' ' && arg[*i] != '>' && arg[*i] != '<' && arg[*i])
 		(*i)++;
 	if (arg[*i] == '<' || arg[*i] == '>')
 		(*i)--;
@@ -67,7 +65,7 @@ void	skip_out(char *arg, int *i)
 	(*i)++;
 	while (arg[*i] == ' ')
 		(*i)++;
-	while (arg[*i] != ' ' && arg[*i] != '>' && arg[*i] != '<' && arg[*i])	
+	while (arg[*i] != ' ' && arg[*i] != '>' && arg[*i] != '<' && arg[*i])
 		(*i)++;
 	if (arg[*i] == '<' || arg[*i] == '>')
 		(*i)--;

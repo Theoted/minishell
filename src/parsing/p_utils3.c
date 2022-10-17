@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/29 11:42:35 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/11 08:36:21 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:42:56 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ void	get_in_out_init(int *i, int *j, int *in_type)
 	*i = -1;
 	*j = -1;
 	*in_type = 0;
+}
+
+void	get_in_out_init2(t_data *data, char *arg, int idx)
+{
+	data->commands[idx].files = gc_calloc(count_in_out_files(arg) + 1,
+			sizeof(t_files), &data->track);
+	data->commands[idx].files[count_in_out_files(arg)].stop = 1;
 }
 
 void	get_old_pwd_print(int x)

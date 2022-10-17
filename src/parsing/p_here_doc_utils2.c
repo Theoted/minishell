@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_here_doc_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 08:33:28 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/07 01:10:57 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:07:09 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,12 @@ int	hd_loop(t_data *data, int idx)
 	here_doc_write(data, buffer, idx);
 	gc_free_malloc(&data->track, (void **)&buffer);
 	return (0);
+}
+
+void	hd_write_close(t_data *data, int pipehd[2], int idx)
+{
+	close(pipehd[0]);
+	write(pipehd[1], data->commands[idx].here_doc,
+		ft_strlen(data->commands[idx].here_doc));
+	close(pipehd[1]);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_synthax_checker.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pat <pat@student.42lyon.fr>                +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 13:09:49 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/13 01:02:21 by pat              ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 15:12:49 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,8 @@ int	synthax_checker(char *arg)
 				return (1);
 		}
 		else if (arg[i] == '>')
-		{
 			if (check_chevrons(arg, &i))
 				return (1);
-		}
 	}
 	if (quote)
 		return (printf("Quotes: Synthax error\n"));
