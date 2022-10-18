@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:24:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 17:52:27 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 09:42:41 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ struct s_data
 	char		*cmd_slash;
 	int			exp_equal;
 	int			fork_error;
+	int			hd_status;
 
 	t_envp		*envp;
 	t_tokens	*commands;

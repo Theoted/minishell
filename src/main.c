@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 10:21:05 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 17:30:32 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 11:38:50 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static int	ft_while_main(t_data *data)
 		{
 			change_termios(RESET);
 			free(data->stdin_arg);
-			continue;
+			continue ;
 		}
 		ft_core_parsing_exec(data);
 		change_termios(RESET);
