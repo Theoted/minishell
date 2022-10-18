@@ -6,7 +6,7 @@
 #    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/17 18:23:11 by rmattheo         ###   ########lyon.fr    #
+#    Updated: 2022/10/18 12:34:48 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS	= ${SRCS:.c=.o}
 CC		= gcc
 CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address -g3
 
-all: maker ${NAME}
+all: 	maker ${NAME}
 
 %.o : %.c	${HEADER} Makefile
 			${CC} ${CFLAGS} -c $< -o $@

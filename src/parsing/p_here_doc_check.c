@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:38:41 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 17:20:54 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 09:47:13 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	check_heredoc(char *arg, t_data *data, int idx)
 			{
 				printf("Chevrons: Syntax error\n");
 				g_status = 258;
-				gc_free_all(&data->track);
 				return (1);
 			}
 			get_heredoc_del(arg, i + 2, data);
-			ft_here_doc(data, idx);
+			if (ft_here_doc(data, idx))
+				return (1);
 		}
 		i++;
 	}

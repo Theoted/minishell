@@ -1,7 +1,3 @@
-1 - PIPE LEAKS
-2 - FD LEAKS ENTRE COMMANDES
-3 - si enormement de commandes = ressources unvailable mais casse
-    tout "l'ordi" fork = -1 puis return donc n'atteint pas les waitpid      DONE
 4 - CHECKER LE MAKEFILE
 
 -------> si on veut se faire vraiment chier faire export fff="'ech     o"
@@ -11,12 +7,7 @@
 
 
 EN PRIORITÉ:
-    MOI - affice les signaux quand il faut pas ctrl + \ dans le heredoc             -> Marche nickel a l'école
-    MOI - ctrl + c doit etre ignorer quand on est dans le prompt sans commandes     -> Marche nickel a l'école
     MOI - G_STATUS faire quelques checks;
     MOI - < $USER crée un fichier nommé $USER au lieu de la variable d'environment\;
-    Leaks de pipe sur heredoc
-    close tous les files sur les redirections
 
-doit faire: CTRL+C dans un heredoc, exit l'excution (pas d'ouverture des autres redirs et heredocs)
-
+doit faire: CTRL+C dans un heredoc, exit l'excution (pas d'ouverture des autres redirs et heredocs) -> réparé avec une condition sur la valeur de status (voir si ca marche bien)

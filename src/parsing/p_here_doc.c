@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 11:04:51 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 15:07:39 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 09:46:50 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ int	ft_here_doc(t_data *data, int idx)
 			if (hd_loop(data, idx))
 				break ;
 		hd_write_close(data, pipehd, idx);
-		exit(1);
+		exit(0);
 	}
 	waitpid(pid, &status, 0);
-	if (!WIFSIGNALED(status))
-		g_status = WEXITSTATUS(status);
 	close(pipehd[1]);
 	data->commands[idx].here_doc = get_pipe_content(pipehd[0], data);
 	close(pipehd[0]);
+	if (status == 2)
+		return (1);
 	return (0);
 }
 

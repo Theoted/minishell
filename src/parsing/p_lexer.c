@@ -6,7 +6,7 @@
 /*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 12:17:25 by tdeville          #+#    #+#             */
-/*   Updated: 2022/10/17 17:02:43 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 09:43:06 by tdeville         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void	lexer_init(char *arg, t_data *data)
 			(data->pipes_nb + 2), &data->track);
 	data->commands[data->pipes_nb + 1].stop = 1;
 	data->fork_error = 0;
+	data->hd_status = 0;
 }
 
 int	lexer(char *arg, t_data *data)
