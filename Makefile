@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+         #
+#    By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/09 10:21:20 by tdeville          #+#    #+#              #
-#    Updated: 2022/10/17 18:01:10 by tdeville         ###   ########lyon.fr    #
+#    Updated: 2022/10/17 18:23:11 by rmattheo         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ include config/exec_srcs.mk
 include config/built_srcs.mk 
 
 NAME	= minishell
-HEADER	= includes/minishell.h libft2/include/libft2.h libft2/include/gc.h
+HEADER	= includes/minishell.h
 LIBFT	= libft2
 
 EXECINCLUDES =	-lreadline -I./readline/include -L./readline/lib -lncurses
@@ -32,11 +32,11 @@ all: maker ${NAME}
 %.o : %.c	${HEADER} Makefile
 			${CC} ${CFLAGS} -c $< -o $@
 
-${NAME}:	${OBJS} libft2/libft2.a 
-			${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a
+${NAME}:	${OBJS} libft2/libft2.a
+		${CC} ${CFLAGS} ${OBJS}  ${EXECINCLUDES} -o $@ libft2/libft2.a
 		
 maker:
-		${MAKE} CFLAGS="$(CFLAGS)" -C ${LIBFT}
+		${MAKE} -C ${LIBFT}
 
 clean:
 		rm -f ${OBJS}

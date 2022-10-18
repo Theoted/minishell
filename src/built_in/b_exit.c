@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/15 11:31:14 by theodeville       #+#    #+#             */
-/*   Updated: 2022/10/17 16:00:21 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 18:32:38 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	no_numeric(char *arg)
 
 int	b_exit(t_data *d, int idx)
 {
-	g_status = 0;
+	// g_status = 0;
 	if (!strncmp_ncs("exit", d->commands[idx].args_vec[0]))
 	{
 		if (double_arr_len(d->commands[idx].args_vec) > 2

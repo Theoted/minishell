@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_exec.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 17:26:05 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/17 18:39:16 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void	waitpid_close(t_data *data, t_tokens *token)
 			close(token[i].pfd[0]);
 		if (token[i].pfd[1])
 			close(token[i].pfd[1]);
+		if (token[i].pid)
+			status = ft_waitpid(token, i);
 	}
 	i = -1;
-	while (token[++i].pid)
-		status = ft_waitpid(token, i);
+	// while (token[++i].pid)
 	if (!WIFSIGNALED(status))
 		g_status = WEXITSTATUS(status);
 	else if (g_status == 131)
