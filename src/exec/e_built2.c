@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 19:59:57 by rmattheo          #+#    #+#             */
-/*   Updated: 2022/10/17 15:13:07 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 12:43:22 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	check_built(char *built, int fd_out)
 	if (!strncmp_ncs(built, "echo"))
 		return (1);
 	if (!strncmp_ncs(built, "export"))
+		return (1);
+	if (!strncmp_ncs(built, "exit"))
 		return (1);
 	return (0);
 }

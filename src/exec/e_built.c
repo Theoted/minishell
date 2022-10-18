@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   e_built.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeville <tdeville@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 15:09:10 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 17:19:48 by tdeville         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 12:53:55 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_exec_built_nofork2(t_data *data, t_tokens token, int idx)
 			return (1);
 		return (b_unset(data, idx));
 	}
-	if (!strncmp_ncs(token.args_vec[0], "exit"))
+	if (!strncmp_ncs(token.args_vec[0], "exit") && data->pipes_nb == 0)
 	{
 		return (b_exit(data, idx));
 	}
@@ -75,17 +75,21 @@ void	ft_exec_built_fork(t_data *data, t_tokens token, int idx)
 		if (!(*s))
 		{
 			err = find_node_content("PWD", data->envp);
-			dprintf(2, "%s\n", err);
+			write(2, err, ft_strlen(err));
+			write(2, "\n", 1);
 		}
 		else
-			dprintf(2, "%s\n", getcwd(s, 100));
+		{
+			write(2, getcwd(s, 100), ft_strlen(getcwd(s, 100)));
+			write(2, "\n", 1);
+		}
 		exit(0);
 	}
 	if (!strncmp_ncs(token.args_vec[0], "echo"))
 		b_echo(data, idx);
 	if (!strncmp_ncs(token.args_vec[0], "export"))
-	{
 		if (b_export(data, idx, 0) == -1)
 			ft_error_export(data, idx);
-	}
+	if (!strncmp_ncs(token.args_vec[0], "exit") && data->pipes_nb > 0)
+		b_exit(data, idx);
 }

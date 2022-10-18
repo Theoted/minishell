@@ -6,7 +6,7 @@
 /*   By: rmattheo <rmattheo@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 16:25:52 by pat               #+#    #+#             */
-/*   Updated: 2022/10/17 18:39:16 by rmattheo         ###   ########lyon.fr   */
+/*   Updated: 2022/10/18 12:46:29 by rmattheo         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	waitpid_close(t_data *data, t_tokens *token)
 		if (token[i].pid)
 			status = ft_waitpid(token, i);
 	}
-	i = -1;
-	// while (token[++i].pid)
 	if (!WIFSIGNALED(status))
 		g_status = WEXITSTATUS(status);
 	else if (g_status == 131)
